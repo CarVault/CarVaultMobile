@@ -18,9 +18,9 @@
         tools:layout="@layout/search_fragment" />
 
     <fragment
-        android:id="@+id/nav_notifications"
-        android:name="com.app.carvault.ui.notifications.NotificationFragment"
-        android:label="@string/menu_notification"
-        tools:layout="@layout/notification_fragment"/>
+        android:id="@+id/nav_transfer"
+        android:name="com.app.carvault.ui.transfers.TransferFragment"
+        android:label="@string/menu_transfer"
+        tools:layout="@layout/fragment_transfer" />
 
 </navigation>

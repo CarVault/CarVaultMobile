@@ -1,7 +1,10 @@
 package com.app.carvault
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,6 +14,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.app.carvault.databinding.ActivityNavDrawerBinding
+import com.app.carvault.ui.notifications.NotificationsActivity
+
+import com.app.carvault.ui.settings.SettingsActivity
 
 class NavDrawer : AppCompatActivity() {
 
@@ -24,11 +30,6 @@ class NavDrawer : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.appBarNavDrawer.toolbar)
 
-        /*
-        binding.appBarNavDrawer.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_nav_drawer)
@@ -36,8 +37,9 @@ class NavDrawer : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_profile, R.id.nav_search, R.id.nav_notifications
-            ), drawerLayout
+                R.id.nav_profile, R.id.nav_search, R.id.nav_transfer
+            ),
+            drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -52,5 +54,24 @@ class NavDrawer : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_nav_drawer)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_settings -> {
+            // User chose the "Settings" item, show the app settings UI...
+            val intent = Intent(this.applicationContext, SettingsActivity()::class.java)
+            startActivity(intent)
+            true
+        }
+        R.id.action_notifications -> {
+            val intent = Intent(this.applicationContext, NotificationsActivity()::class.java)
+            startActivity(intent)
+            true
+        }
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
     }
 }
