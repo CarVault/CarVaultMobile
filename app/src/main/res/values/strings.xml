@@ -5,9 +5,10 @@
     <string name="login">Login</string>
     <string name="login_google">Login with Google</string>
     <string name="cant_login">Can\'t login? Find help here.</string>
-    <string name="register">Don\'t have an account? Register here.</string>
+    <string name="register">Don\'t have an account?.</string>
 
     <string name="title_activity_nav_drawer">NavDrawer</string>
+    <string name="title_activity_register">Register</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Car Vault </string>
