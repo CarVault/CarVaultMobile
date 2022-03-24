@@ -109,7 +109,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.828"
-            android:backgroundTint="@color/item_car_bg"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -162,7 +161,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
-        android:backgroundTint="@color/item_car_bg"
+        android:backgroundTint="@color/app_secondary"
         android:background="@color/white"
         />
 
