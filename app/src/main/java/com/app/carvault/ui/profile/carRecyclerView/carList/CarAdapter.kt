@@ -1,0 +1,60 @@
+package com.app.carvault.ui.profile.carRecyclerView.carList
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.app.carvault.R
+import com.app.carvault.ui.profile.carRecyclerView.data.Car
+
+class CarAdapter (private val onClick: (Car) -> Unit) :
+    ListAdapter<Car, CarAdapter.CarViewHolder>(CarDiffCallback) {
+
+    /* Car view holder */
+    class CarViewHolder(view: View, val onClick: (Car) -> Unit) : RecyclerView.ViewHolder(view) {
+        private val carNameTextView: TextView = view.findViewById<TextView>(R.id.item_car_name)
+        private val carVINTextView: TextView = view.findViewById<TextView>(R.id.item_car_vin)
+        private val carImgView: ImageView = view.findViewById<ImageView>(R.id.item_car_img)
+
+        fun bind(car: Car) {
+            carNameTextView.text = car.name
+            carVINTextView.text = car.VIN
+            if (car.img == null) {
+                carImgView.setImageResource(R.drawable.default_cars)
+            } else {
+                carImgView.setImageResource(car.img!!)
+            }
+            itemView.setOnClickListener {
+                onClick(car)
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_car_list, parent, false)
+        return CarViewHolder(layoutInflater, onClick)
+    }
+
+    override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item)
+    }
+
+}
+
+object CarDiffCallback : DiffUtil.ItemCallback<Car>() {
+    override fun areItemsTheSame(oldItem: Car, newItem: Car): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: Car, newItem: Car): Boolean {
+        return oldItem.id == newItem.id
+    }
+}

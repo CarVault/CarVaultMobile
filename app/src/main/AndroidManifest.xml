@@ -10,6 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarVault">
         <activity
+            android:name=".ui.profile.carRecyclerView.editProfile.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.carRecyclerView.addCar.AddCarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.carRecyclerView.carDetail.CarDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.cardetail.CarDetail"
+            android:exported="false"
+            android:label="@string/title_activity_car_detail"
+            android:theme="@style/Theme.CarVault.NoActionBar" />
+        <activity
             android:name=".NavDrawer"
             android:exported="false"
             android:label="@string/title_activity_nav_drawer"

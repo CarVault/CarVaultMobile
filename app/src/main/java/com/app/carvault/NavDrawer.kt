@@ -22,7 +22,6 @@ class NavDrawer : AppCompatActivity() {
 
         binding = ActivityNavDrawerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.appBarNavDrawer.toolbar)
 
         /*
@@ -37,7 +36,7 @@ class NavDrawer : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_profile, R.id.nav_search
+                R.id.nav_profile, R.id.nav_search, R.id.nav_notifications
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
