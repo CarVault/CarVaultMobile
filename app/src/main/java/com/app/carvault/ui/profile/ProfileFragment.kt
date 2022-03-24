@@ -1,6 +1,7 @@
 package com.app.carvault.ui.profile
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -75,9 +76,9 @@ class ProfileFragment : Fragment() {
             //Toast.makeText(this.context, "Edit button!", Toast.LENGTH_SHORT).show()
             editButtonOnClick()
         }
-
         return v
     }
+
 
     private fun updateProfileData(v: View){
         val profile: Profile = profileDataSource.getProfile()
