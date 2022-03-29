@@ -1,0 +1,38 @@
+{
+"1": {
+    "name": "Manuel Framil",
+    "email": "manuframil@carvault.com",
+    "phone": "667435669",
+    "profile_img":"",
+    "cars": [
+        "1","2"
+    ],
+    "transactions":[
+        
+    ],
+ },
+ "2": {
+    "name": "Angel Paderne",
+    "email": "apaderne@carvault.com",
+    "phone": "636428876",
+    "profile_img":"",
+    "cars": [
+        "3","4"
+    ],
+    "transactions":[
+        
+    ],
+ },
+ "3": {
+    "name": "Jorge Berbel",
+    "email": "jberbel@carvault.com",
+    "phone": "612534098",
+    "profile_img":"",
+    "cars": [
+        "5"
+    ],
+    "transactions":[
+        
+    ],
+ },
+}
