@@ -1,4 +1,4 @@
-package com.app.carvault.ui.profile.carRecyclerView.carDetail
+package com.app.carvault.car.carDetail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

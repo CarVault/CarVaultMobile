@@ -1,21 +1,19 @@
-package com.app.carvault.ui.profile.carRecyclerView.carDetail
+package com.app.carvault.car.carDetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.app.carvault.R
-import com.app.carvault.ui.profile.CAR_ID
 import com.google.android.material.tabs.TabLayout
 
 class CarDetailActivity : AppCompatActivity() {
 
+    /*
     private val carDetailViewModel by viewModels<CarDetailViewModel> {
         CarDetailViewModelFactory(this)
     }
+     */
 
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager

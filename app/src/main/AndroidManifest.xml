@@ -16,13 +16,13 @@
             android:name=".ui.settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.carRecyclerView.editProfile.EditProfileActivity"
+            android:name="com.app.carvault.ui.profile.editProfile.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.carRecyclerView.addCar.AddCarActivity"
+            android:name="com.app.carvault.car.addCar.AddCarActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.carRecyclerView.carDetail.CarDetailActivity"
+            android:name="com.app.carvault.car.carDetail.CarDetailActivity"
             android:exported="false" />
         <activity
             android:name=".NavDrawer"

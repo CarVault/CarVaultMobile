@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.carRecyclerView.addCar.AddCarActivity"
-    android:id="@+id/add_car_layout">
+    tools:context=".car.addCar.AddCarActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/carNameInputLayout"
@@ -23,7 +22,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/carVINInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="139dp"

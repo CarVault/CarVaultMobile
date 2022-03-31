@@ -1,17 +1,16 @@
-package com.app.carvault.ui.profile.carRecyclerView.carList
+package com.app.carvault.car.carList
 
-import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
-import com.app.carvault.ui.profile.carRecyclerView.data.Car
+import com.app.carvault.car.Car
 
 class CarAdapter (private val onClick: (Car) -> Unit) :
     ListAdapter<Car, CarAdapter.CarViewHolder>(CarDiffCallback) {
@@ -25,10 +24,10 @@ class CarAdapter (private val onClick: (Car) -> Unit) :
         fun bind(car: Car) {
             carNameTextView.text = car.name
             carVINTextView.text = car.VIN
-            if (car.img == null) {
+            if (car.img == "") {
                 carImgView.setImageResource(R.drawable.default_cars)
             } else {
-                carImgView.setImageResource(car.img!!)
+                carImgView.setImageURI(Uri.parse(car.img))
             }
             itemView.setOnClickListener {
                 onClick(car)

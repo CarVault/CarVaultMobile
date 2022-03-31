@@ -1,5 +1,5 @@
-{
-"1": {
+[{
+    "id": 1,
     "name": "BMW Serie A",
     "VIN": "3VWRA69M74M033915",
     "manufacturer": "BMW",
@@ -12,8 +12,8 @@
     "color": "black",
     "description": "Coche rapido brum",
     "img": ""
- },
-"2": {
+    }, {
+    "id": 2,
     "name": "Citroen C4 Picasso",
     "VIN": "1HGCG5659WA086602",
     "manufacturer": "Citroen",
@@ -26,8 +26,8 @@
     "color": "light gray",
     "description": "Vehículo disponible en nuestro concesionario Flexicar Móstoles 2, C. Fragua, 15, 28933 Móstoles, Madrid. Te lo enviamos a cualquier punto de la península y Baleares. Entrega a domicilio.",
     "img": ""
- },
-"3": {
+    }, {
+    "id": 3,
     "name": "PEUGEOT 208 PureTech 73kW 100CV EAT8 Allure Pack 5p",
     "VIN": "3FAFP13P41R199033",
     "manufacturer": "Peugeot",
@@ -40,8 +40,8 @@
     "color": "gray/silver",
     "description": "Asientos de tela (material principal) y de cuero sintético (material secundario). Luces de freno, Luces de día y Luces traseras con tecnología LED. Sensores de aparcamiento traseros con radar y cámara.",
     "img": ""
- },
-"4": {
+    }, {
+    "id": 4,
     "name": "NISSAN QASHQAI DIGT 116 kW 160 CV E6D DCT NCONNECTA 5p.",
     "VIN": "4JGBF71E18A429191",
     "manufacturer": "Nissan",
@@ -54,8 +54,8 @@
     "color": "gray/silver",
     "description": "¡Gran Oportunidad! Nissan Qashqai con motor gasolina 1.3 de 160cv con cambio automático acabado N-Connecta.",
     "img": ""
- },
-"5": {
+    }, {
+    "id": 5,
     "name": "MERCEDES-BENZ Clase B B 200 d 5p.",
     "VIN": "4S4BRDSC2D2221585",
     "manufacturer": "Mercedes-Benz",
@@ -68,5 +68,4 @@
     "color": "white",
     "description": "SOLO PARTICULARES. La ITV pasado hasta 2023. Cámara de marcha atrás. Paquete AMG. Recién Pintado. Última revisión en enero 2022",
     "img": ""
- },
-}
+}]

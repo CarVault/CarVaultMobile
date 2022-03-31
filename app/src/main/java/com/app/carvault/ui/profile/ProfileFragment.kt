@@ -1,8 +1,8 @@
 package com.app.carvault.ui.profile
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,23 +11,24 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
-import com.app.carvault.ui.profile.carRecyclerView.addCar.AddCarActivity
-import com.app.carvault.ui.profile.carRecyclerView.addCar.CAR_NAME
-import com.app.carvault.ui.profile.carRecyclerView.addCar.CAR_VIN
-import com.app.carvault.ui.profile.carRecyclerView.carDetail.CarDetailActivity
-import com.app.carvault.ui.profile.carRecyclerView.carList.CarAdapter
-import com.app.carvault.ui.profile.carRecyclerView.carList.CarListViewModel
-import com.app.carvault.ui.profile.carRecyclerView.carList.CarListViewModelFactory
-import com.app.carvault.ui.profile.carRecyclerView.data.Car
-import com.app.carvault.ui.profile.carRecyclerView.editProfile.EditProfileActivity
-import com.app.carvault.ui.profile.carRecyclerView.editProfile.PROFILE_EMAIL
-import com.app.carvault.ui.profile.carRecyclerView.editProfile.PROFILE_NAME
-import com.app.carvault.ui.profile.carRecyclerView.editProfile.PROFILE_PHONE
+import com.app.carvault.car.addCar.AddCarActivity
+import com.app.carvault.car.addCar.CAR_NAME
+import com.app.carvault.car.addCar.CAR_VIN
+import com.app.carvault.car.carDetail.CarDetailActivity
+import com.app.carvault.car.carList.CarAdapter
+import com.app.carvault.car.carList.CarListViewModel
+import com.app.carvault.car.carList.CarListViewModelFactory
+import com.app.carvault.car.Car
+import com.app.carvault.ui.profile.editProfile.EditProfileActivity
+import com.app.carvault.ui.profile.editProfile.PROFILE_EMAIL
+import com.app.carvault.ui.profile.editProfile.PROFILE_NAME
+import com.app.carvault.ui.profile.editProfile.PROFILE_PHONE
+import com.app.carvault.user.User
+import com.app.carvault.user.UserDataSource
 
 const val CAR_ID = "car id"
 
@@ -35,11 +36,8 @@ class ProfileFragment : Fragment() {
 
     private val newCarActivityRequestCode = 1
     private val editProfileActivityRequestCode = 2
-    private val carsListViewModel by viewModels<CarListViewModel> {
-        CarListViewModelFactory(this.requireContext())
-    }
-    private val profileDataSource = ProfileDataSource()
 
+    private lateinit var userDataSource : UserDataSource
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +45,10 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.profile_fragment, container, false)
+        userDataSource = UserDataSource.getDataSource(this.requireContext())
+        val carsListViewModel:CarListViewModel by viewModels {
+            CarListViewModelFactory(this.requireContext(), userDataSource.getCurrentUser().cars)
+        }
 
         // Set up user profile
         updateProfileData(v)
@@ -81,7 +83,7 @@ class ProfileFragment : Fragment() {
 
 
     private fun updateProfileData(v: View){
-        val profile: Profile = profileDataSource.getProfile()
+        val user: User = userDataSource.getCurrentUser()
 
         val profileName = v.findViewById<TextView>(R.id.profile_name)
         val profileId = v.findViewById<TextView>(R.id.profile_id)
@@ -89,13 +91,13 @@ class ProfileFragment : Fragment() {
         val profilePhone = v.findViewById<TextView>(R.id.profile_phone)
         val profileImg = v.findViewById<ImageView>(R.id.profile_img)
 
-        profileName.text = profile.name
-        profileId.text = profile.id.toString()
-        profileEmail.text = profile.email
-        profilePhone.text = profile.phone
+        profileName.text = user.name
+        profileId.text = user.id.toString()
+        profileEmail.text = user.email
+        profilePhone.text = user.phone
 
-        if (profile.img != null){
-            profileImg.setImageResource(profile.img!!)
+        if (user.profile_img != ""){
+            profileImg.setImageURI(Uri.parse(user.profile_img))
         }else{
             profileImg.setImageResource(R.drawable.ic_baseline_person_24)
         }
@@ -124,13 +126,13 @@ class ProfileFragment : Fragment() {
                 1  -> intentData?.let { data ->
                     val carName = data.getStringExtra(CAR_NAME)
                     val carVIN = data.getStringExtra(CAR_VIN)
-                    carsListViewModel.insertCar(carName, carVIN)
+                    //carsListViewModel.insertCar(carName, carVIN)
                 }
                 2 -> intentData?.let { data ->
                     val profileName = data.getStringExtra(PROFILE_NAME)
                     val profileEmail = data.getStringExtra(PROFILE_EMAIL)
                     val profilePhone = data.getStringExtra(PROFILE_PHONE)
-                    profileDataSource.updateProfile(profileName, profileEmail, profilePhone)
+                    userDataSource.updateUser(profileName, profileEmail, profilePhone)
                 }
             }
         }

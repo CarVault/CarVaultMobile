@@ -1,4 +1,4 @@
-package com.app.carvault.ui.profile.carRecyclerView.addCar
+package com.app.carvault.car.addCar
 
 import android.app.Activity
 import android.content.Intent

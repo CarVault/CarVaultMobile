@@ -1,38 +1,45 @@
-{
-"1": {
+[{
+    "id": 1,
+    "username": "mframil",
+    "password": "mframil",
     "name": "Manuel Framil",
     "email": "manuframil@carvault.com",
     "phone": "667435669",
     "profile_img":"",
     "cars": [
-        "1","2"
+        1,2
     ],
     "transactions":[
-        
-    ],
- },
- "2": {
+        1
+    ]
+ },{
+    "id": 2,
+    "username": "apaderne",
+    "password": "apaderne",
     "name": "Angel Paderne",
     "email": "apaderne@carvault.com",
     "phone": "636428876",
     "profile_img":"",
     "cars": [
-        "3","4"
+        3,4
     ],
     "transactions":[
-        
-    ],
- },
- "3": {
+        2
+    ]
+ },{
+    "id": 3,
+    "username": "jberbel",
+    "password": "jberbel",
     "name": "Jorge Berbel",
     "email": "jberbel@carvault.com",
     "phone": "612534098",
     "profile_img":"",
     "cars": [
-        "5"
+        5
     ],
     "transactions":[
-        
-    ],
- },
-}
+        3
+    ]
+ }
+]
+

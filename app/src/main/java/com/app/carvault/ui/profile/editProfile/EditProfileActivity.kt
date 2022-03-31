@@ -1,4 +1,4 @@
-package com.app.carvault.ui.profile.carRecyclerView.editProfile
+package com.app.carvault.ui.profile.editProfile
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.viewModels
 import com.app.carvault.R
-import com.app.carvault.ui.profile.carRecyclerView.carDetail.CarDetailViewModelFactory
+import com.app.carvault.car.carDetail.CarDetailViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 
 const val PROFILE_NAME = "name"

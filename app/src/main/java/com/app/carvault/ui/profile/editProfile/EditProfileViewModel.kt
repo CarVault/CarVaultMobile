@@ -1,4 +1,4 @@
-package com.app.carvault.ui.profile.carRecyclerView.editProfile
+package com.app.carvault.ui.profile.editProfile
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
