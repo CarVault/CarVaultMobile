@@ -47,7 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editPhoneLayout"
         android:layout_marginLeft="150dp"
-        android:text="Done!" />
+        android:text="Done!"
+        android:layout_marginStart="150dp" />
 
 
 </RelativeLayout>
