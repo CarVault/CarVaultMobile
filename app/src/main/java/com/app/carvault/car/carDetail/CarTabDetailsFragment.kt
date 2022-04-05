@@ -5,16 +5,41 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.app.carvault.R
+import com.app.carvault.car.Car
 
 
-class CarTabDetailsFragment : Fragment() {
+class CarTabDetailsFragment (val car: Car?) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_car_tab_details, container, false)
+        val v = inflater.inflate(R.layout.fragment_car_tab_details, container, false)
+        val carNameText = v.findViewById<TextView>(R.id.carNameText)
+        val KmsText = v.findViewById<TextView>(R.id.KmsText)
+        val yearText = v.findViewById<TextView>(R.id.yearText)
+        val addressText = v.findViewById<TextView>(R.id.addressText)
+        val manufacturerText = v.findViewById<TextView>(R.id.manufacturerText)
+        val horsepowerText = v.findViewById<TextView>(R.id.horsepowerText)
+        val originText = v.findViewById<TextView>(R.id.originText)
+        val fuelText = v.findViewById<TextView>(R.id.fuelText)
+        val colorText = v.findViewById<TextView>(R.id.colorText)
+
+        if (car != null){
+            carNameText.text = car.name
+            KmsText.text = car.kms.toString()
+            yearText.text = car.year.toString()
+            addressText.text = car.address
+            manufacturerText.text = car.manufacturer
+            horsepowerText.text = car.horsepower.toString()
+            originText.text = car.origin
+            fuelText.text = car.fuel
+            colorText.text = car.color
+        }
+
+        return v
     }
 }

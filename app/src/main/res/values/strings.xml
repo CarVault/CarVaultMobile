@@ -20,6 +20,8 @@
     <string name="menu_search">Search vehicles</string>
     <string name="menu_transfer">Transfer vehicles</string>
 
+    <string name="car_not_found">Car not found</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <!-- Strings used for fragments for navigation -->
 

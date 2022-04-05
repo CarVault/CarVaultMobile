@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.viewModels
 import com.app.carvault.R
-import com.app.carvault.car.carDetail.CarDetailViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 
 const val PROFILE_NAME = "name"

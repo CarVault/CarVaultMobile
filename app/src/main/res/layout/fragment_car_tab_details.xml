@@ -1,17 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent">
 
-    <TextView
+    <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Detalles del coche"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/left_guideline"
+        app:layout_constraintGuide_percent=".33"
+        android:orientation="vertical"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/right_guideline"
+        app:layout_constraintGuide_percent=".66"
+        android:orientation="vertical"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/top_guideline"
+        app:layout_constraintGuide_percent=".25"
+        android:orientation="horizontal"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/middle_guideline"
+        app:layout_constraintGuide_percent=".50"
+        android:orientation="horizontal"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_guideline"
+        app:layout_constraintGuide_percent=".75"
+        android:orientation="horizontal"/>
+
+    <TextView
+        android:id="@+id/carNameText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Car name"
+        app:layout_constraintBottom_toTopOf="@+id/top_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/left_guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/KmsText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Kilometers"
+        app:layout_constraintBottom_toTopOf="@+id/top_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+        app:layout_constraintStart_toEndOf="@+id/carNameText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/yearText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Year 2022"
+        app:layout_constraintBottom_toTopOf="@+id/top_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/right_guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/addressText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Address"
+        app:layout_constraintBottom_toTopOf="@+id/middle_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/left_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+
+    <TextView
+        android:id="@+id/manufacturerText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Manufacturer"
+        app:layout_constraintBottom_toTopOf="@+id/middle_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+
+    <TextView
+        android:id="@+id/horsepowerText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Horsepower"
+        app:layout_constraintBottom_toTopOf="@+id/middle_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/right_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+
+    <TextView
+        android:id="@+id/originText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Origin"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/left_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/middle_guideline" />
+
+    <TextView
+        android:id="@+id/fuelText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Fuel"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/middle_guideline" />
+
+    <TextView
+        android:id="@+id/colorText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Color"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/right_guideline"
+        app:layout_constraintTop_toTopOf="@+id/middle_guideline" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="To be decided"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/left_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bottom_guideline" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="To be decided"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/bottom_guideline" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="To be decided"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/right_guideline"
+        app:layout_constraintTop_toTopOf="@+id/bottom_guideline" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

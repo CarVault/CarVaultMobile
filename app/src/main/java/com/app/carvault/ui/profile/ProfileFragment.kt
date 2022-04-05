@@ -20,9 +20,8 @@ import com.app.carvault.car.addCar.CAR_NAME
 import com.app.carvault.car.addCar.CAR_VIN
 import com.app.carvault.car.carDetail.CarDetailActivity
 import com.app.carvault.car.carList.CarAdapter
-import com.app.carvault.car.carList.CarListViewModel
-import com.app.carvault.car.carList.CarListViewModelFactory
 import com.app.carvault.car.Car
+import com.app.carvault.car.CarDataSource
 import com.app.carvault.ui.profile.editProfile.EditProfileActivity
 import com.app.carvault.ui.profile.editProfile.PROFILE_EMAIL
 import com.app.carvault.ui.profile.editProfile.PROFILE_NAME
@@ -38,6 +37,7 @@ class ProfileFragment : Fragment() {
     private val editProfileActivityRequestCode = 2
 
     private lateinit var userDataSource : UserDataSource
+    private lateinit var carDataSource: CarDataSource
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,9 +46,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.profile_fragment, container, false)
         userDataSource = UserDataSource.getDataSource(this.requireContext())
-        val carsListViewModel:CarListViewModel by viewModels {
-            CarListViewModelFactory(this.requireContext(), userDataSource.getCurrentUser().cars)
-        }
+        carDataSource = CarDataSource.getDataSource(this.requireContext())
 
         // Set up user profile
         updateProfileData(v)
@@ -59,11 +57,14 @@ class ProfileFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = carsAdapter
-        carsListViewModel.carsLiveData.observe(this.viewLifecycleOwner) {
+        carsAdapter.submitList(carDataSource.loadCarList(userDataSource.getCurrentUser().cars))
+
+        /*carsListViewModel.carsLiveData.observe(this.viewLifecycleOwner) {
             it?.let {
                 carsAdapter.submitList(it as MutableList<Car>)
             }
         }
+         */
 
         // Fab -> adding new cars
         val fab: View = v.findViewById(R.id.floatingAddCarButton)

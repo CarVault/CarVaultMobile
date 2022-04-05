@@ -6,11 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class CarDataSource private constructor (private val context: Context, private val userCars: List<Long>) {
-    private val initialCarList = loadCarList()
-    private val carsLiveData = MutableLiveData(initialCarList)
+class CarDataSource private constructor (private val context: Context) {
 
-    private fun loadCarList(): List<Car> {
+    fun loadCarList(userCars: List<Long>): List<Car> {
         val gson = Gson()
         val listCarType = object : TypeToken<List<Car>>() {}.type
         val carListJson = context.assets.open("cars.json").bufferedReader().use{ it.readText() }
@@ -18,6 +16,15 @@ class CarDataSource private constructor (private val context: Context, private v
         return carList.filter { it.id in userCars }
     }
 
+    fun getCarForId(id: Long): Car? {
+        val gson = Gson()
+        val listCarType = object : TypeToken<List<Car>>() {}.type
+        val carListJson = context.assets.open("cars.json").bufferedReader().use{ it.readText() }
+        val carList: List<Car> = gson.fromJson(carListJson, listCarType)
+        return carList.firstOrNull { it.id == id }
+    }
+
+    /*
     fun addCar(car: Car) {
         val currentList = carsLiveData.value
         if (currentList == null) {
@@ -49,13 +56,14 @@ class CarDataSource private constructor (private val context: Context, private v
     fun getCarList(): LiveData<List<Car>> {
         return carsLiveData
     }
+     */
 
     companion object {
         private var INSTANCE: CarDataSource? = null
 
-        fun getDataSource(context: Context, userCars: List<Long>): CarDataSource {
+        fun getDataSource(context: Context): CarDataSource {
             return synchronized(CarDataSource::class) {
-                val newInstance = INSTANCE ?: CarDataSource(context, userCars)
+                val newInstance = INSTANCE ?: CarDataSource(context)
                 INSTANCE = newInstance
                 newInstance
             }

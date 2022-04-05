@@ -6,9 +6,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
+        android:id="@+id/carDescriptionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descripcion del coche"
+        android:text="Car description"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
