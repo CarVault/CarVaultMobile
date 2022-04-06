@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.car.Car
 import com.app.carvault.car.CarDataSource
+import com.app.carvault.ui.profile.CAR_ID
 import com.app.carvault.user.UserDataSource
 import com.google.android.material.tabs.TabLayout
 
@@ -24,7 +25,11 @@ class CarDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_detail)
-        var currentCarId: Long = 1
+        val bundle: Bundle? = intent.extras
+        var currentCarId: Long? = null
+        if (bundle != null) {
+            currentCarId = bundle.getLong(CAR_ID)
+        }
         carDataSource = CarDataSource.getDataSource(this)
         val currentCar = carDataSource.getCarForId(currentCarId)
 
@@ -35,7 +40,7 @@ class CarDetailActivity : AppCompatActivity() {
         tabLayout.addTab(tabLayout.newTab().setText("Details"))
 
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-        val tabAdapter = CarTabCollectionAdapter(this, supportFragmentManager, tabLayout.tabCount, currentCar!!)
+        val tabAdapter = CarTabCollectionAdapter(this, supportFragmentManager, tabLayout.tabCount, currentCar)
         viewPager.adapter = tabAdapter
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

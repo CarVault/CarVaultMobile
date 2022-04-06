@@ -28,7 +28,7 @@ class CarTabDetailsFragment (val car: Car?) : Fragment() {
         val fuelText = v.findViewById<TextView>(R.id.fuelText)
         val colorText = v.findViewById<TextView>(R.id.colorText)
 
-        if (car != null){
+        car?.let {
             carNameText.text = car.name
             KmsText.text = car.kms.toString()
             yearText.text = car.year.toString()
@@ -39,7 +39,6 @@ class CarTabDetailsFragment (val car: Car?) : Fragment() {
             fuelText.text = car.fuel
             colorText.text = car.color
         }
-
         return v
     }
 }

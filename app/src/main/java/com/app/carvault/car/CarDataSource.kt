@@ -16,12 +16,15 @@ class CarDataSource private constructor (private val context: Context) {
         return carList.filter { it.id in userCars }
     }
 
-    fun getCarForId(id: Long): Car? {
-        val gson = Gson()
-        val listCarType = object : TypeToken<List<Car>>() {}.type
-        val carListJson = context.assets.open("cars.json").bufferedReader().use{ it.readText() }
-        val carList: List<Car> = gson.fromJson(carListJson, listCarType)
-        return carList.firstOrNull { it.id == id }
+    fun getCarForId(id: Long?): Car? {
+        id?.let {
+            val gson = Gson()
+            val listCarType = object : TypeToken<List<Car>>() {}.type
+            val carListJson = context.assets.open("cars.json").bufferedReader().use{ it.readText() }
+            val carList: List<Car> = gson.fromJson(carListJson, listCarType)
+            return carList.firstOrNull { it.id == id }
+        }
+        return null
     }
 
     /*

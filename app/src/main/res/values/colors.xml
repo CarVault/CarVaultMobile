@@ -8,4 +8,8 @@
     <!-- Colores basicos para la app -->
     <color name="app_primary">#5A6BC7</color>
     <color name="app_secondary">#59D6C3</color>
+
+    <!-- Colores -->
+    <color name="light_grey">#808080</color>
+
 </resources>

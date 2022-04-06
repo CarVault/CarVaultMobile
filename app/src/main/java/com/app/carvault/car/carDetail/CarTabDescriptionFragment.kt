@@ -18,6 +18,7 @@ class CarTabDescriptionFragment (val car: Car?) : Fragment() {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_car_tab_description, container, false)
         val descTextView = v.findViewById<TextView>(R.id.carDescriptionText)
+
         if (car != null){
             descTextView.text = car.description
         }else{

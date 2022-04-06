@@ -9,6 +9,34 @@
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/left_padding"
+        app:layout_constraintGuide_percent=".05"
+        android:orientation="vertical"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/right_padding"
+        app:layout_constraintGuide_percent=".95"
+        android:orientation="vertical"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_padding"
+        app:layout_constraintGuide_percent=".975"
+        android:orientation="horizontal"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/top_padding"
+        app:layout_constraintGuide_percent=".025"
+        android:orientation="horizontal"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/left_guideline"
         app:layout_constraintGuide_percent=".33"
         android:orientation="vertical"/>
@@ -41,104 +69,261 @@
         app:layout_constraintGuide_percent=".75"
         android:orientation="horizontal"/>
 
-    <TextView
-        android:id="@+id/carNameText"
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Car name"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/top_guideline"
         app:layout_constraintEnd_toStartOf="@+id/left_guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/left_padding"
+        app:layout_constraintTop_toTopOf="@+id/top_padding">
 
-    <TextView
-        android:id="@+id/KmsText"
+        <TextView
+            android:id="@+id/carName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:text="Name:" />
+
+        <TextView
+            android:id="@+id/carNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/carName"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="Car name" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Kilometers"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/top_guideline"
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
-        app:layout_constraintStart_toEndOf="@+id/carNameText"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_padding">
 
-    <TextView
-        android:id="@+id/yearText"
+        <TextView
+            android:id="@+id/Kms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:text="Kilometers:" />
+
+        <TextView
+            android:id="@+id/KmsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Kms"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="Kms" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Year 2022"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/top_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/right_padding"
         app:layout_constraintStart_toStartOf="@+id/right_guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/top_padding">
 
-    <TextView
-        android:id="@+id/addressText"
+        <TextView
+            android:id="@+id/year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:text="Year:" />
+
+        <TextView
+            android:id="@+id/yearText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/year"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="year" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Address"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/middle_guideline"
         app:layout_constraintEnd_toStartOf="@+id/left_guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+        app:layout_constraintStart_toStartOf="@+id/left_padding"
+        app:layout_constraintTop_toTopOf="@+id/top_guideline" >
 
-    <TextView
-        android:id="@+id/manufacturerText"
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:text="Address:" />
+
+        <TextView
+            android:id="@+id/addressText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/address"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="Address" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Manufacturer"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/middle_guideline"
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
         app:layout_constraintStart_toStartOf="@+id/left_guideline"
-        app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/top_guideline">
 
-    <TextView
-        android:id="@+id/horsepowerText"
+        <TextView
+            android:id="@+id/manufacturer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:text="Manufacturer:" />
+
+        <TextView
+            android:id="@+id/manufacturerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/manufacturer"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="Manufacturer" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Horsepower"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/middle_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/right_padding"
         app:layout_constraintStart_toStartOf="@+id/right_guideline"
-        app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/top_guideline">
 
-    <TextView
-        android:id="@+id/originText"
+        <TextView
+            android:id="@+id/horsepower"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:text="Horsepower:" />
+
+        <TextView
+            android:id="@+id/horsepowerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/horsepower"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="Horsepower" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Origin"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
         app:layout_constraintEnd_toStartOf="@+id/left_guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/middle_guideline" />
+        app:layout_constraintStart_toStartOf="@+id/left_padding"
+        app:layout_constraintTop_toTopOf="@+id/middle_guideline">
 
-    <TextView
-        android:id="@+id/fuelText"
+        <TextView
+            android:id="@+id/origin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:text="Origin:" />
+
+        <TextView
+            android:id="@+id/originText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/origin"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="Origin" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Fuel"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
         app:layout_constraintStart_toStartOf="@+id/left_guideline"
-        app:layout_constraintTop_toTopOf="@+id/middle_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/middle_guideline">
 
-    <TextView
-        android:id="@+id/colorText"
+        <TextView
+            android:id="@+id/fuel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:text="Fuel:" />
+
+        <TextView
+            android:id="@+id/fuelText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fuel"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="Fuel" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Color"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/right_padding"
         app:layout_constraintStart_toStartOf="@+id/right_guideline"
-        app:layout_constraintTop_toTopOf="@+id/middle_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/middle_guideline" >
 
+        <TextView
+            android:id="@+id/color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:text="Color:" />
+
+        <TextView
+            android:id="@+id/colorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/color"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="Color" />
+    </RelativeLayout>
+
+    <!--
     <TextView
         android:id="@+id/textView22"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="To be decided"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_padding"
         app:layout_constraintEnd_toStartOf="@+id/left_guideline"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/left_padding"
         app:layout_constraintTop_toTopOf="@+id/bottom_guideline" />
 
     <TextView
@@ -146,7 +331,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="To be decided"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_padding"
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
         app:layout_constraintStart_toStartOf="@+id/left_guideline"
         app:layout_constraintTop_toTopOf="@+id/bottom_guideline" />
@@ -156,10 +341,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="To be decided"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_padding"
+        app:layout_constraintEnd_toStartOf="@+id/right_padding"
         app:layout_constraintStart_toStartOf="@+id/right_guideline"
         app:layout_constraintTop_toTopOf="@+id/bottom_guideline" />
-
+    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
