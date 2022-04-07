@@ -10,20 +10,19 @@
     <SearchView
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:padding="10dp"
-        android:queryHint="Search vehicles"
-        />
+        android:queryHint="Search vehicles" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/search_bar">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="wrap_content"
             android:src="@drawable/coche"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +31,7 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
 
@@ -49,7 +48,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
 
@@ -72,8 +71,7 @@
             app:layout_constraintHorizontal_bias="0.949"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.956"
-            />
+            app:layout_constraintVertical_bias="0.956" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>
