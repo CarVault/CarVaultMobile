@@ -40,6 +40,20 @@
     "transactions":[
         3
     ]
- }
+ },{
+  "id": 4,
+  "username": "tiago",
+  "password": "tiago",
+  "name": "Tiago Fernandez",
+  "email": "tiago@carvault.com",
+  "phone": "555555555",
+  "profile_img":"",
+  "cars": [
+    1,2,4,5
+  ],
+  "transactions":[
+    3
+  ]
+}
 ]
 

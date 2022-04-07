@@ -23,7 +23,7 @@ class UserDataSource private constructor(context: Context){
         val gson = Gson()
         val listUserType = object : TypeToken<List<User>>() {}.type
         val users: List<User> = gson.fromJson(userListJson, listUserType)
-        val logged = users.firstOrNull { u -> u.email == email && u.password == pass }
+        val logged = users.firstOrNull { u -> u.email == email.trim() && u.password == pass.trim() }
         if (logged != null) {
             user = logged
             return true
