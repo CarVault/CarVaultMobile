@@ -21,6 +21,8 @@
     <string name="menu_transfer">Transfer vehicles</string>
 
     <string name="car_not_found">Car not found</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <!-- Strings used for fragments for navigation -->

@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.car.addCar.AddCarActivity
 import com.app.carvault.car.addCar.CAR_NAME
@@ -22,12 +23,15 @@ import com.app.carvault.car.carDetail.CarDetailActivity
 import com.app.carvault.car.carList.CarAdapter
 import com.app.carvault.car.Car
 import com.app.carvault.car.CarDataSource
+import com.app.carvault.car.carDetail.CarTabCollectionAdapter
 import com.app.carvault.ui.profile.editProfile.EditProfileActivity
 import com.app.carvault.ui.profile.editProfile.PROFILE_EMAIL
 import com.app.carvault.ui.profile.editProfile.PROFILE_NAME
 import com.app.carvault.ui.profile.editProfile.PROFILE_PHONE
+import com.app.carvault.ui.profile.tabProfile.ProfileTabAdapter
 import com.app.carvault.user.User
 import com.app.carvault.user.UserDataSource
+import com.google.android.material.tabs.TabLayout
 
 const val CAR_ID = "car id"
 
@@ -38,6 +42,10 @@ class ProfileFragment : Fragment() {
 
     private lateinit var userDataSource : UserDataSource
     private lateinit var carDataSource: CarDataSource
+
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,13 +59,29 @@ class ProfileFragment : Fragment() {
         // Set up user profile
         updateProfileData(v)
 
-        // List of cars own by the user
-        val carsAdapter = CarAdapter {car -> adapterOnClick(car)}
-        val recyclerView = v.findViewById<RecyclerView>(R.id.profile_car_list)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
-        recyclerView.adapter = carsAdapter
-        carsAdapter.submitList(carDataSource.loadCarList(userDataSource.getCurrentUser().cars))
+        // Tab Layout
+        tabLayout = v.findViewById(R.id.tabLayout_profile)
+        viewPager = v.findViewById(R.id.pager)
+
+        tabLayout.addTab(tabLayout.newTab().setText("Cars"))
+        tabLayout.addTab(tabLayout.newTab().setText("Transactions"))
+
+        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+        val tabAdapter = ProfileTabAdapter(this.requireContext(), this.parentFragmentManager, tabLayout.tabCount)
+        viewPager.adapter = tabAdapter
+        viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                viewPager.currentItem = tab.position
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+        })
+
 
         /*carsListViewModel.carsLiveData.observe(this.viewLifecycleOwner) {
             it?.let {
@@ -102,12 +126,6 @@ class ProfileFragment : Fragment() {
         }else{
             profileImg.setImageResource(R.drawable.ic_baseline_person_24)
         }
-    }
-
-    private fun adapterOnClick(car: Car) {
-        val intent = Intent(this.requireContext(), CarDetailActivity()::class.java)
-        intent.putExtra(CAR_ID, car.id)
-        startActivity(intent)
     }
 
     private fun fabOnClick() {

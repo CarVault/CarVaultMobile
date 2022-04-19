@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
-import com.app.carvault.car.Car
 import com.app.carvault.car.CarDataSource
 import com.app.carvault.ui.profile.CAR_ID
-import com.app.carvault.user.UserDataSource
 import com.google.android.material.tabs.TabLayout
 
 class CarDetailActivity : AppCompatActivity() {
