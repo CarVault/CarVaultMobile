@@ -3,7 +3,6 @@ package com.app.carvault.user
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.io.FileReader
 
 
 class UserDataSource private constructor(context: Context){
@@ -32,8 +31,11 @@ class UserDataSource private constructor(context: Context){
     }
 
 
-    fun getUser(id: Long) {
-
+    fun getUser(id: Long): User? {
+        val gson = Gson()
+        val listUserType = object : TypeToken<List<User>>() {}.type
+        val users: List<User> = gson.fromJson(userListJson, listUserType)
+        return users.firstOrNull { u -> u.id == id }
     }
 
     fun updateUser(newName: String?, newEmail: String?, newPhone: String?): Boolean{

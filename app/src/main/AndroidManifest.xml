@@ -10,19 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarVault">
         <activity
+            android:name=".transaction.TransactionDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.notifications.NotificationsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name="com.app.carvault.ui.profile.editProfile.EditProfileActivity"
+            android:name=".ui.profile.editProfile.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.app.carvault.car.addCar.AddCarActivity"
+            android:name=".car.addCar.AddCarActivity"
             android:exported="false" />
         <activity
-            android:name="com.app.carvault.car.carDetail.CarDetailActivity"
+            android:name=".car.carDetail.CarDetailActivity"
             android:exported="false" />
         <activity
             android:name=".NavDrawer"
@@ -39,6 +42,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

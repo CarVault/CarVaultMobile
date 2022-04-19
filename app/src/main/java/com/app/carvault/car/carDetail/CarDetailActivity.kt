@@ -10,11 +10,6 @@ import com.google.android.material.tabs.TabLayout
 
 class CarDetailActivity : AppCompatActivity() {
 
-    /*
-    private val carDetailViewModel by viewModels<CarDetailViewModel> {
-        CarDetailViewModelFactory(this)
-    }
-     */
     private lateinit var carDataSource : CarDataSource
 
     private lateinit var tabLayout: TabLayout

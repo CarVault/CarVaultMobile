@@ -34,6 +34,7 @@ import com.app.carvault.user.UserDataSource
 import com.google.android.material.tabs.TabLayout
 
 const val CAR_ID = "car id"
+const val TRANS_ID = "trans id"
 
 class ProfileFragment : Fragment() {
 

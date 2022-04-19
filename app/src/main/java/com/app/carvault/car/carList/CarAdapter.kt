@@ -17,9 +17,9 @@ class CarAdapter (private val onClick: (Car) -> Unit) :
 
     /* Car view holder */
     class CarViewHolder(view: View, val onClick: (Car) -> Unit) : RecyclerView.ViewHolder(view) {
-        private val carNameTextView: TextView = view.findViewById<TextView>(R.id.item_car_name)
-        private val carVINTextView: TextView = view.findViewById<TextView>(R.id.item_car_vin)
-        private val carImgView: ImageView = view.findViewById<ImageView>(R.id.item_car_img)
+        private val carNameTextView: TextView = view.findViewById(R.id.item_car_name)
+        private val carVINTextView: TextView = view.findViewById(R.id.item_car_vin)
+        private val carImgView: ImageView = view.findViewById(R.id.item_car_img)
 
         fun bind(car: Car) {
             carNameTextView.text = car.name
