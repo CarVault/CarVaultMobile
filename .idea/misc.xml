@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout-xlarge-port/item_car_list.xml" value="0.33" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/activity_add_car.xml" value="0.27049180327868855" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/activity_add_car_data.xml" value="0.33" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/activity_edit_profile.xml" value="0.27049180327868855" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/item_car_list.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/update_vehicle_data.xml" value="0.11041666666666666" />
         <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/Nueva carpeta/CarVaultMobile-main/app/src/main/res/layout-sw600dp/item_car_list.xml" value="0.27049180327868855" />
         <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/Nueva carpeta/CarVaultMobile-main/app/src/main/res/layout-xlarge-port/item_car_list.xml" value="0.27049180327868855" />
         <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/Nueva carpeta/CarVaultMobile-main/app/src/main/res/layout/activity_car_detail.xml" value="0.358695652173913" />

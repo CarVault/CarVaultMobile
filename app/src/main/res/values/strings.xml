@@ -21,6 +21,19 @@
     <string name="menu_transfer">Transfer vehicles</string>
 
     <string name="car_not_found">Car not found</string>
+    <string name="documentation" />
+    <string name="vehicle_basic_information" />
+    <string name="technical_detail" />
+    <string name="mantenaince_and_repairs_history" />
+    <string name="description" />
+    <string name="photos" />
+    <string name="other" />
+    <string name="cancel_button" />
+    <string name="add_vehicle_button" />
+    <string name="vin" />
+    <string name="brand" />
+    <string name="model" />
+    <string name="manufactured_year" />
 
     <!-- TODO: Remove or change this placeholder text -->
     <!-- Strings used for fragments for navigation -->
