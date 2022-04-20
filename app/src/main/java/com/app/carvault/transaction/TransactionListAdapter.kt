@@ -1,5 +1,6 @@
 package com.app.carvault.transaction
 
+import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -11,24 +12,26 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
 import com.app.carvault.user.UserDataSource
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 class TransactionListAdapter (private val onClick: (Transaction) -> Unit) :
     ListAdapter<Transaction, TransactionListAdapter.CarViewHolder>(TransactionDiffCallback) {
     /* Car view holder */
-        class CarViewHolder(view: View, val onClick: (Transaction) -> Unit) : RecyclerView.ViewHolder(view) {
+        class CarViewHolder(view: View, val onClick: (Transaction) -> Unit, val context: Context) : RecyclerView.ViewHolder(view) {
             private val date: TextView = view.findViewById(R.id.trans_date)
             private val from: TextView = view.findViewById(R.id.from)
             private val to: TextView = view.findViewById(R.id.to)
             private val carName: TextView = view.findViewById(R.id.carName)
 
-        fun bind(transaction: Transaction) {
-                date.text = transaction.date
-                from.text = "From: " + transaction.from_id.toString()
-                to.text = "To: " + transaction.to_id.toString()
-                carName.text = transaction.car.toString()
+        fun bind(t: Transaction) {
+                val transInfo = TransactionDataSource.getDataSource(context).getTransactionInfo(t)
+                date.text = transInfo.date
+                from.text = "From: " + transInfo.from_name
+                to.text = "To: " + transInfo.to_name
+                carName.text = transInfo.car_name
 
                 itemView.setOnClickListener {
-                    onClick(transaction)
+                    onClick(t)
                 }
             }
         }
@@ -36,7 +39,7 @@ class TransactionListAdapter (private val onClick: (Transaction) -> Unit) :
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
                 .inflate(R.layout.transaction_item, parent, false)
-            return CarViewHolder(layoutInflater, onClick)
+            return CarViewHolder(layoutInflater, onClick, parent.context)
         }
 
         override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
