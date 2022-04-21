@@ -6,11 +6,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.apm.graphql.UserQuery
+import com.apollographql.apollo3.ApolloClient
 import com.app.carvault.user.UserDataSource
 import javax.sql.DataSource
 
 class LoginActivity : AppCompatActivity() {
-
     private lateinit var userDataSource: UserDataSource
     private lateinit var emailInput: EditText
     private lateinit var passInput: EditText
@@ -24,6 +25,8 @@ class LoginActivity : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.login_button)
         emailInput = findViewById(R.id.editTextEmailAddress)
         passInput = findViewById(R.id.editTextPassword)
+        val apolloClient = ApolloClient.Builder().serverUrl("http://localhost:8080/graphql").build()
+
 
         loginButton.setOnClickListener {
             tryLogin()
