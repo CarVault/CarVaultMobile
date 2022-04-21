@@ -15,9 +15,9 @@ import com.app.carvault.user.UserDataSource
 import kotlinx.coroutines.NonDisposableHandle.parent
 
 class TransactionListAdapter (private val onClick: (Transaction) -> Unit) :
-    ListAdapter<Transaction, TransactionListAdapter.CarViewHolder>(TransactionDiffCallback) {
-    /* Car view holder */
-        class CarViewHolder(view: View, val onClick: (Transaction) -> Unit, val context: Context) : RecyclerView.ViewHolder(view) {
+    ListAdapter<Transaction, TransactionListAdapter.TransactionViewHolder>(TransactionDiffCallback) {
+
+        class TransactionViewHolder(view: View, val onClick: (Transaction) -> Unit, val context: Context) : RecyclerView.ViewHolder(view) {
             private val date: TextView = view.findViewById(R.id.trans_date)
             private val from: TextView = view.findViewById(R.id.from)
             private val to: TextView = view.findViewById(R.id.to)
@@ -29,20 +29,19 @@ class TransactionListAdapter (private val onClick: (Transaction) -> Unit) :
                 from.text = "From: " + transInfo.from_name
                 to.text = "To: " + transInfo.to_name
                 carName.text = transInfo.car_name
-
                 itemView.setOnClickListener {
                     onClick(t)
                 }
             }
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
                 .inflate(R.layout.transaction_item, parent, false)
-            return CarViewHolder(layoutInflater, onClick, parent.context)
+            return TransactionViewHolder(layoutInflater, onClick, parent.context)
         }
 
-        override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
             val item = getItem(position)
             holder.bind(item)
         }

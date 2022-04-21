@@ -10,5 +10,6 @@ data class User (
     var phone: String,
     var cars: List<Long>,
     var transactions: List<Long>,
+    var notifications: List<Long>,
     var profile_img: String
 )

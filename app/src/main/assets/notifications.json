@@ -1,0 +1,20 @@
+[{
+  "id": 1,
+  "date": "21-03-2022",
+  "type": "WARNING",
+  "info": "Alguien ha intendado entrar en tu cuenta desde un dispositivo no reconocido",
+  "seen": true
+}, {
+  "id": 2,
+  "date": "22-03-2022",
+  "type": "REQUEST",
+  "info": "Solicitud de transferencia de un vehiculo",
+  "seen": false
+}, {
+  "id": 3,
+  "date": "12-04-2022",
+  "type": "CONFIRMATION",
+  "info": "La transferencia se ha realizado correctamente",
+  "seen": true
+}
+]
