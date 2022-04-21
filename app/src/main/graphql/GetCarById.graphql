@@ -1,0 +1,5 @@
+query getCarById($id: ID!){
+    getCarById(id:$id){
+        brand
+    }
+}
