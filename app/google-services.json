@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "886530067070",
+    "project_id": "carvault-apm",
+    "storage_bucket": "carvault-apm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886530067070:android:333b309c14232de3e0662f",
+        "android_client_info": {
+          "package_name": "com.app.carvault"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886530067070-g9t74sp1r6osg2e847mbl51aaou3cd1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgJ3E0A5ztL70Khv940HdzXSofgbGcGAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "886530067070-g9t74sp1r6osg2e847mbl51aaou3cd1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

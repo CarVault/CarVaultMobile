@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.apm.graphql.UserQuery
 import com.apollographql.apollo3.ApolloClient
 import com.app.carvault.user.UserDataSource
+import com.google.firebase.auth.FirebaseAuth
 import javax.sql.DataSource
 
 class LoginActivity : AppCompatActivity() {
@@ -25,7 +26,6 @@ class LoginActivity : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.login_button)
         emailInput = findViewById(R.id.editTextEmailAddress)
         passInput = findViewById(R.id.editTextPassword)
-        val apolloClient = ApolloClient.Builder().serverUrl("http://localhost:8080/graphql").build()
 
 
         loginButton.setOnClickListener {
@@ -40,14 +40,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun tryLogin(){
-        val emailText = emailInput.text.toString()
-        val passText = passInput.text.toString()
-
-        if (userDataSource.login(emailText, passText)){
-            val intent = Intent(this, NavDrawer::class.java)
-            startActivity(intent)
-        } else {
-            Toast.makeText(this, "Email or password wrong!", Toast.LENGTH_SHORT).show()
-        }
+        FirebaseAuth.getInstance()
+            .signInWithEmailAndPassword(emailInput.text.toString(), passInput.text.toString())
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    // Mockeado hasta que vea como hacerlo
+                    userDataSource.login("manuframil@carvault.com", "mframil")
+                    val intent = Intent(this, NavDrawer::class.java)
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(this, "Email or password wrong!", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 }

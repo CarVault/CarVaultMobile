@@ -1,10 +1,11 @@
 package com.app.carvault.car
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.apm.graphql.GetCarByIdQuery
+import com.apollographql.apollo3.ApolloClient
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.*
 
 class CarDataSource private constructor (private val context: Context) {
 
@@ -16,7 +17,7 @@ class CarDataSource private constructor (private val context: Context) {
         return carList.filter { it.id in userCars }
     }
 
-    fun getCarForId(id: Long?): Car? {
+    fun getCarForId(id: Long?): Car?  {
         id?.let {
             val gson = Gson()
             val listCarType = object : TypeToken<List<Car>>() {}.type
@@ -24,6 +25,36 @@ class CarDataSource private constructor (private val context: Context) {
             val carList: List<Car> = gson.fromJson(carListJson, listCarType)
             return carList.firstOrNull { it.id == id }
         }
+        return null
+    }
+
+    fun getCarById(id: Long?): Deferred<Car?> = CoroutineScope(Dispatchers.Default).async {
+        id?.let {
+            val client = ApolloClient.Builder().serverUrl("http://localhost:8080/graphql").build()
+            val response = client.query(GetCarByIdQuery(id = id.toString())).execute()
+            return@async carFromQuery(response.data?.getCarById)
+        }
+        return@async null
+    }
+
+    private fun carFromQuery(query: GetCarByIdQuery.GetCarById?): Car? {
+        query?.let {
+            return Car(
+                id = query.id!!.toLong(),
+                name = query.brand!!,
+                manufacturer = query.manufacturer!!,
+                year = query.year!!,
+                origin = query.origin!!,
+                address = query.address!!,
+                kms = query.kilometers!!.toInt(),
+                fuel = query.fuel!!,
+                description = query.description!!,
+                color = query.color!!,
+                // FALTAN EN EL MODELO DE GRAPHQLK
+                VIN = "4JGBF71E18A429191",
+                horsepower = 120,
+                img = ""
+            ) }
         return null
     }
 

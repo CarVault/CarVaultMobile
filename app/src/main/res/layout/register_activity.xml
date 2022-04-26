@@ -27,6 +27,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -35,6 +36,7 @@
             tools:layout_editor_absoluteY="87dp" />
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usernameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -43,6 +45,7 @@
             tools:layout_editor_absoluteY="161dp" />
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -51,6 +54,7 @@
             tools:layout_editor_absoluteY="245dp" />
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirmPassInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -59,6 +63,7 @@
             tools:layout_editor_absoluteY="310dp" />
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -67,15 +72,18 @@
             tools:layout_editor_absoluteY="378dp" />
 
 
-
+        <!--
         <CheckBox
+            android:id="@+id/checkboxEnterprise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="Enterprise account"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="452dp" />
+
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cifInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -84,13 +92,14 @@
             tools:layout_editor_absoluteY="519dp" />
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addressInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:hint="Address"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="583dp" />
-
+    -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

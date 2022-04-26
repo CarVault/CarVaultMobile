@@ -1,5 +1,22 @@
 query getCarById($id: ID!){
     getCarById(id:$id){
+        id
         brand
+        model
+        reference
+        description
+        kilometers
+        year
+        address
+        manufacturer
+        origin
+        fuel
+        color
+        owner {
+            id
+            username
+            email
+            phone
+        }
     }
 }
