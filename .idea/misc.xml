@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/register_activity.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/activity_add_car.xml" value="0.11041666666666666" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/activity_add_car_data.xml" value="0.5" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/activity_eula.xml" value="0.141015625" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/eula.xml" value="0.27049180327868855" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/item_car_list.xml" value="0.141015625" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="17" project-jdk-type="JavaSDK" />
 </project>
