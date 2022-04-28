@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spanned
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
@@ -16,7 +17,7 @@ class EulaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eula)
-        //setEula()
+        setEula()
 
 
 
@@ -39,8 +40,9 @@ class EulaActivity : AppCompatActivity() {
 
     private fun setEula() {
         val eulaContent = findViewById<TextView>(R.id.eula_content)
-        val eula = intent.extras!!.getInt("eula")
-        val inputStream: InputStream = resources.openRawResource(eula)
+        //val eula = intent.extras!!.getInt("eula")
+        //val inputStream: InputStream = resources.openRawResource(eula)
+        val inputStream: InputStream = assets.open("eula.html")
         val bytes = ByteArray(inputStream.available())
         inputStream.read(bytes)
         val htmlAsSpanned: Spanned =
