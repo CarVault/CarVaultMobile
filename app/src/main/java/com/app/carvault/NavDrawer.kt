@@ -16,6 +16,7 @@ import com.app.carvault.databinding.ActivityNavDrawerBinding
 import com.app.carvault.ui.notifications.NotificationsActivity
 
 import com.app.carvault.ui.settings.SettingsActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class NavDrawer : AppCompatActivity() {
 
@@ -60,6 +61,11 @@ class NavDrawer : AppCompatActivity() {
             // User chose the "Settings" item, show the app settings UI...
             val intent = Intent(this.applicationContext, SettingsActivity()::class.java)
             startActivity(intent)
+            true
+        }
+        R.id.action_logout -> {
+            FirebaseAuth.getInstance().signOut()
+            onBackPressed()
             true
         }
         R.id.action_notifications -> {
