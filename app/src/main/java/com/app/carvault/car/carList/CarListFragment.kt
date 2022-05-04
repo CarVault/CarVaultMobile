@@ -12,19 +12,18 @@ import com.app.carvault.R
 import com.app.carvault.car.Car
 import com.app.carvault.car.CarDataSource
 import com.app.carvault.car.carDetail.CarDetailActivity
+import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.CAR_ID
 import com.app.carvault.user.UserDataSource
 
 class CarListFragment : Fragment() {
 
-    private lateinit var userDataSource : UserDataSource
     private lateinit var carDataSource: CarDataSource
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        userDataSource = UserDataSource.getDataSource(this.requireContext())
         carDataSource = CarDataSource.getDataSource(this.requireContext())
 
         val v = inflater.inflate(R.layout.car_list_fragment, container, false)
@@ -33,7 +32,7 @@ class CarListFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = carsAdapter
-        carsAdapter.submitList(carDataSource.loadCarList(userDataSource.getCurrentUser().cars))
+        carsAdapter.submitList(carDataSource.loadCarList(GraphqlClient.getInstance().getCurrentUser()!!.cars))
         return v
     }
 

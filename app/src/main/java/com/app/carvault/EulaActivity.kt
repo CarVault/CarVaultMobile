@@ -28,11 +28,12 @@ class EulaActivity : AppCompatActivity() {
         }
 
         val cancelButton = findViewById<Button>(R.id.eula_cancel)
-        cancelButton.setOnClickListener{Snackbar.make(
-            findViewById(android.R.id.content),
-            "You must accept the EULA to continue",
-            Snackbar.LENGTH_LONG
-        ).show()
+        cancelButton.setOnClickListener{
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                "You must accept the EULA to continue",
+                Snackbar.LENGTH_LONG
+            ).show()
 
         }
 

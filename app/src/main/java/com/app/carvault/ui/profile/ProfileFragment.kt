@@ -11,26 +11,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.car.addCar.AddCarActivity
 import com.app.carvault.car.addCar.CAR_NAME
 import com.app.carvault.car.addCar.CAR_VIN
-import com.app.carvault.car.carDetail.CarDetailActivity
-import com.app.carvault.car.carList.CarAdapter
-import com.app.carvault.car.Car
 import com.app.carvault.car.CarDataSource
-import com.app.carvault.car.carDetail.CarTabCollectionAdapter
+import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.editProfile.EditProfileActivity
 import com.app.carvault.ui.profile.editProfile.PROFILE_EMAIL
 import com.app.carvault.ui.profile.editProfile.PROFILE_NAME
 import com.app.carvault.ui.profile.editProfile.PROFILE_PHONE
 import com.app.carvault.ui.profile.tabProfile.ProfileTabAdapter
 import com.app.carvault.user.User
-import com.app.carvault.user.UserDataSource
 import com.google.android.material.tabs.TabLayout
 
 const val CAR_ID = "car id"
@@ -41,7 +34,6 @@ class ProfileFragment : Fragment() {
     private val newCarActivityRequestCode = 1
     private val editProfileActivityRequestCode = 2
 
-    private lateinit var userDataSource : UserDataSource
     private lateinit var carDataSource: CarDataSource
 
     private lateinit var tabLayout: TabLayout
@@ -54,11 +46,11 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.profile_fragment, container, false)
-        userDataSource = UserDataSource.getDataSource(this.requireContext())
+        //userDataSource = UserDataSource.getDataSource(this.requireContext())
         carDataSource = CarDataSource.getDataSource(this.requireContext())
 
         // Set up user profile
-        updateProfileData(v)
+        //updateProfileData(v, GraphqlClient.getInstance().getCurrentUser())
 
         // Tab Layout
         tabLayout = v.findViewById(R.id.tabLayout_profile)
@@ -83,14 +75,6 @@ class ProfileFragment : Fragment() {
             }
         })
 
-
-        /*carsListViewModel.carsLiveData.observe(this.viewLifecycleOwner) {
-            it?.let {
-                carsAdapter.submitList(it as MutableList<Car>)
-            }
-        }
-         */
-
         // Fab -> adding new cars
         val fab: View = v.findViewById(R.id.floatingAddCarButton)
         fab.setOnClickListener {
@@ -108,24 +92,25 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun updateProfileData(v: View){
-        val user: User = userDataSource.getCurrentUser()
+    private fun updateProfileData(v: View, user: User?){
 
-        val profileName = v.findViewById<TextView>(R.id.profile_name)
-        val profileId = v.findViewById<TextView>(R.id.profile_id)
-        val profileEmail = v.findViewById<TextView>(R.id.profile_email)
-        val profilePhone = v.findViewById<TextView>(R.id.profile_phone)
-        val profileImg = v.findViewById<ImageView>(R.id.profile_img)
+        user?.let {
+            val profileName = v.findViewById<TextView>(R.id.profile_name)
+            val profileId = v.findViewById<TextView>(R.id.profile_id)
+            val profileEmail = v.findViewById<TextView>(R.id.profile_email)
+            val profilePhone = v.findViewById<TextView>(R.id.profile_phone)
+            val profileImg = v.findViewById<ImageView>(R.id.profile_img)
 
-        profileName.text = user.name
-        profileId.text = user.id.toString()
-        profileEmail.text = user.email
-        profilePhone.text = user.phone
+            profileName.text = user.name
+            profileId.text = user.id.toString()
+            profileEmail.text = user.email
+            profilePhone.text = user.phone
 
-        if (user.profile_img != ""){
-            profileImg.setImageURI(Uri.parse(user.profile_img))
-        }else{
-            profileImg.setImageResource(R.drawable.ic_baseline_person_24)
+            if (user.profile_img != "") {
+                profileImg.setImageURI(Uri.parse(user.profile_img))
+            } else {
+                profileImg.setImageResource(R.drawable.ic_baseline_person_24)
+            }
         }
     }
 
@@ -152,7 +137,7 @@ class ProfileFragment : Fragment() {
                     val profileName = data.getStringExtra(PROFILE_NAME)
                     val profileEmail = data.getStringExtra(PROFILE_EMAIL)
                     val profilePhone = data.getStringExtra(PROFILE_PHONE)
-                    userDataSource.updateUser(profileName, profileEmail, profilePhone)
+                    //userDataSource.updateUser(profileName, profileEmail, profilePhone)
                 }
             }
         }

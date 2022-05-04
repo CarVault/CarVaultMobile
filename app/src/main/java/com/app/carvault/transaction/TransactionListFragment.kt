@@ -9,14 +9,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
-import com.app.carvault.car.CarDataSource
-import com.app.carvault.car.carDetail.CarDetailActivity
+import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.TRANS_ID
-import com.app.carvault.user.UserDataSource
 
 class TransactionListFragment : Fragment() {
 
-    private lateinit var userDataSource : UserDataSource
     private lateinit var transactionDataSource: TransactionDataSource
 
     override fun onCreateView(
@@ -24,7 +21,6 @@ class TransactionListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        userDataSource = UserDataSource.getDataSource(this.requireContext())
         transactionDataSource = TransactionDataSource.getDataSource(this.requireContext())
 
         // Inflate the layout for this fragment
@@ -34,7 +30,9 @@ class TransactionListFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = transAdapter
-        transAdapter.submitList(transactionDataSource.loadTransactions(userDataSource.getCurrentUser().transactions))
+        transAdapter.submitList(transactionDataSource.loadTransactions(
+            GraphqlClient.getInstance().getCurrentUser()!!.transactions)
+        )
         return v
     }
 
