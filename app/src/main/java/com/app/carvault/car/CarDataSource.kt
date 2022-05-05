@@ -28,35 +28,6 @@ class CarDataSource private constructor (private val context: Context) {
         return null
     }
 
-    fun getCarById(id: Long?): Deferred<Car?> = CoroutineScope(Dispatchers.Default).async {
-        id?.let {
-            val client = ApolloClient.Builder().serverUrl("http://localhost:8080/graphql").build()
-            val response = client.query(GetCarByIdQuery(id = id.toString())).execute()
-            return@async carFromQuery(response.data?.getCarById)
-        }
-        return@async null
-    }
-
-    private fun carFromQuery(query: GetCarByIdQuery.GetCarById?): Car? {
-        query?.let {
-            return Car(
-                id = query.id!!.toLong(),
-                name = query.brand!!,
-                manufacturer = query.manufacturer!!,
-                year = query.year!!,
-                origin = query.origin!!,
-                address = query.address!!,
-                kms = query.kilometers!!.toInt(),
-                fuel = query.fuel!!,
-                description = query.description!!,
-                color = query.color!!,
-                // FALTAN EN EL MODELO DE GRAPHQLK
-                VIN = "4JGBF71E18A429191",
-                horsepower = 120,
-                img = ""
-            ) }
-        return null
-    }
 
     /*
     fun addCar(car: Car) {

@@ -1,5 +1,11 @@
 query UserQuery($id: ID!){
-  getUser(id:$id){
+  getUser (id:$id){
     id
+    username
+    firstname
+    surname
+    email
+    phone
+    profilePicture
   }
 }

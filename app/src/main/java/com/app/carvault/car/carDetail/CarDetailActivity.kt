@@ -2,16 +2,15 @@ package com.app.carvault.car.carDetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.car.Car
 import com.app.carvault.car.CarDataSource
+import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.CAR_ID
 import com.google.android.material.tabs.TabLayout
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 class CarDetailActivity : AppCompatActivity() {
 
@@ -28,17 +27,19 @@ class CarDetailActivity : AppCompatActivity() {
         if (bundle != null) {
             currentCarId = bundle.getLong(CAR_ID)
         }
-        carDataSource = CarDataSource.getDataSource(this)
-        val currentCar = carDataSource.getCarForId(currentCarId)
+
+        lifecycleScope.launch {
+            val currentCar = withContext(Dispatchers.IO) {
+                GraphqlClient.getInstance().getCarById(currentCarId!!.toInt())
+            }
+            setTabAdapter(currentCar)
+        }
 
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.pager)
         tabLayout.addTab(tabLayout.newTab().setText("Description"))
         tabLayout.addTab(tabLayout.newTab().setText("Details"))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-
-        setTabAdapter(currentCar)
-
 
         /* Connect variables to UI elements.
         val carName: TextView = findViewById(R.id.carDetailName)

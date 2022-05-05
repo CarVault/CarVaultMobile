@@ -22,7 +22,7 @@ class CarAdapter (private val onClick: (Car) -> Unit) :
         private val carImgView: ImageView = view.findViewById(R.id.item_car_img)
 
         fun bind(car: Car) {
-            carNameTextView.text = car.name
+            carNameTextView.text = car.brand
             carVINTextView.text = car.VIN
             if (car.img == "") {
                 carImgView.setImageResource(R.drawable.default_cars)

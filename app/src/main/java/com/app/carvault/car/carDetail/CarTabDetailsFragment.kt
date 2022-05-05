@@ -18,23 +18,23 @@ class CarTabDetailsFragment (val car: Car?) : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_car_tab_details, container, false)
-        val carNameText = v.findViewById<TextView>(R.id.carNameText)
-        val KmsText = v.findViewById<TextView>(R.id.KmsText)
+        val carBrandText = v.findViewById<TextView>(R.id.carBrandText)
+        val kmsText = v.findViewById<TextView>(R.id.KmsText)
         val yearText = v.findViewById<TextView>(R.id.yearText)
         val addressText = v.findViewById<TextView>(R.id.addressText)
         val manufacturerText = v.findViewById<TextView>(R.id.manufacturerText)
-        val horsepowerText = v.findViewById<TextView>(R.id.horsepowerText)
+        val modelText = v.findViewById<TextView>(R.id.modelText)
         val originText = v.findViewById<TextView>(R.id.originText)
         val fuelText = v.findViewById<TextView>(R.id.fuelText)
         val colorText = v.findViewById<TextView>(R.id.colorText)
 
         car?.let {
-            carNameText.text = car.name
-            KmsText.text = car.kms.toString()
+            carBrandText.text = car.brand
+            kmsText.text = car.kms.toString()
             yearText.text = car.year.toString()
             addressText.text = car.address
             manufacturerText.text = car.manufacturer
-            horsepowerText.text = car.horsepower.toString()
+            modelText.text = car.model
             originText.text = car.origin
             fuelText.text = car.fuel
             colorText.text = car.color

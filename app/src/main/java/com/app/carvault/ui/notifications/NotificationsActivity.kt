@@ -24,8 +24,10 @@ class NotificationsActivity : FragmentActivity() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = notifAdapter
-        notifAdapter.submitList(notificationDataSource.loadNotifications(
-            GraphqlClient.getInstance().getCurrentUser()!!.notifications)
+        notifAdapter.submitList(
+            notificationDataSource.loadNotifications(
+                GraphqlClient.getInstance().getCurrentUser()!!.notifications
+            )
         )
     }
 }

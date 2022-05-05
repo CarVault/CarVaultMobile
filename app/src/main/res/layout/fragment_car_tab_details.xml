@@ -79,21 +79,21 @@
         app:layout_constraintTop_toTopOf="@+id/top_padding">
 
         <TextView
-            android:id="@+id/carName"
+            android:id="@+id/carBrand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/light_grey"
-            android:text="Name:" />
+            android:text="Brand:" />
 
         <TextView
-            android:id="@+id/carNameText"
+            android:id="@+id/carBrandText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/carName"
+            android:layout_below="@id/carBrand"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18dp"
-            android:text="Car name" />
+            android:text="Brand" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -216,21 +216,21 @@
         app:layout_constraintTop_toTopOf="@+id/top_guideline">
 
         <TextView
-            android:id="@+id/horsepower"
+            android:id="@+id/model"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/light_grey"
-            android:text="Horsepower:" />
+            android:text="Model:" />
 
         <TextView
-            android:id="@+id/horsepowerText"
+            android:id="@+id/modelText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/horsepower"
+            android:layout_below="@id/model"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18dp"
-            android:text="Horsepower" />
+            android:text="model" />
     </RelativeLayout>
 
     <RelativeLayout

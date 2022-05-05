@@ -2,6 +2,7 @@ package com.app.carvault.ui.profile
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -25,6 +26,8 @@ import com.app.carvault.ui.profile.editProfile.PROFILE_PHONE
 import com.app.carvault.ui.profile.tabProfile.ProfileTabAdapter
 import com.app.carvault.user.User
 import com.google.android.material.tabs.TabLayout
+import android.util.Base64
+import android.util.Log
 
 const val CAR_ID = "car id"
 const val TRANS_ID = "trans id"
@@ -33,12 +36,9 @@ class ProfileFragment : Fragment() {
 
     private val newCarActivityRequestCode = 1
     private val editProfileActivityRequestCode = 2
-
     private lateinit var carDataSource: CarDataSource
-
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +50,7 @@ class ProfileFragment : Fragment() {
         carDataSource = CarDataSource.getDataSource(this.requireContext())
 
         // Set up user profile
-        //updateProfileData(v, GraphqlClient.getInstance().getCurrentUser())
+        updateProfileData(v, GraphqlClient.getInstance().getCurrentUser())
 
         // Tab Layout
         tabLayout = v.findViewById(R.id.tabLayout_profile)
@@ -101,13 +101,16 @@ class ProfileFragment : Fragment() {
             val profilePhone = v.findViewById<TextView>(R.id.profile_phone)
             val profileImg = v.findViewById<ImageView>(R.id.profile_img)
 
-            profileName.text = user.name
+            profileName.text = getString(R.string.profileName, user.firstname ,user.surname )
             profileId.text = user.id.toString()
             profileEmail.text = user.email
             profilePhone.text = user.phone
 
-            if (user.profile_img != "") {
-                profileImg.setImageURI(Uri.parse(user.profile_img))
+            if (user.profilePicture != "") {
+                val newStr = user.profilePicture.drop(22)
+                val bytes = Base64.decode(newStr, Base64.DEFAULT)
+                val decodedImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                profileImg.setImageBitmap(decodedImage)
             } else {
                 profileImg.setImageResource(R.drawable.ic_baseline_person_24)
             }

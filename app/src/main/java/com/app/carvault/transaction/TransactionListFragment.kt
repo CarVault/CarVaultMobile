@@ -30,8 +30,10 @@ class TransactionListFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = transAdapter
-        transAdapter.submitList(transactionDataSource.loadTransactions(
-            GraphqlClient.getInstance().getCurrentUser()!!.transactions)
+        transAdapter.submitList(
+            transactionDataSource.loadTransactions(
+                GraphqlClient.getInstance().getCurrentUser()!!.transactions
+            )
         )
         return v
     }

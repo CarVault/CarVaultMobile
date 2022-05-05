@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
@@ -15,6 +16,10 @@ import com.app.carvault.car.carDetail.CarDetailActivity
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.CAR_ID
 import com.app.carvault.user.UserDataSource
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CarListFragment : Fragment() {
 
@@ -32,7 +37,14 @@ class CarListFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = carsAdapter
-        carsAdapter.submitList(carDataSource.loadCarList(GraphqlClient.getInstance().getCurrentUser()!!.cars))
+
+        lifecycleScope.launch {
+            val cars = withContext(Dispatchers.IO) {
+                GraphqlClient.getInstance().getUserCars()
+            }
+            //Thread.sleep(5000)
+            carsAdapter.submitList(cars)
+        }
         return v
     }
 

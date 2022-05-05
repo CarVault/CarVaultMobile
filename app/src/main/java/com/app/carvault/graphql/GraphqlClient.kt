@@ -1,15 +1,16 @@
 package com.app.carvault.graphql
 
+import com.apm.graphql.GetCarByIdQuery
+import com.apm.graphql.UserQuery
 import com.apollographql.apollo3.ApolloClient
 import com.app.carvault.car.Car
 import com.app.carvault.user.User
-import com.app.carvault.user.UserDataSource
 
-const val SERVER_URL = "http://carvault2-env.eba-c3vjpzfb.us-east-1.elasticbeanstalk.com/graphiql"
+const val SERVER_URL = "http://carvault2-env.eba-c3vjpzfb.us-east-1.elasticbeanstalk.com/graphql"
 
 class GraphqlClient private constructor() {
 
-    val client = ApolloClient.Builder().serverUrl(SERVER_URL).build()
+    private val client = ApolloClient.Builder().serverUrl(SERVER_URL).build()
     private var currentUser: User? = null
 
     fun setCurrentUser(user: User){
@@ -20,31 +21,32 @@ class GraphqlClient private constructor() {
         return currentUser
     }
 
-    fun getUserById (id: Int) : User?{
-        return null
+    suspend fun getUserById (id: Int) : User?{
+        val response = client.query(UserQuery(id=id.toString())).execute()
+        return User.fromGraphqlQuery(response.data?.getUser)
     }
 
-    fun getUserByEmail (email: String) : User? {
+    suspend fun getUserByEmail (email: String) : User? {
         // Solucion temporal
-        return User(
-            id = 5,
-            username = "mframil",
-            password = "mframil",
-            name = "Manuel Framil",
-            email = "manuframil1999@gmail.com",
-            phone = "665 765 123",
-            cars = listOf(1,2,3),
-            transactions = listOf(1,2),
-            notifications = listOf(1,2),
-            profile_img = ""
-        )
+        return getUserById(1)
     }
 
-    fun getCarById (id: Int) : Car?{
-        return null
+    suspend fun getCarById (id: Int) : Car?{
+        val response = client.query(GetCarByIdQuery(id=id.toString())).execute()
+        return Car.fromGraphqlQuery(response.data?.getCarById)
     }
 
-    fun getCarByVin (vin: String) : Car?{
+    suspend fun getUserCars() : List<Car?> {
+        currentUser?.cars.let {
+            val out = mutableListOf<Car?>()
+            for (carId in it!!){
+                out.add(getCarById(carId.toInt()))
+            }
+            return out
+        }
+    }
+
+    suspend fun getCarByVin (vin: String) : Car?{
         return null
     }
 

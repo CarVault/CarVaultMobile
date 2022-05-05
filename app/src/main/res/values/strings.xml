@@ -14,6 +14,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_notifications">Notifications</string>
 
+    <string name="profileName">%s %s</string>
     <string name="mock_name">Car vault</string>
 
     <string name="menu_profile">Profile</string>

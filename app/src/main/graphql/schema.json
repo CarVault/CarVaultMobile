@@ -48,12 +48,12 @@
             "args": []
           },
           {
-            "name": "reference",
+            "name": "vin",
             "description": "",
             "isDeprecated": false,
             "type": {
               "kind": "SCALAR",
-              "name": "Float"
+              "name": "String"
             },
             "args": []
           },
@@ -215,6 +215,24 @@
                 }
               },
               {
+                "name": "firstname",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
+                "name": "surname",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
                 "name": "phone",
                 "description": "",
                 "isDeprecated": false,
@@ -224,6 +242,15 @@
                     "kind": "SCALAR",
                     "name": "Float"
                   }
+                }
+              },
+              {
+                "name": "profilePicture",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
                 }
               }
             ]
@@ -285,6 +312,15 @@
                 }
               },
               {
+                "name": "vin",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
                 "name": "brand",
                 "description": "",
                 "isDeprecated": false,
@@ -319,6 +355,15 @@
               },
               {
                 "name": "kilometers",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int"
+                }
+              },
+              {
+                "name": "horsepower",
                 "description": "",
                 "isDeprecated": false,
                 "type": {
@@ -468,6 +513,26 @@
             "args": []
           },
           {
+            "name": "firstname",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            },
+            "args": []
+          },
+          {
+            "name": "surname",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            },
+            "args": []
+          },
+          {
             "name": "email",
             "description": "",
             "isDeprecated": false,
@@ -497,6 +562,16 @@
                 "kind": "OBJECT",
                 "name": "Car"
               }
+            },
+            "args": []
+          },
+          {
+            "name": "profilePicture",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
             },
             "args": []
           }

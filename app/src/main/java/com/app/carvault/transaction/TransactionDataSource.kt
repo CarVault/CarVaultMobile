@@ -17,10 +17,10 @@ class TransactionDataSource private constructor (private val context: Context) {
     }
 
     fun getTransactionInfo (t: Transaction) : TransactionInfo {
-        val from = UserDataSource.getDataSource(context).getUser(t.from_id)?.name
-        val to = UserDataSource.getDataSource(context).getUser(t.to_id)?.name
+        val from = UserDataSource.getDataSource(context).getUser(t.from_id)?.username
+        val to = UserDataSource.getDataSource(context).getUser(t.to_id)?.username
         val date = t.date
-        val car = CarDataSource.getDataSource(context).getCarForId(t.car)?.name
+        val car = CarDataSource.getDataSource(context).getCarForId(t.car)?.model
         val sha = t.sha256
         return TransactionInfo(from?:"", to?:"", date, car?:"", sha)
     }

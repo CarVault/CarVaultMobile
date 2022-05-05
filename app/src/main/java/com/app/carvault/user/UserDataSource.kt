@@ -17,7 +17,7 @@ class UserDataSource private constructor(context: Context){
     fun createUser(user: User){
 
     }
-
+    /*
     fun login(email: String, pass: String): Boolean {
         val gson = Gson()
         val listUserType = object : TypeToken<List<User>>() {}.type
@@ -29,6 +29,7 @@ class UserDataSource private constructor(context: Context){
         }
         return false
     }
+     */
 
 
     fun getUser(id: Long): User? {
@@ -39,7 +40,7 @@ class UserDataSource private constructor(context: Context){
     }
 
     fun updateUser(newName: String?, newEmail: String?, newPhone: String?): Boolean{
-        if (newName != null)  { user.name = newName   }
+        //if (newName != null)  { user.name = newName   }
         if (newEmail != null) { user.email = newEmail }
         if (newPhone != null) { user.phone = newPhone }
         return true
