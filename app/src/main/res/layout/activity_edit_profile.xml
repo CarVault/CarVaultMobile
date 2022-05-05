@@ -46,9 +46,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editPhoneLayout"
+        android:layout_marginStart="150dp"
         android:layout_marginLeft="150dp"
-        android:text="Done!"
-        android:layout_marginStart="150dp" />
+        android:layout_marginTop="114dp"
+        android:text="Done!" />
+
+    <Button
+        android:id="@+id/updateImgButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editPhoneLayout"
+        android:layout_marginTop="23dp"
+        android:text="Update Image" />
 
 
 </RelativeLayout>

@@ -39,9 +39,19 @@
         android:id="@+id/doneButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done!"
         android:layout_below="@id/carVINInputLayout"
         android:layout_marginLeft="150dp"
-        />
+        android:layout_marginTop="136dp"
+        android:text="Done!" />
+
+    <Button
+        android:id="@+id/addDocButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/carVINInputLayout"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="47dp"
+        android:text="Add Document" />
 
 </RelativeLayout>

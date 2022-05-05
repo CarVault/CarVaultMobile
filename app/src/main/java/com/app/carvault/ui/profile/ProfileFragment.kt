@@ -28,6 +28,8 @@ import com.app.carvault.user.User
 import com.google.android.material.tabs.TabLayout
 import android.util.Base64
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 
 const val CAR_ID = "car id"
 const val TRANS_ID = "trans id"
@@ -88,8 +90,11 @@ class ProfileFragment : Fragment() {
             //Toast.makeText(this.context, "Edit button!", Toast.LENGTH_SHORT).show()
             editButtonOnClick()
         }
+
         return v
     }
+
+
 
 
     private fun updateProfileData(v: View, user: User?){
@@ -105,6 +110,7 @@ class ProfileFragment : Fragment() {
             profileId.text = user.id.toString()
             profileEmail.text = user.email
             profilePhone.text = user.phone
+
 
             if (user.profilePicture != "") {
                 val newStr = user.profilePicture.drop(22)
