@@ -13,7 +13,7 @@ import com.google.android.material.textfield.TextInputEditText
 const val PROFILE_NAME = "name"
 const val PROFILE_EMAIL = "email"
 const val PROFILE_PHONE = "phone"
-const val PICK_IMG_FILE = 1
+const val PICK_IMG_FILE = 100
 
 class EditProfileActivity : AppCompatActivity() {
 
@@ -30,9 +30,11 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_profile)
 
         // Change img
-        findViewById<Button>(R.id.updateImgButton).setOnClickListener {
-            pickPhotoFromGallery()
+       findViewById<Button>(R.id.updateImgButton).setOnClickListener {
+           pickPhotoFromGallery()
         }
+
+        val image = findViewById<ImageView>(R.id.profile_img)
 
         findViewById<Button>(R.id.doneButton).setOnClickListener {
             editProfile()
@@ -66,4 +68,14 @@ class EditProfileActivity : AppCompatActivity() {
         intent.type = "image/*"
         startActivityForResult(intent, PICK_IMG_FILE )
     }
+
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        super.onActivityResult(requestCode, resultCode, data)
+        //val image = findViewById<ImageView>(R.id.profile_img)
+
+        //if (resultCode == Activity.RESULT_OK){
+            //findViewById<ImageView>(R.id.profile_img).setImageURI(data?.data) // handle chosen image
+        //}
+    }
+
 }

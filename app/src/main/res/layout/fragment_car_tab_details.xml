@@ -216,7 +216,7 @@
         app:layout_constraintTop_toTopOf="@+id/top_guideline">
 
         <TextView
-            android:id="@+id/model"
+            android:id="@+id/addCarManufacturer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/light_grey"
@@ -226,7 +226,7 @@
             android:id="@+id/modelText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/model"
+            android:layout_below="@id/addCarManufacturer"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18dp"

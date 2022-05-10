@@ -6,6 +6,10 @@
         <entry key="..\:/Users/Jorge Berbel/Documents/Universidad/MUEI/APM/Practicas/CarVaultMobile/app/src/main/res/layout/activity_add_car.xml" value="0.15534420289855072" />
         <entry key="..\:/Users/Jorge Berbel/Documents/Universidad/MUEI/APM/Practicas/CarVaultMobile/app/src/main/res/layout/activity_edit_profile.xml" value="0.15625" />
         <entry key="..\:/Users/Jorge Berbel/Documents/Universidad/MUEI/APM/Practicas/CarVaultMobile/app/src/main/res/layout/profile_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.199" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/activity_add_car.xml" value="0.3473731884057971" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/activity_add_car_new.xml" value="0.25" />
+        <entry key="..\:/Users/Jorge/Documents/Universidad/MUEI/APM/CarVaultMobile/app/src/main/res/layout/activity_car_detail.xml" value="0.3473731884057971" />
         <entry key="app/src/main/res/layout/app_bar_nav_drawer.xml" value="0.2767210144927536" />
         <entry key="app/src/main/res/layout/content_nav_drawer.xml" value="0.2767210144927536" />
         <entry key="app/src/main/res/layout/fragment_car_tab_details.xml" value="0.26313405797101447" />
@@ -19,5 +23,5 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>
