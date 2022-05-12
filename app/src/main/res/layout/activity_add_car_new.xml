@@ -21,7 +21,7 @@
             android:id="@+id/tabItem4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/vehicle_basic_information" />
+            android:text="@string/add_vehicle_basic_info" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem3"
@@ -58,11 +58,10 @@
     </com.google.android.material.tabs.TabLayout>
 
     <Button
-        android:id="@+id/cancel"
+        android:id="@+id/addCancelButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginBottom="18dp"
         android:background="#F44336"
         android:text="@string/cancel_button"
@@ -72,7 +71,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/add_vehicle"
+        android:id="@+id/addVehicleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -103,7 +102,7 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="Vehicle basic information" />
+            android:text="@string/add_vehicle_basic_info" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,7 +122,7 @@
                     android:text="@string/carName" />
 
                 <TextView
-                    android:id="@+id/AddCarVin"
+                    android:id="@+id/addCarVin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="48dp"
@@ -197,88 +196,88 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="VIN value"
+                    android:hint="Name"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/brand_val"
+                    android:id="@+id/addCarVin_val"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Brand value"
+                    android:hint="VIN"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/model_val"
+                    android:id="@+id/addCarManufacturer_val"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Model value"
+                    android:hint="Manufacturer"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/manufacturedYear_value"
+                    android:id="@+id/addCarManufacturedYear_val"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Value"
+                    android:hint="Manufactured Year"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/manufacturedYear_value2"
+                    android:id="@+id/addCarHorsepower_val"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Value"
+                    android:hint="Horsepower"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/manufacturedYear_value3"
+                    android:id="@+id/addCarOrigin_val"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Value"
+                    android:hint="Origin"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/manufacturedYear_value4"
+                    android:id="@+id/addCarAddress_val"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Value"
+                    android:hint="Address"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/manufacturedYear_value5"
+                    android:id="@+id/addCarKMS_val"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Value"
+                    android:hint="KMs"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/manufacturedYear_value6"
+                    android:id="@+id/addCarFuel_val"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Value"
+                    android:hint="Fuel"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/manufacturedYear_value7"
+                    android:id="@+id/addCarColor_val"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Value"
+                    android:hint="Color"
                     android:inputType="textPersonName"
                     android:minHeight="48dp" />
             </LinearLayout>
