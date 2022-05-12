@@ -54,6 +54,8 @@ class LoginActivity : AppCompatActivity() {
         loginButton = findViewById(R.id.login_button)
         googleButton = findViewById(R.id.googleButton)
 
+        session()
+
         loginButton.setOnClickListener {
             emailAndPasswordLogin()
         }
@@ -66,10 +68,6 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
-        session()
-
-
     }
 
     override fun onStart() {
@@ -82,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val email = prefs.getString("email", null)
         if (email != null){
-            loginLayout.visibility = View.GONE
+            loginLayout.visibility = View.INVISIBLE
             loadApp(email)
         }
 
