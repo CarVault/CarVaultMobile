@@ -25,15 +25,23 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_vehicle_basic_info">Vehicle basic info</string>
-    <string name="carName">Name</string>
+    <string name="carBrand">Brand</string>
     <string name="carVIN">VIN</string>
-    <string name="ManufacturedYear">Manufacturer year</string>
-    <string name="Horsepower">Horsepower</string>
+    <string name="manufacturer">Manufacturer</string>
+    <string name="ManufacturedYear">Manufactured year</string>
+    <string name="Model">Model</string>
     <string name="origin">Origin</string>
     <string name="carAddress">Address</string>
     <string name="kms">KMs</string>
     <string name="fuel">Fuel</string>
     <string name="color">Color</string>
+    <string name="description">Description</string>
+    <string name="cancel_button">CANCEL</string>
+    <string name="add_vehicle_button">ADD VEHICLE</string>
+    <string name="documentation">Documentation</string>
+    <string name="photos">Photos</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <!-- Strings used for fragments for navigation -->

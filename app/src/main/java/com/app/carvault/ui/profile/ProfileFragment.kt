@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.car.addCar.AddCarActivity
-import com.app.carvault.car.addCar.CAR_NAME
+import com.app.carvault.car.addCar.CAR_BRAND
 import com.app.carvault.car.addCar.CAR_VIN
 import com.app.carvault.car.CarDataSource
 import com.app.carvault.graphql.GraphqlClient
@@ -30,6 +30,7 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+
 
 const val CAR_ID = "car id"
 const val TRANS_ID = "trans id"
@@ -138,7 +139,7 @@ class ProfileFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK){
             when (requestCode){
                 1  -> intentData?.let { data ->
-                    val carName = data.getStringExtra(CAR_NAME)
+                    val carName = data.getStringExtra(CAR_BRAND)
                     val carVIN = data.getStringExtra(CAR_VIN)
                     //carsListViewModel.insertCar(carName, carVIN)
                 }
