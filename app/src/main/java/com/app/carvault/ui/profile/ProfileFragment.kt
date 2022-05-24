@@ -57,7 +57,26 @@ class ProfileFragment : Fragment() {
         // Tab Layout
         tabLayout = v.findViewById(R.id.tabLayout_profile)
         viewPager = v.findViewById(R.id.pager)
+        setupTabs()
 
+        // Fab -> adding new cars
+        val fab: View = v.findViewById(R.id.floatingAddCarButton)
+        fab.setOnClickListener {
+            fabOnClick()
+            //Toast.makeText(this.context, "Add new car!", Toast.LENGTH_SHORT).show()
+        }
+
+        // Edit profile button
+        val editButton = v.findViewById<Button>(R.id.button_edit_profile)
+        editButton.setOnClickListener {
+            //Toast.makeText(this.context, "Edit button!", Toast.LENGTH_SHORT).show()
+            editButtonOnClick()
+        }
+        return v
+    }
+
+
+    private fun setupTabs(){
         tabLayout.addTab(tabLayout.newTab().setText("Cars"))
         tabLayout.addTab(tabLayout.newTab().setText("Transactions"))
 
@@ -76,26 +95,7 @@ class ProfileFragment : Fragment() {
 
             }
         })
-
-        // Fab -> adding new cars
-        val fab: View = v.findViewById(R.id.floatingAddCarButton)
-        fab.setOnClickListener {
-            fabOnClick()
-            //Toast.makeText(this.context, "Add new car!", Toast.LENGTH_SHORT).show()
-        }
-
-        // Edit profile button
-        val editButton = v.findViewById<Button>(R.id.button_edit_profile)
-        editButton.setOnClickListener {
-            //Toast.makeText(this.context, "Edit button!", Toast.LENGTH_SHORT).show()
-            editButtonOnClick()
-        }
-
-        return v
     }
-
-
-
 
     private fun updateProfileData(v: View, user: User?){
 

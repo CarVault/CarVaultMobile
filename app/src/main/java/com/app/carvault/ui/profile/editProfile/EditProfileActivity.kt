@@ -2,11 +2,10 @@ package com.app.carvault.ui.profile.editProfile
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
-import android.widget.ImageView
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.app.carvault.R
 import com.google.android.material.textfield.TextInputEditText
 
@@ -20,10 +19,6 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var editName: TextInputEditText
     private lateinit var editEmail: TextInputEditText
     private lateinit var editPhone: TextInputEditText
-
-    private val editProfileViewModel by viewModels<EditProfileViewModel> {
-        CarDetailViewModelFactory(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +35,9 @@ class EditProfileActivity : AppCompatActivity() {
         editName = findViewById(R.id.editNameInput)
         editEmail = findViewById(R.id.editEmailInput)
         editPhone = findViewById(R.id.editPhoneInput)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     private fun editProfile(){
@@ -59,6 +57,14 @@ class EditProfileActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, resultIntent)
         }
         finish()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // handle arrow click here
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun pickPhotoFromGallery() {

@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.DocumentsContract
+import android.view.MenuItem
 import android.widget.Button
 import com.app.carvault.R
 import com.google.android.material.textfield.TextInputEditText
@@ -31,6 +32,9 @@ class AddCarActivity : AppCompatActivity() {
         }
         addCarName = findViewById(R.id.addCarName)
         addCarVIN = findViewById(R.id.addCarVIN)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     /* The onClick action for the done button. Closes the activity and returns the new flower name
@@ -58,8 +62,15 @@ class AddCarActivity : AppCompatActivity() {
             type = "application/pdf"
 
         }
-
         startActivityForResult(intent, PICK_PDF_FILE)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // handle arrow click here
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

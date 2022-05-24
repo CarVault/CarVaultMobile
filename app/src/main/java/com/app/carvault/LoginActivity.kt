@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        loginLayout.visibility = View.VISIBLE
+        session()
     }
 
     // Comprueba si existe una sesion activa
@@ -82,6 +82,8 @@ class LoginActivity : AppCompatActivity() {
         if (email != null){
             loginLayout.visibility = View.INVISIBLE
             loadApp(email)
+        } else{
+            loginLayout.visibility = View.VISIBLE
         }
 
     }

@@ -2,6 +2,7 @@ package com.app.carvault.car.carDetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
@@ -27,6 +28,9 @@ class CarDetailActivity : AppCompatActivity() {
         if (bundle != null) {
             currentCarId = bundle.getLong(CAR_ID)
         }
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         lifecycleScope.launch {
             val currentCar = withContext(Dispatchers.IO) {
@@ -90,6 +94,14 @@ class CarDetailActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // handle arrow click here
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
