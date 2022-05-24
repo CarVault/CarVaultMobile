@@ -9,7 +9,7 @@
         <entry key="app/src/main/res/layout/activity_eula.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/activity_nav_drawer.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_notifications.xml" value="0.25833333333333336" />
-        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.4209138840070299" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/app_bar_nav_drawer.xml" value="0.2767210144927536" />
         <entry key="app/src/main/res/layout/content_nav_drawer.xml" value="0.2767210144927536" />
         <entry key="app/src/main/res/layout/fragment_car_tab_details.xml" value="0.26313405797101447" />
@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/register_activity.xml" value="0.29347826086956524" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.321875" />
         <entry key="app/src/main/res/menu/nav_drawer.xml" value="0.321875" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.269" />
       </map>
     </option>
   </component>
