@@ -1,0 +1,24 @@
+fragment CarFields on Car{
+    id
+    brand
+    model
+    vin
+    description
+    kilometers
+    year
+    address
+    manufacturer
+    origin
+    fuel
+    color
+}
+
+fragment UserFields on User{
+    id
+    username
+    firstname
+    surname
+    email
+    phone
+    profilePicture
+}

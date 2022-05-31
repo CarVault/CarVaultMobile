@@ -256,6 +256,101 @@
             ]
           },
           {
+            "name": "updateUser",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "OBJECT",
+              "name": "User"
+            },
+            "args": [
+              {
+                "name": "userId",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
+                "name": "username",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String"
+                  }
+                }
+              },
+              {
+                "name": "password",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String"
+                  }
+                }
+              },
+              {
+                "name": "email",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String"
+                  }
+                }
+              },
+              {
+                "name": "firstname",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
+                "name": "surname",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
+                "name": "phone",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Float"
+                  }
+                }
+              },
+              {
+                "name": "profilePicture",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              }
+            ]
+          },
+          {
             "name": "transferCar",
             "description": "",
             "isDeprecated": false,
@@ -426,6 +521,143 @@
                 }
               }
             ]
+          },
+          {
+            "name": "updateCar",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "OBJECT",
+              "name": "Car"
+            },
+            "args": [
+              {
+                "name": "carId",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID"
+                  }
+                }
+              },
+              {
+                "name": "vin",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
+                "name": "brand",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String"
+                  }
+                }
+              },
+              {
+                "name": "model",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String"
+                  }
+                }
+              },
+              {
+                "name": "description",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
+                "name": "kilometers",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int"
+                }
+              },
+              {
+                "name": "horsepower",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int"
+                }
+              },
+              {
+                "name": "year",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int"
+                }
+              },
+              {
+                "name": "address",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
+                "name": "manufacturer",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
+                "name": "origin",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
+                "name": "fuel",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              },
+              {
+                "name": "color",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              }
+            ]
           }
         ]
       },
@@ -458,6 +690,46 @@
             ]
           },
           {
+            "name": "getUserByUsername",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "OBJECT",
+              "name": "User"
+            },
+            "args": [
+              {
+                "name": "username",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              }
+            ]
+          },
+          {
+            "name": "getUserByEmail",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "OBJECT",
+              "name": "User"
+            },
+            "args": [
+              {
+                "name": "email",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String"
+                }
+              }
+            ]
+          },
+          {
             "name": "getCarById",
             "description": "",
             "isDeprecated": false,
@@ -475,6 +747,29 @@
                   "ofType": {
                     "kind": "SCALAR",
                     "name": "ID"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "getCarByVin",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "OBJECT",
+              "name": "Car"
+            },
+            "args": [
+              {
+                "name": "vin",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String"
                   }
                 }
               }

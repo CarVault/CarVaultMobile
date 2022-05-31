@@ -1,7 +1,6 @@
 package com.app.carvault.graphql
 
-import com.apm.graphql.GetCarByIdQuery
-import com.apm.graphql.UserQuery
+import com.apm.graphql.*
 import com.apollographql.apollo3.ApolloClient
 import com.app.carvault.car.Car
 import com.app.carvault.user.User
@@ -23,30 +22,61 @@ class GraphqlClient private constructor() {
 
     suspend fun getUserById (id: Int) : User?{
         val response = client.query(UserQuery(id=id.toString())).execute()
-        return User.fromGraphqlQuery(response.data?.getUser)
+        response.data?.getUser?.let { query ->
+            return User.fromGraphqlQuery(
+                query.userFields,
+                query.cars!!.mapNotNull { carQuery -> carQuery!!.carFields }
+            )
+        }
+        return null
+    }
+
+    suspend fun getUserByUsername (username: String) : User? {
+        val response = client.query(GetUserByUsernameQuery(username = username)).execute()
+        response.data?.getUserByUsername?.let { query ->
+            return User.fromGraphqlQuery(
+                query.userFields,
+                query.cars!!.mapNotNull { carQuery -> carQuery!!.carFields }
+            )
+        }
+        return null
     }
 
     suspend fun getUserByEmail (email: String) : User? {
-        // Solucion temporal
-        return getUserById(1)
+        val response = client.query(GetUserByEmailQuery(email = email)).execute()
+        response.data?.getUserByEmail?.let { query ->
+            return User.fromGraphqlQuery(
+                query.userFields,
+                query.cars!!.mapNotNull { carQuery -> carQuery!!.carFields }
+            )
+        }
+        return null
+    }
+
+
+    fun getUserCars() : List<Car>? {
+        return currentUser?.cars
     }
 
     suspend fun getCarById (id: Int) : Car?{
         val response = client.query(GetCarByIdQuery(id=id.toString())).execute()
-        return Car.fromGraphqlQuery(response.data?.getCarById)
-    }
-
-    suspend fun getUserCars() : List<Car?> {
-        currentUser?.cars.let {
-            val out = mutableListOf<Car?>()
-            for (carId in it!!){
-                out.add(getCarById(carId.toInt()))
-            }
-            return out
+        response.data?.getCarById?.let { query ->
+            return Car.fromGraphqlQuery(
+                query.carFields,
+                query.owner!!.id!!.toLong()
+            )
         }
+        return null
     }
 
     suspend fun getCarByVin (vin: String) : Car?{
+        val response = client.query(GetCarByVinQuery(vin = vin)).execute()
+        response.data?.getCarByVin?.let { query ->
+            return Car.fromGraphqlQuery(
+                query.carFields,
+                query.owner!!.id!!.toLong()
+            )
+        }
         return null
     }
 

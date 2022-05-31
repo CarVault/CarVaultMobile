@@ -1,0 +1,8 @@
+query GetUserByEmail($email: String!){
+    getUserByEmail (email: $email){
+        ...UserFields
+        cars{
+            ...CarFields
+        }
+    }
+}
