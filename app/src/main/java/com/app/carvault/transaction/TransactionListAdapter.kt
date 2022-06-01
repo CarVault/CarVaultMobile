@@ -1,18 +1,16 @@
 package com.app.carvault.transaction
 
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
-import com.app.carvault.user.UserDataSource
-import kotlinx.coroutines.NonDisposableHandle.parent
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class TransactionListAdapter (private val onClick: (Transaction) -> Unit) :
     ListAdapter<Transaction, TransactionListAdapter.TransactionViewHolder>(TransactionDiffCallback) {
@@ -23,7 +21,8 @@ class TransactionListAdapter (private val onClick: (Transaction) -> Unit) :
             private val to: TextView = view.findViewById(R.id.to)
             private val carName: TextView = view.findViewById(R.id.carName)
 
-        fun bind(t: Transaction) {
+
+            suspend fun bind(t: Transaction) {
                 val transInfo = TransactionDataSource.getDataSource(context).getTransactionInfo(t)
                 date.text = transInfo.date
                 from.text = "From: " + transInfo.from_name
@@ -42,8 +41,13 @@ class TransactionListAdapter (private val onClick: (Transaction) -> Unit) :
         }
 
         override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
-            val item = getItem(position)
-            holder.bind(item)
+            runBlocking {
+                launch {
+                    val item = getItem(position)
+                    holder.bind(item)
+                }
+            }
+
         }
     }
 

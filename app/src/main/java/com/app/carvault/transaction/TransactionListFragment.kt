@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.TRANS_ID
+import kotlinx.coroutines.launch
 
 class TransactionListFragment : Fragment() {
 
@@ -30,11 +32,16 @@ class TransactionListFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = transAdapter
-        transAdapter.submitList(
-            transactionDataSource.loadTransactions(
-                GraphqlClient.getInstance().getCurrentUser()!!.transactions
+
+        var transactions = listOf<Long>()
+        GraphqlClient.getInstance().getCurrentUser()?.let {
+            transactions = it.transactions
+        }
+        lifecycleScope.launch {
+            transAdapter.submitList(
+                transactionDataSource.loadTransactions(transactions)
             )
-        )
+        }
         return v
     }
 

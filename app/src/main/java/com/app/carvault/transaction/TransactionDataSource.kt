@@ -1,10 +1,11 @@
 package com.app.carvault.transaction
 
 import android.content.Context
-import com.app.carvault.car.CarDataSource
-import com.app.carvault.user.UserDataSource
+import com.app.carvault.graphql.GraphqlClient
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class TransactionDataSource private constructor (private val context: Context) {
 
@@ -16,11 +17,11 @@ class TransactionDataSource private constructor (private val context: Context) {
         return transList.filter { it.id in userTransactions }
     }
 
-    fun getTransactionInfo (t: Transaction) : TransactionInfo {
-        val from = UserDataSource.getDataSource(context).getUser(t.from_id)?.username
-        val to = UserDataSource.getDataSource(context).getUser(t.to_id)?.username
+    suspend fun getTransactionInfo (t: Transaction) : TransactionInfo {
+        val from = GraphqlClient.getInstance().getUserById(t.from_id.toInt())?.username
+        val to = GraphqlClient.getInstance().getUserById(t.to_id.toInt())?.username
         val date = t.date
-        val car = CarDataSource.getDataSource(context).getCarForId(t.car)?.model
+        val car = GraphqlClient.getInstance().getCarById(t.car.toInt())?.model
         val sha = t.sha256
         return TransactionInfo(from?:"", to?:"", date, car?:"", sha)
     }

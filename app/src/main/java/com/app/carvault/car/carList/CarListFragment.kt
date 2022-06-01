@@ -11,25 +11,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
 import com.app.carvault.car.Car
-import com.app.carvault.car.CarDataSource
 import com.app.carvault.car.carDetail.CarDetailActivity
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.CAR_ID
-import com.app.carvault.user.UserDataSource
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CarListFragment : Fragment() {
 
-    private lateinit var carDataSource: CarDataSource
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        carDataSource = CarDataSource.getDataSource(this.requireContext())
 
         val v = inflater.inflate(R.layout.car_list_fragment, container, false)
         val carsAdapter = CarAdapter {car -> adapterOnClick(car)}
