@@ -146,6 +146,46 @@
               "name": "User"
             },
             "args": []
+          },
+          {
+            "name": "documents",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarDocument"
+              }
+            },
+            "args": []
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarDocument",
+        "description": "",
+        "fields": [
+          {
+            "name": "id",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID"
+            },
+            "args": []
+          },
+          {
+            "name": "content",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            },
+            "args": []
           }
         ]
       },
@@ -180,18 +220,6 @@
             "args": [
               {
                 "name": "username",
-                "description": "",
-                "isDeprecated": false,
-                "type": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String"
-                  }
-                }
-              },
-              {
-                "name": "password",
                 "description": "",
                 "isDeprecated": false,
                 "type": {
@@ -275,18 +303,6 @@
               },
               {
                 "name": "username",
-                "description": "",
-                "isDeprecated": false,
-                "type": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String"
-                  }
-                }
-              },
-              {
-                "name": "password",
                 "description": "",
                 "isDeprecated": false,
                 "type": {
@@ -655,6 +671,41 @@
                 "type": {
                   "kind": "SCALAR",
                   "name": "String"
+                }
+              }
+            ]
+          },
+          {
+            "name": "updateCarDocuments",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "OBJECT",
+              "name": "Car"
+            },
+            "args": [
+              {
+                "name": "carId",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID"
+                  }
+                }
+              },
+              {
+                "name": "documents",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String"
+                  }
                 }
               }
             ]

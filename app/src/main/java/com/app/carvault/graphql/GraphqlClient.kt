@@ -2,6 +2,8 @@ package com.app.carvault.graphql
 
 import com.apm.graphql.*
 import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.api.Optional
+import com.apollographql.apollo3.exception.ApolloException
 import com.app.carvault.car.Car
 import com.app.carvault.user.User
 
@@ -53,7 +55,6 @@ class GraphqlClient private constructor() {
         return null
     }
 
-
     fun getUserCars() : List<Car>? {
         return currentUser?.cars
     }
@@ -78,6 +79,42 @@ class GraphqlClient private constructor() {
             )
         }
         return null
+    }
+
+    suspend fun addUser(username: String, email: String, firstname: String?, surname: String, phone: Double, profilePicture: String?): Long? {
+        val newUserMutation = NewUserMutation(
+            username=username,
+            email=email,
+            firstname = Optional.presentIfNotNull(firstname),
+            surname = Optional.presentIfNotNull(surname),
+            phone = phone,
+            profilePicture = Optional.presentIfNotNull(profilePicture)
+        )
+        val response =  client.mutation(newUserMutation).execute()
+        print(response)
+        return response.data?.newUser?.id?.toLong()
+    }
+
+    suspend fun addCar(userId: String, vin: String, brand: String, model: String, description: String?,
+                        kilometers: Int?, horsepower: Int?, year: Int?, address: String?,
+                        manufacturer: String?, origin: String?, fuel: String?, color: String?): Long? {
+        val newCarMutation = NewCarMutation(
+            userId = userId,
+            vin = vin,
+            brand = brand,
+            model = model,
+            description = Optional.presentIfNotNull(description),
+            kilometers = Optional.presentIfNotNull(kilometers),
+            horsepower = Optional.presentIfNotNull(horsepower),
+            year = Optional.presentIfNotNull(year),
+            address = Optional.presentIfNotNull(address),
+            manufacturer = Optional.presentIfNotNull(manufacturer),
+            origin = Optional.presentIfNotNull(origin),
+            fuel = Optional.presentIfNotNull(fuel),
+            color = Optional.presentIfNotNull(color)
+        )
+        val response =  client.mutation(newCarMutation).execute()
+        return response.data?.newCar?.id?.toLong()
     }
 
     companion object {

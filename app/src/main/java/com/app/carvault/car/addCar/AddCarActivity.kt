@@ -30,16 +30,12 @@ class AddCarActivity : AppCompatActivity() {
         findViewById<Button>(R.id.doneButton).setOnClickListener {
             addCar()
         }
-        addCarName = findViewById(R.id.addCarName)
-        addCarVIN = findViewById(R.id.addCarVIN)
+        addCarName = findViewById(R.id.brand)
+        addCarVIN = findViewById(R.id.model)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }
-
-    /* The onClick action for the done button. Closes the activity and returns the new flower name
-    and description as part of the intent. If the name or description are missing, the result is set
-    to cancelled. */
 
     private fun addCar() {
         val resultIntent = Intent()
@@ -60,7 +56,6 @@ class AddCarActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "application/pdf"
-
         }
         startActivityForResult(intent, PICK_PDF_FILE)
     }

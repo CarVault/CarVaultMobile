@@ -25,6 +25,7 @@ import com.app.carvault.ui.profile.tabProfile.ProfileTabAdapter
 import com.app.carvault.user.User
 import com.google.android.material.tabs.TabLayout
 import android.util.Base64
+import com.app.carvault.Util
 
 const val CAR_ID = "car id"
 const val TRANS_ID = "trans id"
@@ -103,13 +104,9 @@ class ProfileFragment : Fragment() {
             profileId.text = user.id.toString()
             profileEmail.text = user.email
             profilePhone.text = user.phone
-
-
-            if (user.profilePicture != "") {
-                val newStr = user.profilePicture.drop(22)
-                val bytes = Base64.decode(newStr, Base64.DEFAULT)
-                val decodedImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                profileImg.setImageBitmap(decodedImage)
+            val bitMapImage = Util.bitmapImageFromString64(user.profilePicture, false)
+            if (bitMapImage != null){
+                profileImg.setImageBitmap(bitMapImage)
             } else {
                 profileImg.setImageResource(R.drawable.ic_baseline_person_24)
             }

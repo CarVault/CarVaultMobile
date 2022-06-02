@@ -1,11 +1,8 @@
 package com.app.carvault.user
 
-import com.apm.graphql.UserQuery
 import com.apm.graphql.fragment.CarFields
 import com.apm.graphql.fragment.UserFields
 import com.app.carvault.car.Car
-import com.app.carvault.transaction.Transaction
-import com.app.carvault.ui.notifications.Notification
 
 data class User (
     val id: Long,

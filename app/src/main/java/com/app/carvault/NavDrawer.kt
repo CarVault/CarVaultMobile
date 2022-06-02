@@ -65,17 +65,13 @@ class NavDrawer : AppCompatActivity() {
         user?.let {
             username.text = getString(R.string.profileName, user.firstname ,user.surname )
             userEmail.text = user.email
-            if (user.profilePicture != "") {
-                val newStr = user.profilePicture.drop(22)
-                val bytes = Base64.decode(newStr, Base64.DEFAULT)
-                val decodedImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                val resized = Bitmap.createScaledBitmap(decodedImage, 144, 144, true)
-                userImg.setImageBitmap(resized)
+            val bitMapImage = Util.bitmapImageFromString64(user.profilePicture, true)
+            if (bitMapImage != null){
+                userImg.setImageBitmap(bitMapImage)
             } else {
                 userImg.setImageResource(R.drawable.ic_baseline_person_24)
             }
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
