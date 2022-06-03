@@ -2,19 +2,17 @@ package com.app.carvault.car.carDetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.car.Car
-import com.app.carvault.car.CarDataSource
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.CAR_ID
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.*
 
 class CarDetailActivity : AppCompatActivity() {
-
-    private lateinit var carDataSource : CarDataSource
 
     private lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager
@@ -27,6 +25,9 @@ class CarDetailActivity : AppCompatActivity() {
         if (bundle != null) {
             currentCarId = bundle.getLong(CAR_ID)
         }
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         lifecycleScope.launch {
             val currentCar = withContext(Dispatchers.IO) {
@@ -90,6 +91,14 @@ class CarDetailActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // handle arrow click here
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

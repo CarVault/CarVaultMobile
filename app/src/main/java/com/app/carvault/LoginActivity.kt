@@ -8,26 +8,21 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
 //import com.apm.graphql.UserQuery
-import com.apollographql.apollo3.ApolloClient
 import com.app.carvault.graphql.GraphqlClient
-import com.app.carvault.user.UserDataSource
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.sql.DataSource
 
 class LoginActivity : AppCompatActivity() {
 
@@ -72,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        loginLayout.visibility = View.VISIBLE
+        session()
     }
 
     // Comprueba si existe una sesion activa
@@ -82,6 +77,8 @@ class LoginActivity : AppCompatActivity() {
         if (email != null){
             loginLayout.visibility = View.INVISIBLE
             loadApp(email)
+        } else{
+            loginLayout.visibility = View.VISIBLE
         }
 
     }

@@ -16,6 +16,7 @@
 
     <string name="profileName">%s %s</string>
     <string name="mock_name">Car vault</string>
+    <string name="VINNotFound">No vehicle found with VIN %s</string>
 
     <string name="menu_profile">Profile</string>
     <string name="menu_search">Search vehicles</string>

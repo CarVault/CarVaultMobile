@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import com.google.android.material.snackbar.Snackbar
 import java.io.InputStream
@@ -48,6 +49,13 @@ class EulaActivity : AppCompatActivity() {
     private fun checkPreferences(){
         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val eulaAccepted = prefs.getString("eula", null)
+        val darkMode = prefs.getString("dark", "NO")
+        if (darkMode == "YES"){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         if (eulaAccepted!=null){
             val intent = Intent(this, LoginActivity::class.java)
             eulaLayout.visibility = View.INVISIBLE

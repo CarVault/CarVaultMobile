@@ -1,5 +1,5 @@
-query getCarById($id: ID!){
-    getCarById(id:$id){
+query getCarByVin($vin: String!){
+    getCarByVin(vin:$vin){
         ...CarFields
         owner {
             id

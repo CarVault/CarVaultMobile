@@ -3,7 +3,6 @@ package com.app.carvault.ui.profile
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,9 +14,8 @@ import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.car.addCar.AddCarActivity
-import com.app.carvault.car.addCar.CAR_BRAND
+import com.app.carvault.car.addCar.CAR_NAME
 import com.app.carvault.car.addCar.CAR_VIN
-import com.app.carvault.car.CarDataSource
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.editProfile.EditProfileActivity
 import com.app.carvault.ui.profile.editProfile.PROFILE_EMAIL
@@ -27,9 +25,7 @@ import com.app.carvault.ui.profile.tabProfile.ProfileTabAdapter
 import com.app.carvault.user.User
 import com.google.android.material.tabs.TabLayout
 import android.util.Base64
-import android.util.Log
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
+import com.app.carvault.Util
 
 
 const val CAR_ID = "car id"
@@ -39,7 +35,6 @@ class ProfileFragment : Fragment() {
 
     private val newCarActivityRequestCode = 1
     private val editProfileActivityRequestCode = 2
-    private lateinit var carDataSource: CarDataSource
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
 
@@ -50,7 +45,6 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.profile_fragment, container, false)
         //userDataSource = UserDataSource.getDataSource(this.requireContext())
-        carDataSource = CarDataSource.getDataSource(this.requireContext())
 
         // Set up user profile
         updateProfileData(v, GraphqlClient.getInstance().getCurrentUser())
@@ -58,7 +52,26 @@ class ProfileFragment : Fragment() {
         // Tab Layout
         tabLayout = v.findViewById(R.id.tabLayout_profile)
         viewPager = v.findViewById(R.id.pager)
+        setupTabs()
 
+        // Fab -> adding new cars
+        val fab: View = v.findViewById(R.id.floatingAddCarButton)
+        fab.setOnClickListener {
+            fabOnClick()
+            //Toast.makeText(this.context, "Add new car!", Toast.LENGTH_SHORT).show()
+        }
+
+        // Edit profile button
+        val editButton = v.findViewById<Button>(R.id.button_edit_profile)
+        editButton.setOnClickListener {
+            //Toast.makeText(this.context, "Edit button!", Toast.LENGTH_SHORT).show()
+            editButtonOnClick()
+        }
+        return v
+    }
+
+
+    private fun setupTabs(){
         tabLayout.addTab(tabLayout.newTab().setText("Cars"))
         tabLayout.addTab(tabLayout.newTab().setText("Transactions"))
 
@@ -77,26 +90,7 @@ class ProfileFragment : Fragment() {
 
             }
         })
-
-        // Fab -> adding new cars
-        val fab: View = v.findViewById(R.id.floatingAddCarButton)
-        fab.setOnClickListener {
-            fabOnClick()
-            //Toast.makeText(this.context, "Add new car!", Toast.LENGTH_SHORT).show()
-        }
-
-        // Edit profile button
-        val editButton = v.findViewById<Button>(R.id.button_edit_profile)
-        editButton.setOnClickListener {
-            //Toast.makeText(this.context, "Edit button!", Toast.LENGTH_SHORT).show()
-            editButtonOnClick()
-        }
-
-        return v
     }
-
-
-
 
     private fun updateProfileData(v: View, user: User?){
 
@@ -111,13 +105,9 @@ class ProfileFragment : Fragment() {
             profileId.text = user.id.toString()
             profileEmail.text = user.email
             profilePhone.text = user.phone
-
-
-            if (user.profilePicture != "") {
-                val newStr = user.profilePicture.drop(22)
-                val bytes = Base64.decode(newStr, Base64.DEFAULT)
-                val decodedImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                profileImg.setImageBitmap(decodedImage)
+            val bitMapImage = Util.bitmapImageFromString64(user.profilePicture, false)
+            if (bitMapImage != null){
+                profileImg.setImageBitmap(bitMapImage)
             } else {
                 profileImg.setImageResource(R.drawable.ic_baseline_person_24)
             }
@@ -139,7 +129,7 @@ class ProfileFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK){
             when (requestCode){
                 1  -> intentData?.let { data ->
-                    val carName = data.getStringExtra(CAR_BRAND)
+                    val carName = data.getStringExtra(CAR_NAME)
                     val carVIN = data.getStringExtra(CAR_VIN)
                     //carsListViewModel.insertCar(carName, carVIN)
                 }
