@@ -32,7 +32,6 @@ const val TRANS_ID = "trans id"
 
 class ProfileFragment : Fragment() {
 
-    private val newCarActivityRequestCode = 1
     private val editProfileActivityRequestCode = 2
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
@@ -43,7 +42,6 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.profile_fragment, container, false)
-        //userDataSource = UserDataSource.getDataSource(this.requireContext())
 
         // Set up user profile
         updateProfileData(v, GraphqlClient.getInstance().getCurrentUser())
@@ -51,31 +49,26 @@ class ProfileFragment : Fragment() {
         // Tab Layout
         tabLayout = v.findViewById(R.id.tabLayout_profile)
         viewPager = v.findViewById(R.id.pager)
+        tabLayout.addTab(tabLayout.newTab().setText("Cars"))
+        tabLayout.addTab(tabLayout.newTab().setText("Transactions"))
         setupTabs()
 
         // Fab -> adding new cars
         val fab: View = v.findViewById(R.id.floatingAddCarButton)
         fab.setOnClickListener {
             fabOnClick()
-            //Toast.makeText(this.context, "Add new car!", Toast.LENGTH_SHORT).show()
         }
-
         // Edit profile button
         val editButton = v.findViewById<Button>(R.id.button_edit_profile)
         editButton.setOnClickListener {
-            //Toast.makeText(this.context, "Edit button!", Toast.LENGTH_SHORT).show()
             editButtonOnClick()
         }
         return v
     }
 
-
     private fun setupTabs(){
-        tabLayout.addTab(tabLayout.newTab().setText("Cars"))
-        tabLayout.addTab(tabLayout.newTab().setText("Transactions"))
-
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-        val tabAdapter = ProfileTabAdapter(this.requireContext(), this.parentFragmentManager, tabLayout.tabCount)
+        val tabAdapter = ProfileTabAdapter(this.requireContext(), this.childFragmentManager, tabLayout.tabCount)
         viewPager.adapter = tabAdapter
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -115,7 +108,7 @@ class ProfileFragment : Fragment() {
 
     private fun fabOnClick() {
         val intent = Intent(this.context, AddCarActivity::class.java)
-        startActivityForResult(intent, newCarActivityRequestCode)
+        startActivity(intent)
     }
 
     private fun editButtonOnClick(){
