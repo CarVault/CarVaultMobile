@@ -81,7 +81,7 @@ class GraphqlClient private constructor() {
         return null
     }
 
-    suspend fun addUser(username: String, email: String, firstname: String?, surname: String, phone: Double, profilePicture: String?): Long? {
+    suspend fun addUser(username: String, email: String, firstname: String?, surname: String, phone: String, profilePicture: String?): Long? {
         val newUserMutation = NewUserMutation(
             username=username,
             email=email,
@@ -91,8 +91,21 @@ class GraphqlClient private constructor() {
             profilePicture = Optional.presentIfNotNull(profilePicture)
         )
         val response =  client.mutation(newUserMutation).execute()
-        print(response)
         return response.data?.newUser?.id?.toLong()
+    }
+
+    suspend fun updateUser(userId: String, username: String, email: String, firstname: String?, surname: String, phone: String, profilePicture: String?): Long? {
+        val updateUserMutation = UpdateUserMutation(
+            userId=userId,
+            username=username,
+            email=email,
+            firstname = Optional.presentIfNotNull(firstname),
+            surname = Optional.presentIfNotNull(surname),
+            phone = phone,
+            profilePicture = Optional.presentIfNotNull(profilePicture)
+        )
+        val response =  client.mutation(updateUserMutation).execute()
+        return response.data?.updateUser?.id?.toLong()
     }
 
     suspend fun addCar(userId: String, vin: String, brand: String, model: String, description: String?,
@@ -115,6 +128,37 @@ class GraphqlClient private constructor() {
         )
         val response =  client.mutation(newCarMutation).execute()
         return response.data?.newCar?.id?.toLong()
+    }
+
+    suspend fun updateCar(carId: String, vin: String, brand: String, model: String, description: String?,
+                       kilometers: Int?, horsepower: Int?, year: Int?, address: String?,
+                       manufacturer: String?, origin: String?, fuel: String?, color: String?): Long? {
+        val updateCarMutation = UpdateCarMutation(
+            carId = carId,
+            vin = Optional.presentIfNotNull(vin),
+            brand = brand,
+            model = model,
+            description = Optional.presentIfNotNull(description),
+            kilometers = Optional.presentIfNotNull(kilometers),
+            horsepower = Optional.presentIfNotNull(horsepower),
+            year = Optional.presentIfNotNull(year),
+            address = Optional.presentIfNotNull(address),
+            manufacturer = Optional.presentIfNotNull(manufacturer),
+            origin = Optional.presentIfNotNull(origin),
+            fuel = Optional.presentIfNotNull(fuel),
+            color = Optional.presentIfNotNull(color)
+        )
+        val response =  client.mutation(updateCarMutation).execute()
+        return response.data?.updateCar?.id?.toLong()
+    }
+
+    suspend fun transferCar(carId: String, userId: String) : Long?{
+        val transferMutation = TransferMutation(
+            userId = userId,
+            carId = carId
+        )
+        val response =  client.mutation(transferMutation).execute()
+        return response.data?.transferCar?.id?.toLong()
     }
 
     companion object {

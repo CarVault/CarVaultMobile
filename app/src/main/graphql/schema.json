@@ -159,6 +159,19 @@
               }
             },
             "args": []
+          },
+          {
+            "name": "images",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarImage"
+              }
+            },
+            "args": []
           }
         ]
       },
@@ -190,9 +203,31 @@
         ]
       },
       {
-        "kind": "SCALAR",
-        "name": "Float",
-        "description": "Built-in Float"
+        "kind": "OBJECT",
+        "name": "CarImage",
+        "description": "",
+        "fields": [
+          {
+            "name": "id",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID"
+            },
+            "args": []
+          },
+          {
+            "name": "content",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            },
+            "args": []
+          }
+        ]
       },
       {
         "kind": "SCALAR",
@@ -268,7 +303,7 @@
                   "kind": "NON_NULL",
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Float"
+                    "name": "String"
                   }
                 }
               },
@@ -351,7 +386,7 @@
                   "kind": "NON_NULL",
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Float"
+                    "name": "String"
                   }
                 }
               },
@@ -672,6 +707,18 @@
                   "kind": "SCALAR",
                   "name": "String"
                 }
+              },
+              {
+                "name": "images",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String"
+                  }
+                }
               }
             ]
           },
@@ -705,6 +752,29 @@
                   "ofType": {
                     "kind": "SCALAR",
                     "name": "String"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "deleteCar",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID"
+            },
+            "args": [
+              {
+                "name": "carId",
+                "description": "",
+                "isDeprecated": false,
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID"
                   }
                 }
               }
@@ -894,7 +964,7 @@
             "isDeprecated": false,
             "type": {
               "kind": "SCALAR",
-              "name": "Float"
+              "name": "String"
             },
             "args": []
           },

@@ -6,8 +6,13 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.app.carvault.R
+import com.app.carvault.car.addCar.CAR_NAME
+import com.app.carvault.car.addCar.CAR_VIN
+import com.app.carvault.graphql.GraphqlClient
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.launch
 
 const val PROFILE_NAME = "name"
 const val PROFILE_EMAIL = "email"
@@ -16,13 +21,14 @@ const val PICK_IMG_FILE = 1
 
 class EditProfileActivity : AppCompatActivity() {
 
-    private lateinit var editName: TextInputEditText
-    private lateinit var editEmail: TextInputEditText
+    private lateinit var editFirstname: TextInputEditText
+    private lateinit var editSurname: TextInputEditText
     private lateinit var editPhone: TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+
 
         // Change img
         findViewById<Button>(R.id.updateImgButton).setOnClickListener {
@@ -32,30 +38,33 @@ class EditProfileActivity : AppCompatActivity() {
         findViewById<Button>(R.id.doneButton).setOnClickListener {
             editProfile()
         }
-        editName = findViewById(R.id.editNameInput)
-        editEmail = findViewById(R.id.editEmailInput)
-        editPhone = findViewById(R.id.editPhoneInput)
+        editFirstname = findViewById(R.id.firstname)
+        editSurname = findViewById(R.id.surname)
+        editPhone = findViewById(R.id.phone)
+
+        editFirstname.setText(GraphqlClient.getInstance().getCurrentUser()!!.firstname)
+        editSurname.setText(GraphqlClient.getInstance().getCurrentUser()!!.surname)
+        editPhone.setText(GraphqlClient.getInstance().getCurrentUser()!!.phone)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     private fun editProfile(){
-        val resultIntent = Intent()
-
-        if ( editEmail.text.isNullOrEmpty()
-            || editEmail.text.isNullOrEmpty()
-            || editPhone.text.isNullOrEmpty() ) {
-            setResult(Activity.RESULT_CANCELED, resultIntent)
-        } else {
-            val name = editName.text.toString()
-            val email = editEmail.text.toString()
-            val phone = editEmail.text.toString()
-            resultIntent.putExtra(PROFILE_NAME, name)
-            resultIntent.putExtra(PROFILE_EMAIL, email)
-            resultIntent.putExtra(PROFILE_PHONE, phone)
-            setResult(Activity.RESULT_OK, resultIntent)
+        lifecycleScope.launch {
+            GraphqlClient.getInstance().updateUser(
+                userId = GraphqlClient.getInstance().getCurrentUser()!!.id.toString(),
+                username = GraphqlClient.getInstance().getCurrentUser()!!.username,
+                email = GraphqlClient.getInstance().getCurrentUser()!!.email,
+                firstname = editFirstname.text.toString(),
+                surname = editSurname.text.toString(),
+                phone = editPhone.text.toString(),
+                profilePicture = GraphqlClient.getInstance().getCurrentUser()!!.profilePicture,
+            )
         }
+        GraphqlClient.getInstance().getCurrentUser()!!.firstname = editFirstname.text.toString()
+        GraphqlClient.getInstance().getCurrentUser()!!.surname = editSurname.text.toString()
+        GraphqlClient.getInstance().getCurrentUser()!!.phone = editPhone.text.toString()
         finish()
     }
 
@@ -71,5 +80,16 @@ class EditProfileActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         startActivityForResult(intent, PICK_IMG_FILE )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intentData)
+        if (resultCode == Activity.RESULT_OK){
+            when (requestCode){
+                1  -> intentData?.let { data ->
+
+                }
+            }
+        }
     }
 }

@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal">
+    android:padding="15dp"
+    android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editNameLayout"
         android:layout_width="match_parent"
+        android:paddingBottom="15dp"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editNameInput"
+            android:id="@+id/firstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:hint="Firstname" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editEmailLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editNameLayout">
+        android:paddingBottom="15dp"
+        android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editEmailInput"
+            android:id="@+id/surname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email" />
+            android:hint="Surname" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editPhoneLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editEmailLayout">
+        android:paddingBottom="15dp"
+        android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editPhoneInput"
+            android:id="@+id/phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone" />
@@ -45,7 +44,6 @@
         android:id="@+id/doneButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editPhoneLayout"
         android:layout_marginStart="150dp"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="114dp"
@@ -55,9 +53,8 @@
         android:id="@+id/updateImgButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editPhoneLayout"
         android:layout_marginTop="23dp"
         android:text="Update Image" />
 
 
-</RelativeLayout>
+</LinearLayout>

@@ -69,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
                                         email = emailInput.text.toString(),
                                         firstname = firstnameInput.text.toString(),
                                         surname = surnameInput.text.toString(),
-                                        phone = phoneInput.text.toString().toDouble(),
+                                        phone = phoneInput.text.toString(),
                                         profilePicture = emailInput.text.toString(),
                                     )
                                 }

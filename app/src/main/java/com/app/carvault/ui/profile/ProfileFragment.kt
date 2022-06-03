@@ -66,6 +66,11 @@ class ProfileFragment : Fragment() {
         return v
     }
 
+    override fun onStart() {
+        super.onStart()
+        updateProfileData(this.requireView(), GraphqlClient.getInstance().getCurrentUser())
+    }
+
     private fun setupTabs(){
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         val tabAdapter = ProfileTabAdapter(this.requireContext(), this.childFragmentManager, tabLayout.tabCount)
@@ -85,7 +90,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun updateProfileData(v: View, user: User?){
-
         user?.let {
             val profileName = v.findViewById<TextView>(R.id.profile_name)
             val profileId = v.findViewById<TextView>(R.id.profile_id)
@@ -113,28 +117,7 @@ class ProfileFragment : Fragment() {
 
     private fun editButtonOnClick(){
         val intent = Intent(this.context, EditProfileActivity::class.java)
-        startActivityForResult(intent, editProfileActivityRequestCode)
+        startActivity(intent)
     }
-    
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-        if (resultCode == Activity.RESULT_OK){
-            when (requestCode){
-                1  -> intentData?.let { data ->
-                    val carName = data.getStringExtra(CAR_NAME)
-                    val carVIN = data.getStringExtra(CAR_VIN)
-                    //carsListViewModel.insertCar(carName, carVIN)
-                }
-                2 -> intentData?.let { data ->
-                    val profileName = data.getStringExtra(PROFILE_NAME)
-                    val profileEmail = data.getStringExtra(PROFILE_EMAIL)
-                    val profilePhone = data.getStringExtra(PROFILE_PHONE)
-                    //userDataSource.updateUser(profileName, profileEmail, profilePhone)
-                }
-            }
-        }
-
-    }
-
 
 }
