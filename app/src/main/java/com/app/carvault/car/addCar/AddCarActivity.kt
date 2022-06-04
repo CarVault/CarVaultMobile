@@ -13,6 +13,8 @@ import android.provider.DocumentsContract
 import android.text.Html
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
@@ -28,22 +30,22 @@ const val CAR_VIN = "VIN"
 const val PICK_PDF_FILE = 2
 
 class AddCarActivity : AppCompatActivity() {
-    private lateinit var vin: TextInputEditText
-    private lateinit var brand: TextInputEditText
-    private lateinit var model: TextInputEditText
-    private lateinit var description: TextInputEditText
-    private lateinit var kilometers: TextInputEditText
-    private lateinit var horsepower: TextInputEditText
-    private lateinit var year: TextInputEditText
-    private lateinit var address: TextInputEditText
-    private lateinit var manufacturer: TextInputEditText
-    private lateinit var origin: TextInputEditText
-    private lateinit var fuel: TextInputEditText
-    private lateinit var color: TextInputEditText
-    
-    private lateinit var vinLayout: TextInputLayout
-    private lateinit var modelLayout: TextInputLayout
-    private lateinit var brandLayout: TextInputLayout
+    private lateinit var vin: EditText
+    private lateinit var brand: EditText
+    private lateinit var model: EditText
+    private lateinit var description: EditText
+    private lateinit var kilometers: EditText
+    private lateinit var horsepower: EditText
+    private lateinit var year: EditText
+    private lateinit var address: EditText
+    private lateinit var manufacturer: EditText
+    private lateinit var origin: EditText
+    private lateinit var fuel: EditText
+    private lateinit var color: EditText
+
+    private lateinit var vinLayout: TextView
+    private lateinit var modelLayout: TextView
+    private lateinit var brandLayout: TextView
 
 
 
@@ -55,7 +57,7 @@ class AddCarActivity : AppCompatActivity() {
             openFile();
         }
 
-        findViewById<Button>(R.id.doneButton).setOnClickListener {
+        findViewById<Button>(R.id.addVehicleButton).setOnClickListener {
             addCar()
         }
         brand = findViewById(R.id.brand)
@@ -70,7 +72,7 @@ class AddCarActivity : AppCompatActivity() {
         origin = findViewById(R.id.origin)
         fuel = findViewById(R.id.fuel)
         color = findViewById(R.id.color)
-        
+
         vinLayout = findViewById(R.id.vinLayout)
         modelLayout = findViewById(R.id.modelLayout)
         brandLayout = findViewById(R.id.brandLayout)
@@ -111,21 +113,21 @@ class AddCarActivity : AppCompatActivity() {
         var check = true
         if (vin.text.isNullOrBlank() || vin.text.isNullOrEmpty()){
             vinLayout.hint = getString(R.string.vin_hint_asterisk)
-            vinLayout.makeHintRed()
+            vinLayout.setHintTextColor(0xFF0000)
             check =  false
         } else {
             vinLayout.hint = getString(R.string.vin_hint)
         }
         if (model.text.isNullOrBlank() || model.text.isNullOrEmpty()){
             modelLayout.hint = getString(R.string.model_hint_asterisk)
-            modelLayout.makeHintRed()
+            modelLayout.setHintTextColor(0xFF0000)
             check = false
         } else {
             modelLayout.hint = getString(R.string.model_hint)
         }
         if (brand.text.isNullOrBlank() || brand.text.isNullOrEmpty()){
             brandLayout.hint = getString(R.string.brand_hint_asterisk)
-            brandLayout.makeHintRed()
+            brandLayout.setHintTextColor(0xFF0000)
             check = false
         } else {
             brandLayout.hint = getString(R.string.brand_hint)
