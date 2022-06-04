@@ -15,8 +15,13 @@
     <string name="action_notifications">Notifications</string>
 
     <string name="profileName">%s %s</string>
+    <string name="user_username">Username: %s</string>
+    <string name="user_email">Email: %s</string>
+    <string name="user_phone">Phone: %s</string>
+
     <string name="mock_name">Car vault</string>
     <string name="VINNotFound">No vehicle found with VIN %s</string>
+    <string name="UsernameNotFound">No user found with username %s</string>
 
     <string name="menu_profile">Profile</string>
     <string name="menu_search">Search vehicles</string>
@@ -66,5 +71,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="selected_car">Selected: %s</string>
+    <string name="transfer_confirm">Are you sure you want to transfer vehicle %s to %s %s? </string>
+
+
 
 </resources>

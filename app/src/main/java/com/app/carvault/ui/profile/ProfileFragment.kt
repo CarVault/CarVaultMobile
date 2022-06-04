@@ -1,8 +1,6 @@
 package com.app.carvault.ui.profile
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,17 +12,11 @@ import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.car.addCar.AddCarActivity
-import com.app.carvault.car.addCar.CAR_NAME
-import com.app.carvault.car.addCar.CAR_VIN
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.editProfile.EditProfileActivity
-import com.app.carvault.ui.profile.editProfile.PROFILE_EMAIL
-import com.app.carvault.ui.profile.editProfile.PROFILE_NAME
-import com.app.carvault.ui.profile.editProfile.PROFILE_PHONE
 import com.app.carvault.ui.profile.tabProfile.ProfileTabAdapter
 import com.app.carvault.user.User
 import com.google.android.material.tabs.TabLayout
-import android.util.Base64
 import com.app.carvault.Util
 
 
@@ -33,7 +25,6 @@ const val TRANS_ID = "trans id"
 
 class ProfileFragment : Fragment() {
 
-    private val editProfileActivityRequestCode = 2
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
 
@@ -67,6 +58,11 @@ class ProfileFragment : Fragment() {
         return v
     }
 
+    override fun onStart() {
+        super.onStart()
+        updateProfileData(this.requireView(), GraphqlClient.getInstance().getCurrentUser())
+    }
+
     private fun setupTabs(){
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         val tabAdapter = ProfileTabAdapter(this.requireContext(), this.childFragmentManager, tabLayout.tabCount)
@@ -86,7 +82,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun updateProfileData(v: View, user: User?){
-
         user?.let {
             val profileName = v.findViewById<TextView>(R.id.profile_name)
             val profileId = v.findViewById<TextView>(R.id.profile_id)
@@ -114,28 +109,7 @@ class ProfileFragment : Fragment() {
 
     private fun editButtonOnClick(){
         val intent = Intent(this.context, EditProfileActivity::class.java)
-        startActivityForResult(intent, editProfileActivityRequestCode)
+        startActivity(intent)
     }
-    
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-        if (resultCode == Activity.RESULT_OK){
-            when (requestCode){
-                1  -> intentData?.let { data ->
-                    val carName = data.getStringExtra(CAR_NAME)
-                    val carVIN = data.getStringExtra(CAR_VIN)
-                    //carsListViewModel.insertCar(carName, carVIN)
-                }
-                2 -> intentData?.let { data ->
-                    val profileName = data.getStringExtra(PROFILE_NAME)
-                    val profileEmail = data.getStringExtra(PROFILE_EMAIL)
-                    val profilePhone = data.getStringExtra(PROFILE_PHONE)
-                    //userDataSource.updateUser(profileName, profileEmail, profilePhone)
-                }
-            }
-        }
-
-    }
-
 
 }

@@ -11,6 +11,9 @@
         android:theme="@style/Theme.CarVault"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".car.editCar.EditCar"
+            android:exported="false" />
+        <activity
             android:name=".EulaActivity"
             android:exported="true">
             <intent-filter>
@@ -33,9 +36,6 @@
             android:exported="false" />
         <activity
             android:name=".car.addCar.AddCarActivity"
-            android:exported="false" />
-        <activity
-            android:name=".car.updateCar.UpdateCarActivity"
             android:exported="false" />
         <activity
             android:name=".car.carDetail.CarDetailActivity"
