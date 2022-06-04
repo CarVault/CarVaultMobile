@@ -11,6 +11,13 @@ fragment CarFields on Car{
     origin
     fuel
     color
+    documents{
+        id
+        content
+    }
+    images {
+        content
+    }
 }
 
 fragment UserFields on User{

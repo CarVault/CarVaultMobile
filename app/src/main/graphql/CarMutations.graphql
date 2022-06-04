@@ -1,45 +1,3 @@
-mutation newUser(
-    $username: String!,
-    $email: String!,
-    $firstname: String,
-    $surname: String,
-    $phone: String!,
-    $profilePicture: String
-)
-{
-    newUser(
-        username:$username,
-        email:$email,
-        firstname:$firstname,
-        surname:$surname,
-        phone:$phone,
-        profilePicture:$profilePicture
-    )
-    {id}
-}
-
-mutation updateUser(
-    $userId: String!
-    $username: String!,
-    $email: String!,
-    $firstname: String,
-    $surname: String,
-    $phone: String!,
-    $profilePicture: String
-)
-{
-    updateUser(
-        userId:$userId,
-        username:$username,
-        email:$email,
-        firstname:$firstname,
-        surname:$surname,
-        phone:$phone,
-        profilePicture:$profilePicture
-    )
-    {id}
-}
-
 mutation newCar(
     $userId: ID!,
     $vin: String!,
@@ -53,7 +11,7 @@ mutation newCar(
     $manufacturer: String,
     $origin: String,
     $fuel: String,
-    $color: String
+    $color: String,
 ){
     newCar(
         userId: $userId,
@@ -68,7 +26,7 @@ mutation newCar(
         manufacturer: $manufacturer,
         origin: $origin,
         fuel: $fuel,
-        color: $color
+        color: $color,
     ){id}
 }
 
@@ -86,6 +44,7 @@ mutation updateCar(
     $origin: String,
     $fuel: String,
     $color: String
+    $images: [String]
 ){
     updateCar(
         carId: $carId,
@@ -100,17 +59,30 @@ mutation updateCar(
         manufacturer: $manufacturer,
         origin: $origin,
         fuel: $fuel,
-        color: $color
+        color: $color,
+        images: $images
     ){id}
 }
 
 mutation transfer(
-    $carId: ID!
-    $userId: ID!,
+    $carId: ID!,
+    $userId: ID!
 ){
     transferCar(
         carId: $carId,
         userId: $userId,
     ){id}
+}
+
+mutation updateDocuments(
+    $carId: ID!,
+    $documents: [String]!
+){
+    updateCarDocuments(
+        carId: $carId,
+        documents: $documents
+    ){
+        id
+    }
 }
 

@@ -1,0 +1,26 @@
+query UserQuery($id: ID!){
+    getUser (id:$id){
+        ...UserFields
+        cars{
+            ...CarFields
+        }
+    }
+}
+
+query GetUserByEmail($email: String!){
+    getUserByEmail (email: $email){
+        ...UserFields
+        cars{
+            ...CarFields
+        }
+    }
+}
+
+query GetUserByUsername($username: String!){
+    getUserByUsername (username:$username){
+        ...UserFields
+        cars{
+            ...CarFields
+        }
+    }
+}

@@ -1,8 +1,0 @@
-query UserQuery($id: ID!){
-  getUser (id:$id){
-    ...UserFields
-    cars{
-      ...CarFields
-    }
-  }
-}

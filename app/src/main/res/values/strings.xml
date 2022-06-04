@@ -28,8 +28,8 @@
     <string name="menu_transfer">Transfer vehicles</string>
 
     <string name="car_not_found">Car not found</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
     <string name="add_vehicle_basic_info">Vehicle basic info</string>
     <string name="carBrand">Brand</string>
     <string name="carVIN">VIN</string>
@@ -65,7 +65,6 @@
 
     <string name="selected_car">Selected: %s</string>
     <string name="transfer_confirm">Are you sure you want to transfer vehicle %s to %s %s? </string>
-
 
 
 </resources>
