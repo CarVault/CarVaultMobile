@@ -23,7 +23,6 @@
     <string name="menu_transfer">Transfer vehicles</string>
 
     <string name="car_not_found">Car not found</string>
-<<<<<<< HEAD
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_vehicle_basic_info">Vehicle basic info</string>
@@ -34,6 +33,7 @@
     <string name="Model">Model</string>
     <string name="origin">Origin</string>
     <string name="carAddress">Address</string>
+    <string name="horsepower">Horsepower</string>
     <string name="kms">KMs</string>
     <string name="fuel">Fuel</string>
     <string name="color">Color</string>
@@ -42,10 +42,6 @@
     <string name="add_vehicle_button">ADD VEHICLE</string>
     <string name="documentation">Documentation</string>
     <string name="photos">Photos</string>
-
-
-=======
->>>>>>> main
 
     <string name="prefs_file">com.app.carvault.PREFERENCE_FILE_KEY</string>
 
@@ -61,5 +57,14 @@
     <string name="model_hint_asterisk">Model*</string>
 
     <string name="toast_mandatory">Please, introduce mandatory fields.</string>
+    <string name="title_activity_update_car">UpdateCarActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>

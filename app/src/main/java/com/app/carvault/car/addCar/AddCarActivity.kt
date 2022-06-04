@@ -40,7 +40,7 @@ class AddCarActivity : AppCompatActivity() {
     private lateinit var origin: TextInputEditText
     private lateinit var fuel: TextInputEditText
     private lateinit var color: TextInputEditText
-    
+
     private lateinit var vinLayout: TextInputLayout
     private lateinit var modelLayout: TextInputLayout
     private lateinit var brandLayout: TextInputLayout
@@ -49,19 +49,15 @@ class AddCarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_car_new)
+        setContentView(R.layout.activity_add_car)
 
         /*findViewById<Button>(R.id.addDocButton).setOnClickListener {
             openFile();
         }*/
 
-        /*findViewById<Button>(R.id.doneButton).setOnClickListener {
+        findViewById<Button>(R.id.addVehicleButton).setOnClickListener {
             addCar()
         }
-<<<<<<< HEAD
-        addCarName = findViewById(R.id.addCarBrand)
-        addCarVIN = findViewById(R.id.addCarVin)
-=======
         brand = findViewById(R.id.brand)
         vin = findViewById(R.id.vin)
         model = findViewById(R.id.model)
@@ -74,20 +70,15 @@ class AddCarActivity : AppCompatActivity() {
         origin = findViewById(R.id.origin)
         fuel = findViewById(R.id.fuel)
         color = findViewById(R.id.color)
-        
+
         vinLayout = findViewById(R.id.vinLayout)
         modelLayout = findViewById(R.id.modelLayout)
         brandLayout = findViewById(R.id.brandLayout)
->>>>>>> main
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)*/
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
-<<<<<<< HEAD
-    /*private fun addCar() {
-        val resultIntent = Intent()
-=======
     private fun addCar() {
         if (!checkMandatoryFields()){
             Toast.makeText(applicationContext, getString(R.string.toast_mandatory), Toast.LENGTH_SHORT).show()
@@ -115,7 +106,6 @@ class AddCarActivity : AppCompatActivity() {
         }
         finish()
     }
->>>>>>> main
 
     private fun checkMandatoryFields(): Boolean {
         var check = true
@@ -148,12 +138,7 @@ class AddCarActivity : AppCompatActivity() {
             color(Color.RED) { append(hint) } // Mind the space prefix.
             color(Color.RED) { append(" ") }
         }
-<<<<<<< HEAD
-        finish()
-    }*/
-=======
     }
->>>>>>> main
 
     /*private fun openFile() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -163,12 +148,12 @@ class AddCarActivity : AppCompatActivity() {
         startActivityForResult(intent, PICK_PDF_FILE)
     }*/
 
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // handle arrow click here
         if (item.itemId == android.R.id.home) {
             finish()
         }
         return super.onOptionsItemSelected(item)
-    }*/
+    }
 
 }
