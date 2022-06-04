@@ -121,11 +121,7 @@ class LoginActivity : AppCompatActivity() {
     private fun loadApp(email: String){
         val intent = Intent(this, NavDrawer::class.java)
         lifecycleScope.launch {
-            val user = withContext(Dispatchers.IO) {
-                GraphqlClient.getInstance().getUserByEmail(
-                    email
-                )
-            }
+            val user = GraphqlClient.getInstance().getUserByEmail(email)
             user?.let {
                 GraphqlClient.getInstance().setCurrentUser(user)
             }
