@@ -1,27 +1,17 @@
 package com.app.carvault.car.addCar
 
-import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.graphics.Color
-import android.graphics.Color.RED
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.DocumentsContract
-import android.text.Html
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import androidx.lifecycle.lifecycleScope
 import com.app.carvault.R
 import com.app.carvault.graphql.GraphqlClient
-import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.tabs.TabItem
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 
@@ -56,6 +46,10 @@ class AddCarActivity : AppCompatActivity() {
         findViewById<Button>(R.id.addDocButton).setOnClickListener {
             openFile();
         }
+
+        /*findViewById<TabItem>(R.id.tabDocumentation).setOnClickListener{
+            openDocPhotoTab();
+        }*/
 
         findViewById<Button>(R.id.addVehicleButton).setOnClickListener {
             addCar()
@@ -140,6 +134,11 @@ class AddCarActivity : AppCompatActivity() {
             color(Color.RED) { append(hint) } // Mind the space prefix.
             color(Color.RED) { append(" ") }
         }
+    }
+
+    private fun openDocPhotoTab(){
+        val intent = Intent( this, DocumentationPhotosActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openFile() {
