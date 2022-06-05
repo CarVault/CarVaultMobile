@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.3185" />
         <entry key="app/src/main/res/layout/activity_add_car.xml" value="0.23052536231884058" />
         <entry key="app/src/main/res/layout/activity_car_detail.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/layout/activity_eula.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/app_bar_nav_drawer.xml" value="0.2767210144927536" />
         <entry key="app/src/main/res/layout/content_nav_drawer.xml" value="0.2767210144927536" />

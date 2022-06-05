@@ -12,7 +12,6 @@ class Util {
             if (image64.isNullOrEmpty() || image64.isBlank()){
                 return null
             }
-            //val newStr = image64.drop(22)
             val newStr = image64.substring(image64.indexOfFirst { c -> c==',' } + 1)
             val bytes = Base64.decode(newStr, Base64.DEFAULT)
             val decodedImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)

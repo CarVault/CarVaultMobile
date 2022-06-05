@@ -89,8 +89,6 @@ class EditProfileActivity : AppCompatActivity() {
                 1  -> intentData?.let { data ->
                     val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, data.data)
                     val str64 = Util.string64FromBitmapImage(bitmap)
-                    Toast.makeText(this, str64, Toast.LENGTH_SHORT).show()
-
                     str64?.let {
                         lifecycleScope.launch {
                             GraphqlClient.getInstance().updateUser(
@@ -98,8 +96,8 @@ class EditProfileActivity : AppCompatActivity() {
                                 profilePicture = str64,
                             )
                         }
-
-                        //GraphqlClient.getInstance().getCurrentUser()!!.profilePicture = str64
+                        GraphqlClient.getInstance().getCurrentUser()!!.profilePicture = str64
+                        Toast.makeText(this, "Profile image updated correctly!", Toast.LENGTH_SHORT).show()
                     }
 
                 }
