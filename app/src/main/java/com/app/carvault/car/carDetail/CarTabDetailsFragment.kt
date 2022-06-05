@@ -18,6 +18,7 @@ class CarTabDetailsFragment (val car: Car?) : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_car_tab_details, container, false)
+        val descriptionText = v.findViewById<TextView>(R.id.descriptionText)
         val carBrandText = v.findViewById<TextView>(R.id.carBrandText)
         val kmsText = v.findViewById<TextView>(R.id.KmsText)
         val yearText = v.findViewById<TextView>(R.id.yearText)
@@ -29,6 +30,7 @@ class CarTabDetailsFragment (val car: Car?) : Fragment() {
         val colorText = v.findViewById<TextView>(R.id.colorText)
 
         car?.let {
+            descriptionText.text = car.description
             carBrandText.text = car.brand
             kmsText.text = car.kms.toString()
             yearText.text = car.year.toString()

@@ -10,11 +10,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
+import com.app.carvault.car.Car
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.TRANS_ID
 import kotlinx.coroutines.launch
 
-class TransactionListFragment : Fragment() {
+class TransactionListFragment(car: Car?) : Fragment() {
 
     private lateinit var transactionDataSource: TransactionDataSource
 

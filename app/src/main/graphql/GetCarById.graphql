@@ -1,8 +1,0 @@
-query getCarById($id: ID!){
-    getCarById(id:$id){
-        ...CarFields
-        owner {
-            id
-        }
-    }
-}

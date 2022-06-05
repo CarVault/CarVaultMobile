@@ -47,8 +47,10 @@ class CarDetailActivity : AppCompatActivity() {
 
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.pager)
-        tabLayout.addTab(tabLayout.newTab().setText("Description"))
         tabLayout.addTab(tabLayout.newTab().setText("Details"))
+        tabLayout.addTab(tabLayout.newTab().setText("Documents"))
+        tabLayout.addTab(tabLayout.newTab().setText("Transactions"))
+
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
 
     }

@@ -1,0 +1,36 @@
+mutation newUser(
+    $username: String!,
+    $email: String!,
+    $firstname: String,
+    $surname: String,
+    $phone: String!,
+    $profilePicture: String
+){
+    newUser(
+        username:$username,
+        email:$email,
+        firstname:$firstname,
+        surname:$surname,
+        phone:$phone,
+        profilePicture:$profilePicture
+    )
+    {id}
+}
+
+mutation updateUser(
+    $userId: String!
+    $firstname: String,
+    $surname: String,
+    $phone: String!,
+    $profilePicture: String
+)
+{
+    updateUser(
+        userId:$userId,
+        firstname:$firstname,
+        surname:$surname,
+        phone:$phone,
+        profilePicture:$profilePicture
+    )
+    {id}
+}

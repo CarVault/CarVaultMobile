@@ -54,8 +54,6 @@ class EditProfileActivity : AppCompatActivity() {
         lifecycleScope.launch {
             GraphqlClient.getInstance().updateUser(
                 userId = GraphqlClient.getInstance().getCurrentUser()!!.id.toString(),
-                username = GraphqlClient.getInstance().getCurrentUser()!!.username,
-                email = GraphqlClient.getInstance().getCurrentUser()!!.email,
                 firstname = editFirstname.text.toString(),
                 surname = editSurname.text.toString(),
                 phone = editPhone.text.toString(),
