@@ -31,9 +31,6 @@ class AddCarActivity : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_car)
@@ -58,13 +55,9 @@ class AddCarActivity : AppCompatActivity() {
         tabLayout.addTab(tabLayout.newTab().setText("Photos"))
 
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+
+        setTabAdapter()
     }
-
-
-
-
-
-
 
     private fun setTabAdapter(){
         val tabAdapter = AddCarTabCollectionAdapter(this, supportFragmentManager, tabLayout.tabCount)
