@@ -199,6 +199,60 @@
               "name": "String"
             },
             "args": []
+          },
+          {
+            "name": "documentType",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            },
+            "args": []
+          },
+          {
+            "name": "documentName",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            },
+            "args": []
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CarDocumentInput",
+        "description": "",
+        "inputFields": [
+          {
+            "name": "content",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            }
+          },
+          {
+            "name": "documentType",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            }
+          },
+          {
+            "name": "documentName",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            }
           }
         ]
       },
@@ -716,8 +770,8 @@
                   "ofType": {
                     "kind": "LIST",
                     "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String"
+                      "kind": "INPUT_OBJECT",
+                      "name": "CarDocumentInput"
                     }
                   }
                 }

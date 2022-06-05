@@ -3,7 +3,6 @@ package com.app.carvault.graphql
 import com.apm.graphql.*
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
-import com.apollographql.apollo3.exception.ApolloException
 import com.app.carvault.car.Car
 import com.app.carvault.user.User
 
@@ -128,14 +127,14 @@ class GraphqlClient private constructor() {
         return response.data?.newCar?.id?.toLong()
     }
 
-    suspend fun updateCar(carId: String, vin: String, brand: String, model: String, description: String?,
+    suspend fun updateCar(carId: String, vin: String?, brand: String?, model: String?, description: String?,
                        kilometers: Int?, horsepower: Int?, year: Int?, address: String?,
                        manufacturer: String?, origin: String?, fuel: String?, color: String?): Long? {
         val updateCarMutation = UpdateCarMutation(
             carId = carId,
             vin = Optional.presentIfNotNull(vin),
-            brand = brand,
-            model = model,
+            brand = Optional.presentIfNotNull(brand),
+            model = Optional.presentIfNotNull(model),
             description = Optional.presentIfNotNull(description),
             kilometers = Optional.presentIfNotNull(kilometers),
             horsepower = Optional.presentIfNotNull(horsepower),

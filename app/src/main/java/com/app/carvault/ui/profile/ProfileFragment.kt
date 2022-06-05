@@ -37,11 +37,11 @@ class ProfileFragment : Fragment() {
         val v = inflater.inflate(R.layout.profile_fragment, container, false)
 
         // Set up user profile
-        updateProfileData(v, GraphqlClient.getInstance().getCurrentUser())
+        //updateProfileData(v, GraphqlClient.getInstance().getCurrentUser())
 
         // Tab Layout
         recyclerView = v.findViewById(R.id.profile_car_list)
-        setupCarList()
+        //setupCarList()
 
         // Fab -> adding new cars
         val fab: View = v.findViewById(R.id.floatingAddCarButton)
@@ -59,7 +59,15 @@ class ProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         updateProfileData(this.requireView(), GraphqlClient.getInstance().getCurrentUser())
+        setupCarList()
     }
+
+    override fun onResume() {
+        super.onResume()
+        updateProfileData(this.requireView(), GraphqlClient.getInstance().getCurrentUser())
+        setupCarList()
+    }
+
 
     private fun setupCarList(){
         val carsAdapter = CarAdapter {car -> adapterOnClick(car)}

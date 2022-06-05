@@ -20,6 +20,7 @@ import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import androidx.lifecycle.lifecycleScope
 import com.app.carvault.R
+import com.app.carvault.car.Car
 import com.app.carvault.graphql.GraphqlClient
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -86,8 +87,9 @@ class AddCarActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, getString(R.string.toast_mandatory), Toast.LENGTH_SHORT).show()
             return
         }
+        var carId: Long? = null
         lifecycleScope.launch {
-            GraphqlClient.getInstance().addCar(
+            carId = GraphqlClient.getInstance().addCar(
                 userId = GraphqlClient.getInstance().getCurrentUser()?.id.toString(),
                 vin = vin.text.toString(),
                 model = model.text.toString(),
@@ -105,6 +107,28 @@ class AddCarActivity : AppCompatActivity() {
                 fuel = fuel.text.toString(),
                 color = color.text.toString()
             )
+            if (carId!=null){
+                GraphqlClient.getInstance().getCurrentUser()!!.cars.plus(
+                    Car(
+                        id = carId!!,
+                        VIN = vin.text.toString(),
+                        model = model.text.toString(),
+                        brand = brand.text.toString(),
+                        description = description.text.toString(),
+                        kms = if (kilometers.text.toString().isNotBlank()) {
+                            kilometers.text.toString().toInt() } else {0},
+                        year = if (year.text.toString().isNotBlank()) {
+                            year.text.toString().toInt() } else {0},
+                        address = address.text.toString(),
+                        manufacturer = manufacturer.text.toString(),
+                        origin = origin.text.toString(),
+                        fuel = fuel.text.toString(),
+                        color = color.text.toString(),
+                        img = listOf(),
+                        owner = GraphqlClient.getInstance().getCurrentUser()!!.id
+                    )
+                )
+            }
         }
         finish()
     }

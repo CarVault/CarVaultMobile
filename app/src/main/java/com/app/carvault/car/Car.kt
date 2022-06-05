@@ -14,7 +14,7 @@ data class Car(
     var origin: String,
     var fuel: String,
     var color: String,
-    var img: String,
+    var img: List<String>,
     var owner: Long
 ){
     companion object {
@@ -32,7 +32,7 @@ data class Car(
                 fuel = carFields.fuel!!,
                 description = carFields.description!!,
                 color = carFields.color!!,
-                img = "",
+                img = carFields.images!!.mapNotNull { it?.content.toString() },
                 owner = owner
             )
         }

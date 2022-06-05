@@ -1,13 +1,16 @@
 package com.app.carvault.car.carDetail
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
+import com.app.carvault.Util
 import com.app.carvault.car.Car
 import com.app.carvault.car.addCar.AddCarActivity
 import com.app.carvault.car.editCar.EditCar
@@ -21,6 +24,7 @@ class CarDetailActivity : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager
     private lateinit var editButton: Button
+    private lateinit var carImages: ImageView
     private var currentCarId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,14 +34,15 @@ class CarDetailActivity : AppCompatActivity() {
         if (bundle != null) {
             currentCarId = bundle.getLong(CAR_ID)
         }
+        carImages = findViewById(R.id.carImages)
 
         lifecycleScope.launch {
             val currentCar = withContext(Dispatchers.IO) {
-                GraphqlClient.getInstance().getCarById(currentCarId!!.toInt())
+                GraphqlClient.getInstance().getCarById(currentCarId.toInt())
             }
             setTabAdapter(currentCar)
+            setupCarImages(currentCar)
         }
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
@@ -54,6 +59,17 @@ class CarDetailActivity : AppCompatActivity() {
 
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
 
+    }
+
+    private fun setupCarImages(car: Car?){
+        car?.let {
+            val bitMapImage = Util.bitmapImageFromString64(car.img.first(), false)
+            if (bitMapImage != null) {
+                carImages.setImageBitmap(bitMapImage)
+            } else {
+                carImages.setImageResource(R.drawable.default_cars)
+            }
+        }
     }
 
     private fun editCar(){

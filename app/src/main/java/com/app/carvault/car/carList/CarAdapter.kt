@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
+import com.app.carvault.Util
 import com.app.carvault.car.Car
 
 class CarAdapter (private val onClick: (Car) -> Unit) :
@@ -24,10 +25,11 @@ class CarAdapter (private val onClick: (Car) -> Unit) :
         fun bind(car: Car) {
             carNameTextView.text = car.brand
             carVINTextView.text = car.VIN
-            if (car.img == "") {
-                carImgView.setImageResource(R.drawable.default_cars)
+            val bitMapImage = Util.bitmapImageFromString64(car.img.first(), false)
+            if (bitMapImage != null) {
+                carImgView.setImageBitmap(bitMapImage)
             } else {
-                carImgView.setImageURI(Uri.parse(car.img))
+                carImgView.setImageResource(R.drawable.default_cars)
             }
             itemView.setOnClickListener {
                 onClick(car)

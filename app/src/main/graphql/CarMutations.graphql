@@ -33,8 +33,8 @@ mutation newCar(
 mutation updateCar(
     $carId: ID!
     $vin: String,
-    $brand: String!,
-    $model: String!,
+    $brand: String,
+    $model: String,
     $description: String,
     $kilometers: Int,
     $horsepower: Int,
@@ -76,7 +76,7 @@ mutation transfer(
 
 mutation updateDocuments(
     $carId: ID!,
-    $documents: [String]!
+    $documents: [CarDocumentInput]!
 ){
     updateCarDocuments(
         carId: $carId,
