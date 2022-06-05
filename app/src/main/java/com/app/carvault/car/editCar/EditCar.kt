@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import com.app.carvault.R
 import com.app.carvault.car.Car
@@ -16,18 +17,18 @@ import kotlinx.coroutines.withContext
 
 class EditCar : AppCompatActivity() {
 
-    private lateinit var vin: TextInputEditText
-    private lateinit var brand: TextInputEditText
-    private lateinit var model: TextInputEditText
-    private lateinit var description: TextInputEditText
-    private lateinit var kilometers: TextInputEditText
-    private lateinit var horsepower: TextInputEditText
-    private lateinit var year: TextInputEditText
-    private lateinit var address: TextInputEditText
-    private lateinit var manufacturer: TextInputEditText
-    private lateinit var origin: TextInputEditText
-    private lateinit var fuel: TextInputEditText
-    private lateinit var color: TextInputEditText
+    private lateinit var vin: EditText
+    private lateinit var brand: EditText
+    private lateinit var model: EditText
+    private lateinit var description: EditText
+    private lateinit var kilometers: EditText
+    private lateinit var horsepower: EditText
+    private lateinit var year: EditText
+    private lateinit var address: EditText
+    private lateinit var manufacturer: EditText
+    private lateinit var origin: EditText
+    private lateinit var fuel: EditText
+    private lateinit var color: EditText
 
     private var currentCarId: Long = 0
 
