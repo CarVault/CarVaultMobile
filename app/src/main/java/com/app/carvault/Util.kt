@@ -3,6 +3,7 @@ package com.app.carvault
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
+import java.io.File
 
 class Util {
     companion object {
@@ -21,6 +22,10 @@ class Util {
                 }
             }
             return null
+        }
+
+        fun convertToBase64(attachment: File): String {
+            return Base64.encodeToString(attachment.readBytes(), Base64.NO_WRAP)
         }
     }
 }
