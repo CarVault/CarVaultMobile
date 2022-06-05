@@ -21,7 +21,7 @@ mutation updateUser(
     $userId: String!
     $firstname: String,
     $surname: String,
-    $phone: String!,
+    $phone: String,
     $profilePicture: String
 )
 {

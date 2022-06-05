@@ -93,12 +93,13 @@ class GraphqlClient private constructor() {
         return response.data?.newUser?.id?.toLong()
     }
 
-    suspend fun updateUser(userId: String, firstname: String?, surname: String, phone: String, profilePicture: String?): Long? {
+    suspend fun updateUser(userId: String, firstname: String? = null, surname: String? = null,
+                           phone: String? = null, profilePicture: String? = null): Long? {
         val updateUserMutation = UpdateUserMutation(
             userId=userId,
             firstname = Optional.presentIfNotNull(firstname),
             surname = Optional.presentIfNotNull(surname),
-            phone = phone,
+            phone = Optional.presentIfNotNull(phone),
             profilePicture = Optional.presentIfNotNull(profilePicture)
         )
         val response =  client.mutation(updateUserMutation).execute()
