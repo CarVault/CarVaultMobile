@@ -45,7 +45,7 @@
     <string name="description">Description</string>
     <string name="cancel_button">CANCEL</string>
     <string name="add_vehicle_button">ADD VEHICLE</string>
-    <string name="documentation">Documentation</string>
+    <string name="documentation">Documentation&amp;Photos</string>
     <string name="photos">Photos</string>
 
     <string name="prefs_file">com.app.carvault.PREFERENCE_FILE_KEY</string>

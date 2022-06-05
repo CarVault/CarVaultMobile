@@ -12,7 +12,6 @@ import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.Util
 import com.app.carvault.car.Car
-import com.app.carvault.car.addCar.AddCarActivity
 import com.app.carvault.car.editCar.EditCar
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.CAR_ID

@@ -11,6 +11,9 @@
         android:theme="@style/Theme.CarVault"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".car.addCar.DocumentationPhotosActivity"
+            android:exported="false" />
+        <activity
             android:name=".car.editCar.EditCar"
             android:exported="false" />
         <activity
@@ -52,7 +55,7 @@
             android:theme="@style/Theme.CarVault.NoActionBar" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
