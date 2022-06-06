@@ -37,6 +37,8 @@ class ProfileFragment : Fragment() {
         val v = inflater.inflate(R.layout.profile_fragment, container, false)
 
         // Set up user profile
+        recyclerView = v.findViewById(R.id.profile_car_list)
+
         //updateProfileData(v, GraphqlClient.getInstance().getCurrentUser())
         carsAdapter = CarAdapter {car -> adapterOnClick(car)}
         recyclerView.setHasFixedSize(false)
@@ -44,7 +46,6 @@ class ProfileFragment : Fragment() {
         recyclerView.adapter = carsAdapter
 
         // Tab Layout
-        recyclerView = v.findViewById(R.id.profile_car_list)
         //setupCarList()
 
         // Fab -> adding new cars

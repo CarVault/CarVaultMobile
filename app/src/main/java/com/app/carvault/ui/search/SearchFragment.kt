@@ -1,5 +1,6 @@
 package com.app.carvault.ui.search
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +10,12 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
 import com.app.carvault.R
+import com.app.carvault.Util
 import com.app.carvault.car.Car
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.user.User
@@ -54,6 +57,7 @@ class SearchFragment : Fragment() {
                 return false
             }
 
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onQueryTextSubmit(query: String): Boolean {
                 vehicleLayout.visibility = View.INVISIBLE
                 searchSpinner.visibility = View.VISIBLE
@@ -64,6 +68,7 @@ class SearchFragment : Fragment() {
         return v
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun searchVehicle(vin: String){
         lifecycleScope.launch {
             val car = withContext(Dispatchers.IO) {
@@ -85,6 +90,12 @@ class SearchFragment : Fragment() {
     private fun setupVehicle(car: Car, owner: User){
         carModel.text = car.model
         carVIN.text = car.VIN
+        val bitMapImage = Util.bitmapImageFromString64(car.img?.firstOrNull(), false)
+        if (bitMapImage != null) {
+            carImg.setImageBitmap(bitMapImage)
+        } else {
+            carImg.setImageResource(R.drawable.default_cars)
+        }
         carOwner.text = getString(R.string.profileName, owner.firstname ,owner.surname)
     }
 
