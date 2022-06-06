@@ -16,7 +16,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
@@ -25,6 +27,7 @@ import com.app.carvault.car.Car
 import com.app.carvault.documents.Document
 import com.app.carvault.documents.DocumentListAdapter
 import com.app.carvault.graphql.GraphqlClient
+import kotlinx.coroutines.launch
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -35,7 +38,7 @@ const val PICK_PDF_FILE = 4
 class EditCarTabDocumentationFragment (val car: Car?): Fragment() {
 
     private lateinit var galleryButton: Button
-    private lateinit var previewImage: ImageView
+    private lateinit var removeButton: Button
     private lateinit var adapter: DocumentListAdapter
 
     override fun onCreateView(
@@ -45,9 +48,14 @@ class EditCarTabDocumentationFragment (val car: Car?): Fragment() {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_edit_car_tab_documentation, container, false)
         galleryButton = v.findViewById(R.id.galleryButton)
+        removeButton = v.findViewById(R.id.remove)
 
         galleryButton.setOnClickListener {
             openFile();
+        }
+
+        removeButton.setOnClickListener{
+            removeAllDocs()
         }
 
         adapter = DocumentListAdapter { doc -> onClickOpenDoc(doc)}
@@ -76,17 +84,12 @@ class EditCarTabDocumentationFragment (val car: Car?): Fragment() {
         startActivityForResult(intent, PICK_PDF_FILE)
     }
 
-    private fun submitNewImage(){
-        Toast.makeText(this.requireContext(), "Image uploaded!", Toast.LENGTH_SHORT).show()
-    }
-
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == AppCompatActivity.RESULT_OK && requestCode == PICK_PDF_FILE){
             if (data != null){
                 data.data?.also { uri ->
-                    //Toast.makeText(this.requireContext(), uri.toString(), Toast.LENGTH_SHORT).show()
                     val str = convertToBase64(uri)
                     val doc = Document(
                         id = -1,
@@ -122,6 +125,33 @@ class EditCarTabDocumentationFragment (val car: Car?): Fragment() {
             }
         }
         return "Unknown"
+    }
+
+    private fun removeAllDocs(){
+        val builder = AlertDialog.Builder(this.requireContext())
+        builder.setMessage("Are you sure you want to delete ALL documents of this vehicle?")
+            .setCancelable(false)
+            .setNegativeButton("No") { dialog, _ ->
+                // Dismiss the dialog
+                dialog.dismiss()
+            }
+            .setPositiveButton("Yes") { _, _ ->
+                var response: Long? = null
+                lifecycleScope.launch {
+                    response = GraphqlClient.getInstance().deleteDocuments(
+                        carId = car!!.id.toString(),
+                    )
+                }
+                if (response!=null){
+                    Toast.makeText(this.requireContext(), "Documents deleted", Toast.LENGTH_SHORT).show()
+                    GraphqlClient.getInstance().temporalCar?.documents = listOf()
+                    adapter.submitList(GraphqlClient.getInstance().temporalCar!!.documents)
+                }else{
+                    Toast.makeText(this.requireContext(), "Could not delete the images", Toast.LENGTH_SHORT).show()
+                }
+            }
+        val alert = builder.create()
+        alert.show()
     }
 
 }

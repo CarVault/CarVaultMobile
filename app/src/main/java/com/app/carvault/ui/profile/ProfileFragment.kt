@@ -27,6 +27,7 @@ const val CAR_POSITION = "car position"
 class ProfileFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var carsAdapter: CarAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +38,10 @@ class ProfileFragment : Fragment() {
 
         // Set up user profile
         //updateProfileData(v, GraphqlClient.getInstance().getCurrentUser())
+        carsAdapter = CarAdapter {car -> adapterOnClick(car)}
+        recyclerView.setHasFixedSize(false)
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.adapter = carsAdapter
 
         // Tab Layout
         recyclerView = v.findViewById(R.id.profile_car_list)
@@ -69,10 +74,6 @@ class ProfileFragment : Fragment() {
 
 
     private fun setupCarList(){
-        val carsAdapter = CarAdapter {car -> adapterOnClick(car)}
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
-        recyclerView.adapter = carsAdapter
 
         GraphqlClient.getInstance().getCurrentUser()?.let {
             carsAdapter.submitList(it.cars)

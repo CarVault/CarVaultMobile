@@ -103,9 +103,8 @@ class EditCarTabPhotosFragment (val car: Car?) : Fragment() {
             .setPositiveButton("Yes") { _, _ ->
                 var response: Long? = null
                 lifecycleScope.launch {
-                    response = GraphqlClient.getInstance().updateCar(
+                    response = GraphqlClient.getInstance().deleteImages(
                         carId = car!!.id.toString(),
-                        images = listOf()
                     )
                 }
                 if (response!=null){

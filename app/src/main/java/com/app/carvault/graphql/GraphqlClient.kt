@@ -181,6 +181,29 @@ class GraphqlClient private constructor() {
         return response.data?.updateCarDocuments?.id?.toLong()
     }
 
+    suspend fun deleteDocuments(carId: String): Long?{
+        val deleteDocsMutation = DeleteDocumentsMutation(
+            carId = carId,
+        )
+        val response = client.mutation(deleteDocsMutation).execute()
+        return response.data?.updateCarDocuments?.id?.toLong()
+    }
+
+    suspend fun deleteImages(carId: String): Long?{
+        val deleteImgsMutation = DeleteImagesMutation(
+            carId = carId,
+        )
+        val response = client.mutation(deleteImgsMutation).execute()
+        return response.data?.updateCar?.id?.toLong()
+    }
+
+    suspend fun deleteCar(carId: String){
+        val deleteCar = DeleteCarMutation(
+            carId = carId,
+        )
+        client.mutation(deleteCar).execute()
+    }
+
     companion object {
         private var INSTANCE: GraphqlClient? = null
 

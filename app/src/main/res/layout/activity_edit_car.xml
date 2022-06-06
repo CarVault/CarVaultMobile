@@ -8,10 +8,12 @@
     tools:context=".car.editCar.EditCar">
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
 
         <Space
             android:layout_width="match_parent"
@@ -23,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
-            />
+            >
+        </androidx.viewpager.widget.ViewPager>
     </LinearLayout>
 
     <LinearLayout
@@ -32,15 +35,36 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/confirm_button"
+        <ProgressBar
+            android:id="@+id/progress_horizontal"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:text="Confirm changes"
-            />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/confirm_button"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:text="Confirm changes" />
+
+            <Button
+                android:id="@+id/deleteCar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:text="Delete" />
+        </LinearLayout>
+
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/editCarLayout"

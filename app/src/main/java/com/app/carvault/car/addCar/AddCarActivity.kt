@@ -83,7 +83,7 @@ class AddCarActivity : AppCompatActivity() {
                 kilometers = if (kilometers.text.toString().isNotBlank()) {
                     kilometers.text.toString().toInt() } else {null},
                 horsepower = if (horsepower.text.toString().isNotBlank()) {
-                    horsepower.text.toString().toInt() } else {null},
+                    horsepower.text.toString().toIntOrNull() } else {null},
                 year = if (year.text.toString().isNotBlank()) {
                     year.text.toString().toInt() } else {null},
                 address = address.text.toString(),
@@ -104,9 +104,9 @@ class AddCarActivity : AppCompatActivity() {
                         brand = brand.text.toString(),
                         description = description.text.toString(),
                         kms = if (kilometers.text.toString().isNotBlank()) {
-                            kilometers.text.toString().toInt() } else {0},
+                            kilometers.text.toString().toIntOrNull() } else {0},
                         year = if (year.text.toString().isNotBlank()) {
-                            year.text.toString().toInt() } else {0},
+                            year.text.toString().toIntOrNull() } else {0},
                         address = address.text.toString(),
                         manufacturer = manufacturer.text.toString(),
                         origin = origin.text.toString(),

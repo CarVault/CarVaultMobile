@@ -86,3 +86,39 @@ mutation updateDocuments(
     }
 }
 
+mutation deleteDocuments(
+    $carId: ID!,
+){
+    updateCarDocuments(
+        carId: $carId,
+        documents: []
+    ){
+        id
+    }
+}
+
+
+mutation deleteImages(
+    $carId: ID!,
+){
+    updateCar(
+        carId: $carId,
+        images: []
+    ){
+        id
+    }
+}
+
+mutation deleteCar(
+    $carId: ID!,
+){
+    deleteCar(
+        carId: $carId,
+    )
+}
+
+
+
+
+
+

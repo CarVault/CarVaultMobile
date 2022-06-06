@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
@@ -23,6 +26,8 @@ class EditCar : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
     private lateinit var confirmButton: Button
+    private lateinit var progressBar: ProgressBar
+    private lateinit var deleteCar: Button
 
     private var currentCarPosition: Int? = null
     private var currentCar : Car? = null
@@ -40,9 +45,16 @@ class EditCar : AppCompatActivity() {
             GraphqlClient.getInstance().temporalCar = currentCar
         }
 
+        progressBar = findViewById(R.id.progress_horizontal)
+
         confirmButton = findViewById(R.id.confirm_button)
         confirmButton.setOnClickListener{
-            submitChanges()
+            askForConfirmation()
+        }
+
+        deleteCar = findViewById(R.id.deleteCar)
+        deleteCar.setOnClickListener{
+            deleteCar()
         }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -59,6 +71,13 @@ class EditCar : AppCompatActivity() {
         setTabAdapter()
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        progressBar.isIndeterminate = true
+        progressBar.visibility = View.GONE
+
+    }
 
     private fun setTabAdapter(){
         val tabAdapter = EditCarTabCollectionAdapter(this, supportFragmentManager, tabLayout.tabCount, currentCar)
@@ -88,6 +107,7 @@ class EditCar : AppCompatActivity() {
     private fun submitChanges(){
         GraphqlClient.getInstance().temporalCar?.let { car ->
             lifecycleScope.launch {
+                progressBar.visibility = View.VISIBLE
                 GraphqlClient.getInstance().updateCar(
                     carId = car.id.toString(),
                     vin = car.VIN,
@@ -112,5 +132,43 @@ class EditCar : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    private fun askForConfirmation(){
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Are you sure you want to save the changes?")
+            .setCancelable(false)
+            .setNegativeButton("No") { dialog, _ ->
+                // Dismiss the dialog
+                dialog.dismiss()
+            }
+            .setPositiveButton("Yes") { _, _ ->
+                submitChanges()
+            }
+        val alert = builder.create()
+        alert.show()
+    }
+
+    private fun deleteCar(){
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Are you sure you want to delete the vehicle?")
+            .setCancelable(false)
+            .setNegativeButton("No") { dialog, _ ->
+                // Dismiss the dialog
+                dialog.dismiss()
+            }
+            .setPositiveButton("Yes") { _, _ ->
+                progressBar.visibility = View.VISIBLE
+                lifecycleScope.launch {
+                    GraphqlClient.getInstance().deleteCar(currentCar!!.id.toString())
+                    GraphqlClient.getInstance().getCurrentUser()?.cars =
+                        GraphqlClient.getInstance().getCurrentUser()?.cars?.let {
+                            it.filterIndexed { index, _ -> index == currentCarPosition }
+                        }!!
+                }
+                finish()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 }
