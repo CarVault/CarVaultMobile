@@ -14,9 +14,15 @@ fragment CarFields on Car{
     documents{
         id
         content
+        documentType
+        documentName
+        date
     }
     images {
         content
+    }
+    transactions{
+        hash
     }
 }
 

@@ -172,6 +172,19 @@
               }
             },
             "args": []
+          },
+          {
+            "name": "transactions",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CarTransaction"
+              }
+            },
+            "args": []
           }
         ]
       },
@@ -219,6 +232,16 @@
               "name": "String"
             },
             "args": []
+          },
+          {
+            "name": "date",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            },
+            "args": []
           }
         ]
       },
@@ -253,6 +276,15 @@
               "kind": "SCALAR",
               "name": "String"
             }
+          },
+          {
+            "name": "date",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            }
           }
         ]
       },
@@ -273,6 +305,23 @@
           },
           {
             "name": "content",
+            "description": "",
+            "isDeprecated": false,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String"
+            },
+            "args": []
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CarTransaction",
+        "description": "",
+        "fields": [
+          {
+            "name": "hash",
             "description": "",
             "isDeprecated": false,
             "type": {

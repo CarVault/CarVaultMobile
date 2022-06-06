@@ -38,8 +38,6 @@ class AddCarActivity : AppCompatActivity() {
     private lateinit var modelLayout: TextView
     private lateinit var brandLayout: TextView
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_car)
@@ -114,7 +112,9 @@ class AddCarActivity : AppCompatActivity() {
                         origin = origin.text.toString(),
                         fuel = fuel.text.toString(),
                         color = color.text.toString(),
-                        img = listOf()
+                        img = listOf(),
+                        documents = listOf(),
+                        transactions = listOf()
                     )
                 )
             }

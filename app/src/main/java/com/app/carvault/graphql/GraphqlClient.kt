@@ -1,9 +1,12 @@
 package com.app.carvault.graphql
 
+import android.R
 import com.apm.graphql.*
+import com.apm.graphql.type.CarDocumentInput
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
 import com.app.carvault.car.Car
+import com.app.carvault.documents.Document
 import com.app.carvault.user.User
 
 const val SERVER_URL = "http://carvault2-env.eba-c3vjpzfb.us-east-1.elasticbeanstalk.com/graphql"
@@ -122,7 +125,7 @@ class GraphqlClient private constructor() {
             manufacturer = Optional.presentIfNotNull(manufacturer),
             origin = Optional.presentIfNotNull(origin),
             fuel = Optional.presentIfNotNull(fuel),
-            color = Optional.presentIfNotNull(color)
+            color = Optional.presentIfNotNull(color),
         )
         val response =  client.mutation(newCarMutation).execute()
         return response.data?.newCar?.id?.toLong()
@@ -130,7 +133,7 @@ class GraphqlClient private constructor() {
 
     suspend fun updateCar(carId: String, vin: String?, brand: String?, model: String?, description: String?,
                        kilometers: Int?, horsepower: Int?, year: Int?, address: String?,
-                       manufacturer: String?, origin: String?, fuel: String?, color: String?): Long? {
+                       manufacturer: String?, origin: String?, fuel: String?, color: String?, images: List<String>? = null): Long? {
         val updateCarMutation = UpdateCarMutation(
             carId = carId,
             vin = Optional.presentIfNotNull(vin),
@@ -144,7 +147,8 @@ class GraphqlClient private constructor() {
             manufacturer = Optional.presentIfNotNull(manufacturer),
             origin = Optional.presentIfNotNull(origin),
             fuel = Optional.presentIfNotNull(fuel),
-            color = Optional.presentIfNotNull(color)
+            color = Optional.presentIfNotNull(color),
+            images = Optional.presentIfNotNull(images)
         )
         val response =  client.mutation(updateCarMutation).execute()
         return response.data?.updateCar?.id?.toLong()
@@ -157,6 +161,15 @@ class GraphqlClient private constructor() {
         )
         val response =  client.mutation(transferMutation).execute()
         return response.data?.transferCar?.id?.toLong()
+    }
+
+    suspend fun updateDocuments(carId: String, documents: List<Document>): Long?{
+        val updateDocMutation = UpdateDocumentsMutation(
+            carId = carId,
+            documents = documents.map { it.toCarDocumenInput() }
+        )
+        val response = client.mutation(updateDocMutation).execute()
+        return response.data?.updateCarDocuments?.id?.toLong()
     }
 
     companion object {

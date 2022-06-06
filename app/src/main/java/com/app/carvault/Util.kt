@@ -1,5 +1,7 @@
 package com.app.carvault
 
+import android.content.ClipData
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -34,6 +36,12 @@ class Util {
             bm.compress(Bitmap.CompressFormat.JPEG, 75, baos)
             val b = baos.toByteArray()
             return Base64.encodeToString(b, Base64.DEFAULT)
+        }
+
+        fun setClipboard(context: Context, label: String, text: String) {
+            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+            val clip = ClipData.newPlainText(label, text)
+            clipboard.setPrimaryClip(clip)
         }
     }
 }

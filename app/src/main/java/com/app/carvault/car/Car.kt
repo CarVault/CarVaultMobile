@@ -1,5 +1,12 @@
 package com.app.carvault.car
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.apm.graphql.fragment.CarFields
+import com.app.carvault.documents.Document
+import com.app.carvault.transaction.Transaction
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 data class Car(
     var id: Long,
@@ -15,10 +22,14 @@ data class Car(
     var fuel: String,
     var color: String,
     var img: List<String>,
+    var documents: List<Document>,
+    var transactions: List<Transaction>,
     var owner: Long
 ){
     companion object {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun fromGraphqlQuery(carFields: CarFields, owner: Long): Car{
+            val pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             return Car(
                 id = carFields.id!!.toLong(),
                 brand = carFields.brand!!,
@@ -33,6 +44,15 @@ data class Car(
                 description = carFields.description!!,
                 color = carFields.color!!,
                 img = carFields.images!!.mapNotNull { it?.content.toString() },
+                documents = carFields.documents!!.mapNotNull {
+                    Document(
+                        id = it?.id!!.toLong(),
+                        content = it.content,
+                        name = it.documentName,
+                        date = LocalDateTime.parse(it.date!!.substring(0, it.date.indexOfFirst { c -> c == '.' }), pattern),
+                        type = it.documentType
+                    )},
+                transactions = carFields.transactions!!.mapNotNull { Transaction(it!!.hash!!) },
                 owner = owner
             )
         }

@@ -15,6 +15,7 @@ import com.app.carvault.car.Car
 import com.app.carvault.car.editCar.EditCar
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.CAR_ID
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.*
 
@@ -22,8 +23,8 @@ class CarDetailActivity : AppCompatActivity() {
 
     private lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager
-    private lateinit var editButton: Button
-    private lateinit var carImages: ImageView
+    private lateinit var editButton: FloatingActionButton
+    private lateinit var carImages: ViewPager
     private var currentCarId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,12 +63,8 @@ class CarDetailActivity : AppCompatActivity() {
 
     private fun setupCarImages(car: Car?){
         car?.let {
-            val bitMapImage = Util.bitmapImageFromString64(car.img.firstOrNull(), false)
-            if (bitMapImage != null) {
-                carImages.setImageBitmap(bitMapImage)
-            } else {
-                carImages.setImageResource(R.drawable.default_cars)
-            }
+            val carImagesAdapter = CarImagesAdapter(this, car.img.map { img -> Util.bitmapImageFromString64(img, false) })
+            carImages.adapter = carImagesAdapter
         }
     }
 

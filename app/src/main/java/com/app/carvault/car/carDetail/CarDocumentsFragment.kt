@@ -12,9 +12,10 @@ import com.app.carvault.R
 import com.app.carvault.car.Car
 import com.app.carvault.documents.Document
 import com.app.carvault.documents.DocumentListAdapter
+import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.transaction.TransactionListAdapter
 
-class CarDocumentsFragment(car: Car?) : Fragment() {
+class CarDocumentsFragment(val car: Car?) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +29,10 @@ class CarDocumentsFragment(car: Car?) : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = adapter
+
+        car?.let {
+            adapter.submitList(car.documents)
+        }
 
         return v
     }

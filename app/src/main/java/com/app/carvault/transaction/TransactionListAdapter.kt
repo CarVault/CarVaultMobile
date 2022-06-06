@@ -17,17 +17,10 @@ class TransactionListAdapter (private val onClick: (Transaction) -> Unit) :
 
         class TransactionViewHolder(view: View, val onClick: (Transaction) -> Unit, val context: Context) : RecyclerView.ViewHolder(view) {
             private val date: TextView = view.findViewById(R.id.trans_date)
-            private val from: TextView = view.findViewById(R.id.from)
-            private val to: TextView = view.findViewById(R.id.to)
-            private val carName: TextView = view.findViewById(R.id.carName)
+            private val hash: TextView = view.findViewById(R.id.hash)
 
-
-            suspend fun bind(t: Transaction) {
-                val transInfo = TransactionDataSource.getDataSource(context).getTransactionInfo(t)
-                date.text = transInfo.date
-                from.text = "From: " + transInfo.from_name
-                to.text = "To: " + transInfo.to_name
-                carName.text = transInfo.car_name
+            fun bind(t: Transaction) {
+                hash.text = t.hash
                 itemView.setOnClickListener {
                     onClick(t)
                 }
@@ -56,6 +49,6 @@ object TransactionDiffCallback : DiffUtil.ItemCallback<Transaction>() {
         return oldItem == newItem
     }
     override fun areContentsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.hash == newItem.hash
     }
 }

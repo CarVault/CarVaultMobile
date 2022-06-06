@@ -45,7 +45,6 @@ class EditCarTabVehicleDataFragment : Fragment() {
         if (bundle != null) {
             currentCarId = bundle.getLong(CAR_ID)
         }
-        val editCar = EditCar()
         val v = inflater.inflate(R.layout.fragment_edit_car_tab_vehicle_data, container, false)
 
         v.findViewById<Button>(R.id.updateVehicleButton).setOnClickListener {
@@ -105,7 +104,7 @@ class EditCarTabVehicleDataFragment : Fragment() {
                 manufacturer = manufacturer.text.toString(),
                 origin = origin.text.toString(),
                 fuel = fuel.text.toString(),
-                color = color.text.toString()
+                color = color.text.toString(),
             )
         }
 
