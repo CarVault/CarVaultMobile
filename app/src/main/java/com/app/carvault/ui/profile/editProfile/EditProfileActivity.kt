@@ -3,16 +3,18 @@ package com.app.carvault.ui.profile.editProfile
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.app.carvault.R
-import com.app.carvault.car.addCar.CAR_NAME
-import com.app.carvault.car.addCar.CAR_VIN
+import com.app.carvault.Util
 import com.app.carvault.graphql.GraphqlClient
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
+
 
 const val PROFILE_NAME = "name"
 const val PROFILE_EMAIL = "email"
@@ -85,6 +87,18 @@ class EditProfileActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK){
             when (requestCode){
                 1  -> intentData?.let { data ->
+                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, data.data)
+                    val str64 = Util.string64FromBitmapImage(bitmap)
+                    str64?.let {
+                        lifecycleScope.launch {
+                            GraphqlClient.getInstance().updateUser(
+                                userId = GraphqlClient.getInstance().getCurrentUser()!!.id.toString(),
+                                profilePicture = str64,
+                            )
+                        }
+                        GraphqlClient.getInstance().getCurrentUser()!!.profilePicture = str64
+                        Toast.makeText(this, "Profile image updated correctly!", Toast.LENGTH_SHORT).show()
+                    }
 
                 }
             }
