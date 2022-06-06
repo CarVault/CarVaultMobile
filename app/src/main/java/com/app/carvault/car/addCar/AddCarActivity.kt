@@ -10,6 +10,7 @@ import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import androidx.lifecycle.lifecycleScope
 import com.app.carvault.R
+import com.app.carvault.car.Car
 import com.app.carvault.graphql.GraphqlClient
 import com.google.android.material.tabs.TabItem
 import com.google.android.material.textfield.TextInputLayout
@@ -72,8 +73,10 @@ class AddCarActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, getString(R.string.toast_mandatory), Toast.LENGTH_SHORT).show()
             return
         }
+        var newId: Long? = null
+
         lifecycleScope.launch {
-            GraphqlClient.getInstance().addCar(
+            newId = GraphqlClient.getInstance().addCar(
                 userId = GraphqlClient.getInstance().getCurrentUser()?.id.toString(),
                 vin = vin.text.toString(),
                 model = model.text.toString(),
@@ -91,8 +94,32 @@ class AddCarActivity : AppCompatActivity() {
                 fuel = fuel.text.toString(),
                 color = color.text.toString()
             )
+
+            newId?.let {
+                GraphqlClient.getInstance().getCurrentUser()!!.cars =
+                    GraphqlClient.getInstance().getCurrentUser()!!.cars.plus(
+                    Car(
+                        id = newId!!,
+                        owner = GraphqlClient.getInstance().getCurrentUser()!!.id,
+                        VIN = vin.text.toString(),
+                        model = model.text.toString(),
+                        brand = brand.text.toString(),
+                        description = description.text.toString(),
+                        kms = if (kilometers.text.toString().isNotBlank()) {
+                            kilometers.text.toString().toInt() } else {0},
+                        year = if (year.text.toString().isNotBlank()) {
+                            year.text.toString().toInt() } else {0},
+                        address = address.text.toString(),
+                        manufacturer = manufacturer.text.toString(),
+                        origin = origin.text.toString(),
+                        fuel = fuel.text.toString(),
+                        color = color.text.toString(),
+                        img = listOf()
+                    )
+                )
+            }
+            finish()
         }
-        finish()
     }
 
     private fun checkMandatoryFields(): Boolean {

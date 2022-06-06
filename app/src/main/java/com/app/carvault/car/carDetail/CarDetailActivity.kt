@@ -62,7 +62,7 @@ class CarDetailActivity : AppCompatActivity() {
 
     private fun setupCarImages(car: Car?){
         car?.let {
-            val bitMapImage = Util.bitmapImageFromString64(car.img.first(), false)
+            val bitMapImage = Util.bitmapImageFromString64(car.img.firstOrNull(), false)
             if (bitMapImage != null) {
                 carImages.setImageBitmap(bitMapImage)
             } else {
