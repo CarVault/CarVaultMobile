@@ -5,6 +5,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.*
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
@@ -38,6 +39,9 @@ class AddCarActivity : AppCompatActivity() {
     private lateinit var modelLayout: TextView
     private lateinit var brandLayout: TextView
 
+    private lateinit var progressBar: ProgressBar
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_car)
@@ -61,10 +65,18 @@ class AddCarActivity : AppCompatActivity() {
         vinLayout = findViewById(R.id.vinLayout)
         modelLayout = findViewById(R.id.modelLayout)
         brandLayout = findViewById(R.id.brandLayout)
+        progressBar = findViewById(R.id.progress_horizontal)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }
+
+    override fun onStart() {
+        super.onStart()
+        progressBar.isIndeterminate = true
+        progressBar.visibility = View.GONE
+    }
+
 
     private fun addCar() {
         if (!checkMandatoryFields()){
@@ -74,6 +86,7 @@ class AddCarActivity : AppCompatActivity() {
         var newId: Long? = null
 
         lifecycleScope.launch {
+            progressBar.visibility = View.VISIBLE
             newId = GraphqlClient.getInstance().addCar(
                 userId = GraphqlClient.getInstance().getCurrentUser()?.id.toString(),
                 vin = vin.text.toString(),

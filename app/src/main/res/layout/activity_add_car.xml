@@ -25,6 +25,12 @@
             android:inputType="textPersonName"
             android:text="@string/add_vehicle_basic_info" />
 
+        <ProgressBar
+            android:id="@+id/progress_horizontal"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

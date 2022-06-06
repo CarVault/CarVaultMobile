@@ -76,7 +76,6 @@ class EditCar : AppCompatActivity() {
         super.onStart()
         progressBar.isIndeterminate = true
         progressBar.visibility = View.GONE
-
     }
 
     private fun setTabAdapter(){
