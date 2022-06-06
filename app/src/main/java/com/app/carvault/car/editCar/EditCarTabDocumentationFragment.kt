@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.OpenableColumns
+import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -51,12 +52,12 @@ class EditCarTabDocumentationFragment (val car: Car?): Fragment() {
 
         adapter = DocumentListAdapter { doc -> onClickOpenDoc(doc)}
         val recyclerView = v.findViewById<RecyclerView>(R.id.document_list)
-        recyclerView.setHasFixedSize(true)
+        recyclerView.setHasFixedSize(false)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = adapter
 
         GraphqlClient.getInstance().temporalCar?.let {
-            adapter.submitList(it.documents)
+            adapter.submitList(GraphqlClient.getInstance().temporalCar!!.documents)
         }
 
         return v
@@ -85,8 +86,8 @@ class EditCarTabDocumentationFragment (val car: Car?): Fragment() {
         if (resultCode == AppCompatActivity.RESULT_OK && requestCode == PICK_PDF_FILE){
             if (data != null){
                 data.data?.also { uri ->
-                    Toast.makeText(this.requireContext(), uri.toString(), Toast.LENGTH_SHORT).show()
-                    val str = readTextFromUri(uri)
+                    //Toast.makeText(this.requireContext(), uri.toString(), Toast.LENGTH_SHORT).show()
+                    val str = convertToBase64(uri)
                     val doc = Document(
                         id = -1,
                         name = getDocumentName(uri),
@@ -95,30 +96,18 @@ class EditCarTabDocumentationFragment (val car: Car?): Fragment() {
                         type = "PDF"
                     )
                     GraphqlClient.getInstance().temporalCar?.documents = GraphqlClient.getInstance().temporalCar?.documents?.plus(doc)
+                    adapter.submitList(GraphqlClient.getInstance().temporalCar!!.documents)
                 }
             }
-
-            GraphqlClient.getInstance().temporalCar?.let {
-                adapter.submitList(it.documents)
-            }
-
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
-    @Throws(IOException::class)
-    private fun readTextFromUri(uri: Uri): String {
-        val stringBuilder = StringBuilder()
+
+    fun convertToBase64(uri: Uri): String? {
         this.requireContext().contentResolver.openInputStream(uri)?.use { inputStream ->
-            BufferedReader(InputStreamReader(inputStream)).use { reader ->
-                var line: String? = reader.readLine()
-                while (line != null) {
-                    stringBuilder.append(line)
-                    line = reader.readLine()
-                }
-            }
+            return Base64.encodeToString(inputStream.readBytes(), Base64.NO_WRAP)
         }
-        return stringBuilder.toString()
+        return null
     }
 
     @SuppressLint("Range")

@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.util.Base64
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -30,6 +31,7 @@ class Util {
         fun convertToBase64(attachment: File): String {
             return Base64.encodeToString(attachment.readBytes(), Base64.NO_WRAP)
         }
+
 
         fun string64FromBitmapImage(bm: Bitmap): String? {
             val baos = ByteArrayOutputStream()
