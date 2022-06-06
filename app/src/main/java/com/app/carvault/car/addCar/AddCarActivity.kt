@@ -12,6 +12,7 @@ import androidx.core.text.color
 import androidx.lifecycle.lifecycleScope
 import com.app.carvault.R
 import com.app.carvault.car.Car
+import com.app.carvault.car.carList.CarAdapter
 import com.app.carvault.graphql.GraphqlClient
 import com.google.android.material.tabs.TabItem
 import com.google.android.material.textfield.TextInputLayout
@@ -21,7 +22,7 @@ const val CAR_NAME = "name"
 const val CAR_VIN = "VIN"
 
 
-class AddCarActivity : AppCompatActivity() {
+class AddCarActivity () : AppCompatActivity() {
     private lateinit var vin: EditText
     private lateinit var brand: EditText
     private lateinit var model: EditText
@@ -94,11 +95,11 @@ class AddCarActivity : AppCompatActivity() {
                 brand = brand.text.toString(),
                 description = description.text.toString(),
                 kilometers = if (kilometers.text.toString().isNotBlank()) {
-                    kilometers.text.toString().toInt() } else {null},
+                    kilometers.text.toString().toIntOrNull() } else {null},
                 horsepower = if (horsepower.text.toString().isNotBlank()) {
                     horsepower.text.toString().toIntOrNull() } else {null},
                 year = if (year.text.toString().isNotBlank()) {
-                    year.text.toString().toInt() } else {null},
+                    year.text.toString().toIntOrNull() } else {null},
                 address = address.text.toString(),
                 manufacturer = manufacturer.text.toString(),
                 origin = origin.text.toString(),

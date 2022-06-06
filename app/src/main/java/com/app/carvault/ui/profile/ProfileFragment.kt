@@ -73,9 +73,7 @@ class ProfileFragment : Fragment() {
         setupCarList()
     }
 
-
     private fun setupCarList(){
-
         GraphqlClient.getInstance().getCurrentUser()?.let {
             carsAdapter.submitList(it.cars)
         }
@@ -118,5 +116,7 @@ class ProfileFragment : Fragment() {
         val intent = Intent(this.context, EditProfileActivity::class.java)
         startActivity(intent)
     }
+
+
 
 }
