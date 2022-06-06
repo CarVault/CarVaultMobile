@@ -11,17 +11,21 @@ import androidx.viewpager.widget.PagerAdapter
 import com.app.carvault.R
 import java.util.*
 
-class CarImagesAdapter(val context: Context, val images: List<Bitmap?>) : PagerAdapter() {
+class CarImagesAdapter(val context: Context, val images: List<Bitmap>?) : PagerAdapter() {
     // on below line we are creating a method
     // as get count to return the size of the list.
     private var showDefault = false
 
     override fun getCount(): Int {
-        if (images.isEmpty()){
-            showDefault = true
-            return 1
+        images?.let {
+            if (images.isEmpty()){
+                showDefault = true
+                return 1
+            }
+            return images.size
         }
-        return images.size
+        showDefault = true
+        return 1
     }
 
     // on below line we are returning the object
@@ -43,7 +47,7 @@ class CarImagesAdapter(val context: Context, val images: List<Bitmap?>) : PagerA
         if (showDefault){
             imageView.setImageResource(R.drawable.default_cars)
         }else{
-            images[position]?.let {
+            images?.let{
                 imageView.setImageBitmap(images[position])
             }
         }

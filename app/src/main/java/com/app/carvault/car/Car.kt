@@ -13,17 +13,17 @@ data class Car(
     var brand: String,
     var model: String,
     var VIN: String,
-    var description: String,
-    var kms: Int,
-    var year: Int,
-    var address: String,
-    var manufacturer: String,
-    var origin: String,
-    var fuel: String,
-    var color: String,
-    var img: List<String>,
-    var documents: List<Document>,
-    var transactions: List<Transaction>,
+    var description: String?,
+    var kms: Int?,
+    var year: Int?,
+    var address: String?,
+    var manufacturer: String?,
+    var origin: String?,
+    var fuel: String?,
+    var color: String?,
+    var img: List<String>?,
+    var documents: List<Document>?,
+    var transactions: List<Transaction>?,
     var owner: Long
 ){
     companion object {
@@ -35,15 +35,15 @@ data class Car(
                 brand = carFields.brand!!,
                 model = carFields.model!!,
                 VIN = carFields.vin!!,
-                manufacturer = carFields.manufacturer!!,
-                year = carFields.year!!,
-                origin = carFields.origin!!,
-                address = carFields.address!!,
-                kms = carFields.kilometers!!.toInt(),
-                fuel = carFields.fuel!!,
-                description = carFields.description!!,
-                color = carFields.color!!,
-                img = carFields.images!!.mapNotNull { it?.content.toString() },
+                manufacturer = carFields.manufacturer,
+                year = carFields.year,
+                origin = carFields.origin,
+                address = carFields.address,
+                kms = carFields.kilometers,
+                fuel = carFields.fuel,
+                description = carFields.description,
+                color = carFields.color,
+                img = carFields.images?.mapNotNull { it?.content.toString() },
                 documents = carFields.documents!!.mapNotNull {
                     Document(
                         id = it?.id!!.toLong(),
@@ -52,7 +52,7 @@ data class Car(
                         date = LocalDateTime.parse(it.date!!.substring(0, it.date.indexOfFirst { c -> c == '.' }), pattern),
                         type = it.documentType
                     )},
-                transactions = carFields.transactions!!.mapNotNull { Transaction(it!!.hash!!) },
+                transactions = carFields.transactions?.mapNotNull { Transaction(it!!.hash!!) },
                 owner = owner
             )
         }

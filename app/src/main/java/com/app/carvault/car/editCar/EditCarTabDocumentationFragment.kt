@@ -1,35 +1,71 @@
 package com.app.carvault.car.editCar
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.database.Cursor
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.OpenableColumns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.carvault.R
+import com.app.carvault.Util
+import com.app.carvault.car.Car
+import com.app.carvault.documents.Document
+import com.app.carvault.documents.DocumentListAdapter
+import com.app.carvault.graphql.GraphqlClient
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.time.LocalDateTime
 
-const val PICK_PDF_FILE = 2
+const val PICK_PDF_FILE = 4
 
-class EditCarTabDocumentationFragment : Fragment() {
+class EditCarTabDocumentationFragment (val car: Car?): Fragment() {
 
+    private lateinit var galleryButton: Button
+    private lateinit var previewImage: ImageView
+    private lateinit var adapter: DocumentListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val editCar = EditCar()
         val v = inflater.inflate(R.layout.fragment_edit_car_tab_documentation, container, false)
-        v.findViewById<Button>(R.id.editCarAddDocButton).setOnClickListener {
+        galleryButton = v.findViewById(R.id.galleryButton)
+
+        galleryButton.setOnClickListener {
             openFile();
         }
-        v.findViewById<ImageButton>(R.id.editCarAddDocButton).setOnClickListener {
-            editCar.dispatchTakePictureIntent();
+
+        adapter = DocumentListAdapter { doc -> onClickOpenDoc(doc)}
+        val recyclerView = v.findViewById<RecyclerView>(R.id.document_list)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.adapter = adapter
+
+        GraphqlClient.getInstance().temporalCar?.let {
+            adapter.submitList(it.documents)
         }
-        return v;
+
+        return v
     }
+
+    private fun onClickOpenDoc(doc: Document){
+        Toast.makeText(this.requireContext(), doc.name, Toast.LENGTH_SHORT).show()
+    }
+
 
     private fun openFile() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -37,6 +73,66 @@ class EditCarTabDocumentationFragment : Fragment() {
             type = "application/pdf"
         }
         startActivityForResult(intent, PICK_PDF_FILE)
+    }
+
+    private fun submitNewImage(){
+        Toast.makeText(this.requireContext(), "Image uploaded!", Toast.LENGTH_SHORT).show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == AppCompatActivity.RESULT_OK && requestCode == PICK_PDF_FILE){
+            if (data != null){
+                data.data?.also { uri ->
+                    Toast.makeText(this.requireContext(), uri.toString(), Toast.LENGTH_SHORT).show()
+                    val str = readTextFromUri(uri)
+                    val doc = Document(
+                        id = -1,
+                        name = getDocumentName(uri),
+                        content = str,
+                        date = LocalDateTime.now(),
+                        type = "PDF"
+                    )
+                    GraphqlClient.getInstance().temporalCar?.documents = GraphqlClient.getInstance().temporalCar?.documents?.plus(doc)
+                }
+            }
+
+            GraphqlClient.getInstance().temporalCar?.let {
+                adapter.submitList(it.documents)
+            }
+
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    @Throws(IOException::class)
+    private fun readTextFromUri(uri: Uri): String {
+        val stringBuilder = StringBuilder()
+        this.requireContext().contentResolver.openInputStream(uri)?.use { inputStream ->
+            BufferedReader(InputStreamReader(inputStream)).use { reader ->
+                var line: String? = reader.readLine()
+                while (line != null) {
+                    stringBuilder.append(line)
+                    line = reader.readLine()
+                }
+            }
+        }
+        return stringBuilder.toString()
+    }
+
+    @SuppressLint("Range")
+    fun getDocumentName(uri: Uri) : String {
+
+        val cursor: Cursor? = this.requireContext().contentResolver.query(
+            uri, null, null, null, null, null)
+
+        cursor?.use {
+            if (it.moveToFirst()) {
+                return it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+            }
+        }
+        return "Unknown"
     }
 
 }

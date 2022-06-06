@@ -22,8 +22,7 @@ import com.app.carvault.car.carDetail.CarDetailActivity
 import com.app.carvault.car.carList.CarAdapter
 
 
-const val CAR_ID = "car id"
-const val TRANS_ID = "trans id"
+const val CAR_POSITION = "car position"
 
 class ProfileFragment : Fragment() {
 
@@ -82,7 +81,8 @@ class ProfileFragment : Fragment() {
 
     private fun adapterOnClick(car: Car) {
         val intent = Intent(this.requireContext(), CarDetailActivity()::class.java)
-        intent.putExtra(CAR_ID, car.id)
+        val index =  GraphqlClient.getInstance().getCurrentUser()!!.cars.indexOf(car)
+        intent.putExtra(CAR_POSITION, index)
         startActivity(intent)
     }
 

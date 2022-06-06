@@ -1,6 +1,5 @@
 package com.app.carvault.car.carList
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +24,7 @@ class CarAdapter (private val onClick: (Car) -> Unit) :
         fun bind(car: Car) {
             carNameTextView.text = car.brand
             carVINTextView.text = car.VIN
-            val bitMapImage = Util.bitmapImageFromString64(car.img.firstOrNull(), false)
+            val bitMapImage = Util.bitmapImageFromString64(car.img?.firstOrNull(), false)
             if (bitMapImage != null) {
                 carImgView.setImageBitmap(bitMapImage)
             } else {

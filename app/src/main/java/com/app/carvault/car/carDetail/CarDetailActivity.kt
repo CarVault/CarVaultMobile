@@ -1,23 +1,18 @@
 package com.app.carvault.car.carDetail
 
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.ImageView
-import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.Util
 import com.app.carvault.car.Car
 import com.app.carvault.car.editCar.EditCar
 import com.app.carvault.graphql.GraphqlClient
-import com.app.carvault.ui.profile.CAR_ID
+import com.app.carvault.ui.profile.CAR_POSITION
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
-import kotlinx.coroutines.*
 
 class CarDetailActivity : AppCompatActivity() {
 
@@ -25,24 +20,26 @@ class CarDetailActivity : AppCompatActivity() {
     lateinit var viewPager: ViewPager
     private lateinit var editButton: FloatingActionButton
     private lateinit var carImages: ViewPager
-    private var currentCarId: Long = 0
+
+    private var currentCarPosition: Int? = null
+    private var currentCar : Car? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_detail)
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
-            currentCarId = bundle.getLong(CAR_ID)
+            currentCarPosition = bundle.getInt(CAR_POSITION)
         }
-        carImages = findViewById(R.id.carImages)
 
-        lifecycleScope.launch {
-            val currentCar = withContext(Dispatchers.IO) {
-                GraphqlClient.getInstance().getCarById(currentCarId.toInt())
-            }
-            setTabAdapter(currentCar)
-            setupCarImages(currentCar)
-        }
+        carImages = findViewById(R.id.carImages)
+        tabLayout = findViewById(R.id.tabLayout)
+        viewPager = findViewById(R.id.pager)
+        tabLayout.addTab(tabLayout.newTab().setText("Details"))
+        tabLayout.addTab(tabLayout.newTab().setText("Documents"))
+        tabLayout.addTab(tabLayout.newTab().setText("Transactions"))
+        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
@@ -50,27 +47,36 @@ class CarDetailActivity : AppCompatActivity() {
         editButton.setOnClickListener{
             editCar()
         }
+    }
 
-        tabLayout = findViewById(R.id.tabLayout)
-        viewPager = findViewById(R.id.pager)
-        tabLayout.addTab(tabLayout.newTab().setText("Details"))
-        tabLayout.addTab(tabLayout.newTab().setText("Documents"))
-        tabLayout.addTab(tabLayout.newTab().setText("Transactions"))
+    override fun onStart() {
+        super.onStart()
+        currentCarPosition?.let{
+            currentCar = GraphqlClient.getInstance().getCurrentUser()!!.cars[currentCarPosition!!.toInt()]
+            setTabAdapter(currentCar)
+            setupCarImages(currentCar)
+        }
+    }
 
-        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-
+    override fun onResume() {
+        super.onResume()
+        currentCarPosition?.let{
+            currentCar = GraphqlClient.getInstance().getCurrentUser()!!.cars[currentCarPosition!!.toInt()]
+            setTabAdapter(currentCar)
+            setupCarImages(currentCar)
+        }
     }
 
     private fun setupCarImages(car: Car?){
         car?.let {
-            val carImagesAdapter = CarImagesAdapter(this, car.img.map { img -> Util.bitmapImageFromString64(img, false) })
+            val carImagesAdapter = CarImagesAdapter(this, car.img?.mapNotNull { img -> Util.bitmapImageFromString64(img, false) })
             carImages.adapter = carImagesAdapter
         }
     }
 
     private fun editCar(){
         val intent = Intent(this, EditCar::class.java)
-        intent.putExtra(CAR_ID, currentCarId)
+        intent.putExtra(CAR_POSITION, currentCarPosition)
         startActivity(intent)
     }
 

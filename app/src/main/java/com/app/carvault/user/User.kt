@@ -1,5 +1,7 @@
 package com.app.carvault.user
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.apm.graphql.fragment.CarFields
 import com.apm.graphql.fragment.UserFields
 import com.app.carvault.car.Car
@@ -17,6 +19,7 @@ data class User (
     var profilePicture: String
 ) {
     companion object {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun fromGraphqlQuery(userFields: UserFields, carFields: List<CarFields>): User{
             return User(
                 id = userFields.id!!.toLong(),

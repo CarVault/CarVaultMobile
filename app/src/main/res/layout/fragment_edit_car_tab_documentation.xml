@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".car.editCar.EditCarTabDocumentationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,28 +27,31 @@
             android:layout_height="wrap_content"
             android:text="Add relevant documentation to certificate the vehicle." />
 
-        <Button
-            android:id="@+id/editCarAddDocButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:text="Add Document" />
 
-        <ImageButton
-            android:id="@+id/editCarDocImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:srcCompat="@android:drawable/ic_menu_camera"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <ImageView
-            android:id="@+id/editCarDocImage"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/document_list"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="0dp"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/galleryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:text="Add new document" />
+        <Button
+            android:id="@+id/removeImages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="Remove all documents">
+        </Button>
 
     </LinearLayout>
 

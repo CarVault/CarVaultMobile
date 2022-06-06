@@ -1,6 +1,8 @@
 package com.app.carvault.graphql
 
 import android.R
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.apm.graphql.*
 import com.apm.graphql.type.CarDocumentInput
 import com.apollographql.apollo3.ApolloClient
@@ -16,6 +18,8 @@ class GraphqlClient private constructor() {
     private val client = ApolloClient.Builder().serverUrl(SERVER_URL).build()
     private var currentUser: User? = null
 
+    var temporalCar: Car? = null
+
     fun setCurrentUser(user: User){
         this.currentUser = user
     }
@@ -24,6 +28,7 @@ class GraphqlClient private constructor() {
         return currentUser
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getUserById (id: Int) : User?{
         val response = client.query(UserQuery(id=id.toString())).execute()
         response.data?.getUser?.let { query ->
@@ -34,6 +39,7 @@ class GraphqlClient private constructor() {
         }
         return null
     }
+    @RequiresApi(Build.VERSION_CODES.O)
 
     suspend fun getUserByUsername (username: String) : User? {
         val response = client.query(GetUserByUsernameQuery(username = username)).execute()
@@ -46,6 +52,7 @@ class GraphqlClient private constructor() {
         return null
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getUserByEmail (email: String) : User? {
         val response = client.query(GetUserByEmailQuery(email = email)).execute()
         response.data?.getUserByEmail?.let { query ->
@@ -61,6 +68,7 @@ class GraphqlClient private constructor() {
         return currentUser?.cars
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getCarById (id: Int) : Car?{
         val response = client.query(GetCarByIdQuery(id=id.toString())).execute()
         response.data?.getCarById?.let { query ->
@@ -72,6 +80,7 @@ class GraphqlClient private constructor() {
         return null
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getCarByVin (vin: String) : Car?{
         val response = client.query(GetCarByVinQuery(vin = vin)).execute()
         response.data?.getCarByVin?.let { query ->
@@ -131,9 +140,9 @@ class GraphqlClient private constructor() {
         return response.data?.newCar?.id?.toLong()
     }
 
-    suspend fun updateCar(carId: String, vin: String?, brand: String?, model: String?, description: String?,
-                       kilometers: Int?, horsepower: Int?, year: Int?, address: String?,
-                       manufacturer: String?, origin: String?, fuel: String?, color: String?, images: List<String>? = null): Long? {
+    suspend fun updateCar(carId: String, vin: String? = null, brand: String? = null, model: String? = null, description: String? = null,
+                       kilometers: Int? = null, horsepower: Int? = null, year: Int? = null, address: String? = null,
+                       manufacturer: String? = null, origin: String? = null, fuel: String? = null, color: String? = null, images: List<String>? = null): Long? {
         val updateCarMutation = UpdateCarMutation(
             carId = carId,
             vin = Optional.presentIfNotNull(vin),

@@ -9,16 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.app.carvault.R
 import com.app.carvault.car.Car
 import com.app.carvault.graphql.GraphqlClient
-import com.app.carvault.ui.profile.CAR_ID
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class EditCarTabVehicleDataFragment : Fragment() {
+class EditCarTabVehicleDataFragment (var car: Car?) : Fragment() {
 
     private lateinit var vin: EditText
     private lateinit var brand: EditText
@@ -33,23 +31,12 @@ class EditCarTabVehicleDataFragment : Fragment() {
     private lateinit var fuel: EditText
     private lateinit var color: EditText
 
-    private var currentCarId: Long = 0
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val intent = Intent()
-        val bundle: Bundle? = intent.extras
-        if (bundle != null) {
-            currentCarId = bundle.getLong(CAR_ID)
-        }
         val v = inflater.inflate(R.layout.fragment_edit_car_tab_vehicle_data, container, false)
-
-        v.findViewById<Button>(R.id.updateVehicleButton).setOnClickListener {
-            submitCarUpdate()
-        }
         brand = v.findViewById(R.id.brand)
         vin = v.findViewById(R.id.vin)
         model = v.findViewById(R.id.model)
@@ -62,13 +49,42 @@ class EditCarTabVehicleDataFragment : Fragment() {
         fuel = v.findViewById(R.id.fuel)
         color = v.findViewById(R.id.color)
 
-        lifecycleScope.launch {
-            val currentCar = withContext(Dispatchers.IO) {
-                GraphqlClient.getInstance().getCarById(currentCarId!!.toInt())
-            }
-            currentCar?.let {
-                setCurrentValues(currentCar)
-            }
+        car?.let {
+            setCurrentValues(it)
+        }
+
+        brand.setOnFocusChangeListener { view, b ->
+            GraphqlClient.getInstance().temporalCar?.brand = brand.text.toString()
+        }
+        vin.setOnFocusChangeListener { view, b ->
+            if (!b){ GraphqlClient.getInstance().temporalCar?.VIN = vin.text.toString() }
+        }
+        model.setOnFocusChangeListener { view, b ->
+            if (!b){ GraphqlClient.getInstance().temporalCar?.model = model.text.toString() }
+        }
+        description.setOnFocusChangeListener { view, b ->
+            if (!b){ GraphqlClient.getInstance().temporalCar?.description = description.text.toString() }
+        }
+        kilometers.setOnFocusChangeListener { view, b ->
+            if (!b){ GraphqlClient.getInstance().temporalCar?.kms = kilometers.text.toString().toIntOrNull() }
+        }
+        year.setOnFocusChangeListener { view, b ->
+            if (!b){ GraphqlClient.getInstance().temporalCar?.year = year.text.toString().toIntOrNull() }
+        }
+        address.setOnFocusChangeListener { view, b ->
+            if (!b){ GraphqlClient.getInstance().temporalCar?.address = address.text.toString() }
+        }
+        manufacturer.setOnFocusChangeListener { view, b ->
+            if (!b){ GraphqlClient.getInstance().temporalCar?.manufacturer = manufacturer.text.toString() }
+        }
+        origin.setOnFocusChangeListener { view, b ->
+            if (!b){ GraphqlClient.getInstance().temporalCar?.origin = origin.text.toString() }
+        }
+        fuel.setOnFocusChangeListener { view, b ->
+            if (!b){ GraphqlClient.getInstance().temporalCar?.fuel = fuel.text.toString() }
+        }
+        color.setOnFocusChangeListener { view, b ->
+            if (!b){ GraphqlClient.getInstance().temporalCar?.color = color.text.toString() }
         }
         return v
     }
@@ -86,30 +102,4 @@ class EditCarTabVehicleDataFragment : Fragment() {
         fuel.setText(car.fuel)
         color.setText(car.color)
     }
-
-    private fun submitCarUpdate(){
-        lifecycleScope.launch {
-            GraphqlClient.getInstance().updateCar(
-                carId = currentCarId.toString(),
-                vin = vin.text.toString(),
-                brand = brand.text.toString(),
-                model = model.text.toString(),
-                description = description.text.toString(),
-                kilometers = if (kilometers.text.toString().isNotBlank()) {
-                    kilometers.text.toString().toInt() } else {null},
-                horsepower = 0,
-                year = if (year.text.toString().isNotBlank()) {
-                    year.text.toString().toInt() } else {null},
-                address = address.text.toString(),
-                manufacturer = manufacturer.text.toString(),
-                origin = origin.text.toString(),
-                fuel = fuel.text.toString(),
-                color = color.text.toString(),
-            )
-        }
-
-    }
-
-
-
 }

@@ -14,11 +14,9 @@ import com.app.carvault.Util
 import com.app.carvault.car.Car
 import com.app.carvault.car.carDetail.CarDetailActivity
 import com.app.carvault.graphql.GraphqlClient
-import com.app.carvault.ui.profile.CAR_ID
+import com.app.carvault.ui.profile.CAR_POSITION
 import com.app.carvault.user.User
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class TransferFragment : Fragment(),  AdapterView.OnItemSelectedListener {
@@ -102,7 +100,8 @@ class TransferFragment : Fragment(),  AdapterView.OnItemSelectedListener {
 
     private fun onDetailClick(car: Car) {
         val intent = Intent(this.requireContext(), CarDetailActivity()::class.java)
-        intent.putExtra(CAR_ID, car.id)
+        val index =  GraphqlClient.getInstance().getCurrentUser()!!.cars.indexOf(car)
+        intent.putExtra(CAR_POSITION, index)
         startActivity(intent)
     }
 
