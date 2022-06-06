@@ -14,9 +14,6 @@
         android:theme="@style/Theme.CarVault"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".car.addCar.DocumentationPhotosActivity"
-            android:exported="false" />
-        <activity
             android:name=".car.editCar.EditCar"
             android:exported="false" />
         <activity

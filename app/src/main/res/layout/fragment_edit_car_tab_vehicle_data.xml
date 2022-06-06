@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".car.addCar.AddCarActivity">
+    android:layout_height="match_parent"
+    tools:context=".car.editCar.EditCarTabVehicleDataFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
@@ -252,14 +254,14 @@
                         android:minHeight="48dp" />
 
                     <Button
-                        android:id="@+id/addVehicleButton"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/updateVehicleButton"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
                         android:layout_weight="1"
-                        android:text="@string/add_vehicle_button" />
+                        android:text="UPDATE" />
                 </LinearLayout>
 
             </LinearLayout>

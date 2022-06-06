@@ -1,23 +1,31 @@
 package com.app.carvault.car.editCar
 
+import android.content.Intent
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager.widget.ViewPager
 import com.app.carvault.R
 import com.app.carvault.car.Car
 import com.app.carvault.graphql.GraphqlClient
 import com.app.carvault.ui.profile.CAR_ID
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
+ const val REQUEST_IMAGE_CAPTURE = 1
 class EditCar : AppCompatActivity() {
 
-    private lateinit var vin: EditText
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager
+   /* private lateinit var vin: EditText
     private lateinit var brand: EditText
     private lateinit var model: EditText
     private lateinit var description: EditText
@@ -30,12 +38,12 @@ class EditCar : AppCompatActivity() {
     private lateinit var fuel: EditText
     private lateinit var color: EditText
 
-    private var currentCarId: Long = 0
+    private var currentCarId: Long = 0*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_car)
-        val bundle: Bundle? = intent.extras
+        /*val bundle: Bundle? = intent.extras
         if (bundle != null) {
             currentCarId = bundle.getLong(CAR_ID)
         }
@@ -63,12 +71,22 @@ class EditCar : AppCompatActivity() {
             currentCar?.let {
                 setCurrentValues(currentCar)
             }
-        }
+        }*/
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        tabLayout = findViewById(R.id.editCarLayout)
+        viewPager = findViewById(R.id.editCarPager)
+        tabLayout.addTab(tabLayout.newTab().setText("Vehicle basic info"))
+        tabLayout.addTab(tabLayout.newTab().setText("Documents"))
+        tabLayout.addTab(tabLayout.newTab().setText("Photos"))
+
+        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+
+        setTabAdapter()
     }
 
-    private fun setCurrentValues(car: Car){
+    /*private fun setCurrentValues(car: Car){
         brand.setText(car.brand)
         vin.setText(car.VIN)
         model.setText(car.model)
@@ -80,9 +98,9 @@ class EditCar : AppCompatActivity() {
         origin.setText(car.origin)
         fuel.setText(car.fuel)
         color.setText(car.color)
-    }
+    }*/
 
-    private fun submitCarUpdate(){
+    /*fun submitCarUpdate(){
         lifecycleScope.launch {
             GraphqlClient.getInstance().updateCar(
                 carId = currentCarId.toString(),
@@ -103,6 +121,31 @@ class EditCar : AppCompatActivity() {
             )
         }
         finish()
+    }*/
+
+    private fun setTabAdapter(){
+        val tabAdapter = EditCarTabCollectionAdapter(this, supportFragmentManager, tabLayout.tabCount)
+        viewPager.adapter = tabAdapter
+        viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                viewPager.currentItem = tab.position
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+        })
+    }
+
+    fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

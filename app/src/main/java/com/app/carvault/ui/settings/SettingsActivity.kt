@@ -1,6 +1,7 @@
 package com.app.carvault.ui.settings
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
