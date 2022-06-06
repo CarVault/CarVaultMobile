@@ -1,12 +1,14 @@
 package com.app.carvault.ui.transfers
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.app.carvault.R
@@ -105,6 +107,7 @@ class TransferFragment : Fragment(),  AdapterView.OnItemSelectedListener {
         startActivity(intent)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun searchUser(username: String){
         lifecycleScope.launch {
             foundUser = GraphqlClient.getInstance().getUserByUsername(username)
@@ -159,11 +162,6 @@ class TransferFragment : Fragment(),  AdapterView.OnItemSelectedListener {
                             carId = selectedCar.id.toString()
                         )
                     }
-                }
-                if (response!=null){
-                    Toast.makeText(this.requireContext(), "Vehicle successfully transferred!", Toast.LENGTH_SHORT).show()
-                }else{
-                    Toast.makeText(this.requireContext(), "Could not transfer the vehicle", Toast.LENGTH_SHORT).show()
                 }
             }
 
